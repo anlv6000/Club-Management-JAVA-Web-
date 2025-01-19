@@ -43,19 +43,19 @@ public class RegisterServlet extends HttpServlet {
         
     // Validate username
     if(user ==null || user.trim().isEmpty() || !user.matches("[a-zA-Z0-9_]+")){
-        request.setAttribute("mess", "Invalid username. Only letters, digits, and underscores are allowed.");
+        request.setAttribute("messuser", "Invalid username. Only letters, digits, and underscores are allowed.");
         request.getRequestDispatcher("Register.jsp").forward(request, response);
         return;
     }
         //Validate password
         if (pass==null || pass.length() < 8 || !pass.matches(".*[A-Z].*") || !pass.matches(".*[a-z].*") || !pass.matches(".*\\d.*") || !pass.matches(".*[!@#$%^&*].*")) {
-            request.setAttribute("mess", "Password must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters.");
+            request.setAttribute("messpass", "Password must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters.");
             request.setAttribute("user", user); // Keep username filled in
             request.getRequestDispatcher("Register.jsp").forward(request, response);
             return;
         }
         if (!pass.equals(re_pass)){
-            request.setAttribute("mess", "Passwords do not match.");
+            request.setAttribute("messverify", "Passwords do not match.");
             request.setAttribute("user", user); // Keep username filled in
             request.getRequestDispatcher("Register.jsp").forward(request, response);
             return;

@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,22 +22,25 @@
             <h2>Sign Up</h2>
             
                 <form action="RegisterServlet" >
+                    <c:if test="${messuser != null}">${messuser}</c:if>
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input name="user" type="text" id="username" placeholder="Enter your username" >
                 </div>
+                <c:if test="${messpass != null}">${messpass}</c:if>
 
                 <div class="form-group password-toggle">
                     <label for="password">Password</label>
                     <input name="pass" type="password" id="password" placeholder="Enter new password" >
                     <span onclick="togglePassword('password')"></span>
                 </div>
-
+                <c:if test="${messverify != null}">${messverify}</c:if>
                 <div class="form-group password-toggle">
                     <label for="verification">Verification</label>
                     <input name="re_pass" type="password" id="verification" placeholder="Confirm password" >
                     <span onclick="togglePassword('verification')"></span>
                 </div>
+                <c:if test="${mess != null}">${mess}</c:if>
 
                 <button type="submit" class="btn">Sign Up</button>
 
