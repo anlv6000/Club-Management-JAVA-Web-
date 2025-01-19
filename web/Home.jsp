@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
@@ -32,18 +33,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 <body>
     <header>
         <div>
-            <img <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.webp" alt="alt"/>
+            <img <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.web" alt="alt"/>
             <h1>FPT Club Manager</h1>
         </div>
         
-        
+        <c:if test="${sessionScope.acc != null }"><div> hello ${sessionScope.txtUsername} </div></c:if>
         <div id="logo-container">
             <!-- Default logo -->
             <img  src="https://media.discordapp.net/attachments/1326181143841869847/1328762115007451279/image.png?ex=6787e1a7&is=67869027&hm=982177fd4bb7b909b36866ac49ca606b0ccc15ffa87e3ade47020082b388cd13&=&format=webp&quality=lossless"   alt="Logo">
         </div>
          
     </header>
-
+    <div>
+        <a href="#">Home</a>
+            <a href="PublicClub.jsp">Public Club</a>
+            <c:if test="${sessionScope.acc ==null}">
+            <a href="Login.jsp">Sign in</a>
+            
+            <a href="Register.jsp">Sign up</a>
+            </c:if> 
+            <c:if test="${sessionScope.acc !=null}">
+                <a href="Login.jsp">Log out</a>
+            </c:if>
+            
+    </div>
 
    
 
@@ -109,48 +122,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
                 }
             });
         });
-       document.addEventListener("DOMContentLoaded", function() {
-        const logoContainer = document.getElementById("logo-container");
-
-        // Create navigation container
-        const nav = document.createElement("nav");
-        nav.innerHTML = `
-            <a href="#">Home</a>
-            <a href="PublicClub.jsp">Public Club</a>
-            <a href="Login.jsp">Login</a>
-            <a href="Register.jsp">Register</a>
-        `;
-
-        // Append navigation to logo container
-        logoContainer.appendChild(nav);
-
-        // Add style to align navigation inside logo-container
-        const style = document.createElement("style");
-        style.innerHTML = `
-            #logo-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            #logo-container nav {
-                margin-top: 10px;
-                display: flex;
-                gap: 15px;
-            }
-
-            #logo-container nav a {
-                text-decoration: none;
-                color: #000;
-                font-weight: bold;
-            }
-
-            #logo-container nav a:hover {
-                text-decoration: underline;
-            }
-        `;
-        document.head.appendChild(style);
-    });
+       
     </script>
 </body>
 </html>

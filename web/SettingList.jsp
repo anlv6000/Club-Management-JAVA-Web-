@@ -72,7 +72,8 @@
                     <th>Value</th>
                     <th>Priority</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Action<tus</th>
+                    <th>Action/th>
                 </tr>
             </thead>
             <tbody>

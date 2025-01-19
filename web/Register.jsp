@@ -18,27 +18,23 @@
         <!-- Right Section -->
         <div class="right-section">
             <h2>Sign Up</h2>
-            <form>
+            
+                <form action="RegisterServlet" >
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Enter your username" required>
+                    <input name="user" type="text" id="username" placeholder="Enter your username" >
                 </div>
 
                 <div class="form-group password-toggle">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter new password" required>
+                    <input name="pass" type="password" id="password" placeholder="Enter new password" >
                     <span onclick="togglePassword('password')"></span>
                 </div>
 
                 <div class="form-group password-toggle">
                     <label for="verification">Verification</label>
-                    <input type="password" id="verification" placeholder="Confirm password" required>
+                    <input name="re_pass" type="password" id="verification" placeholder="Confirm password" >
                     <span onclick="togglePassword('verification')"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" required>
                 </div>
 
                 <button type="submit" class="btn">Sign Up</button>
@@ -46,7 +42,8 @@
                 <div class="divider">OR</div>
 
                 <div class="google-signup">
-                    <button type="button">Sign up with Google</button>
+                    <button><a href="GmailSignup.jsp"> Sign Up With Google</a></button>
+                    
                 </div>
             </form>
         </div>

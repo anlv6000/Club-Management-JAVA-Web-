@@ -30,21 +30,18 @@
             <form>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Enter your username" required>
+                    <input name="user" type="text" id="username" placeholder="Enter your username" required>
                 </div>
 
                 <div class="form-group password-toggle">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <input name="pass" type="password" id="password" placeholder="Enter your password" required>
                     <span onclick="togglePassword('password')"></span>
                 </div>
 
                
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" required>
-                </div>
+                
  <div class="google-signup">
                     <button type="button">Forgot Password or Username</button>
                 </div>
