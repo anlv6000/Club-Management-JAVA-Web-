@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
                  session.setAttribute("txtUsername", user);
                  session.setAttribute("acc", a);
                  session.setMaxInactiveInterval(1800);
-                response.sendRedirect("Home.jsp");
+                response.sendRedirect("Public_ClubServlet");
              }else{
                   request.setAttribute("mess", "Incorrect user or pass");
                 request.getRequestDispatcher("Login.jsp").forward(request, response);

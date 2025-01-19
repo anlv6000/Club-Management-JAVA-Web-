@@ -35,7 +35,12 @@ public class Public_ClubServlet extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
+          dao dao = new dao();
+       
+        List<Public_club> list = dao.getTop5();
+       
+            request.setAttribute("listP", list);
+          request.getRequestDispatcher("Home.jsp").forward(request, response);
        
        
         
