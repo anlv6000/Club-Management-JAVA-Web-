@@ -5,6 +5,7 @@
 package DAO;
 import Dal.DBContext;
 import Model.Account;
+import Model.Public_club;
 import com.sun.source.tree.ArrayAccessTree;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -61,37 +62,29 @@ public class dao  extends DBContext{
         }
         return false;
     }
-      public Account checkLogin(String username, String password)throws SQLException{
-          String sql = " Select Username  "
-                        + " FROM users  "
-                        + " WHERE Username = ? "
-                        + " AND Password = ? ";
-          
-          try {
-              stm=getConnection().prepareStatement(sql);
-              stm.setString(1, username);
-              stm.setString(2, password);
-              rs = stm.executeQuery();
-              if(rs.next()){
-                  Account acc = new Account(rs.getString("Username"), rs.getString("Password"));
-                  if(BCrypt.checkpw(password,acc.getPassword() )){
-                      return acc;
-                  }else{
-                      return null;
-                  }
-              }
-          } catch (Exception e) {
-           
-          } finally {
-              if(rs != null){
-                rs.close();
+      public Account login(String user, String pass) {
+        String query = "SELECT * FROM users WHERE Username = ?";
+        try {
+            stm = getConnection().prepareStatement(query);
+            stm.setString(1, user);
+            rs = stm.executeQuery();
+
+            if (rs.next()) {
+                // Tạo đối tượng Account từ kết quả truy vấn
+            Account a = new Account(rs.getString("Username"), rs.getString("Password"));
+
+                // Kiểm tra mật khẩu đã nhập với mật khẩu hash từ cơ sở dữ liệu
+                if (BCrypt.checkpw(pass, a.getPassword() )) {
+                    return a; // Nếu mật khẩu đúng, trả về đối tượng Account
+                } else {
+                    return null; // Mật khẩu sai
+                }
             }
-            if(stm != null){
-                stm.close();
-            }
-          }
-    return  null;
-      }
+        } catch (Exception e) {
+            e.printStackTrace(); // In ra lỗi để kiểm tra
+        }
+        return null; // Trả về null nếu không tìm thấy tài khoản
+    }
             public boolean checkLogin2(String username, String password)throws SQLException{
           String sql = " Select Username  "
                         + " FROM users  "
@@ -121,4 +114,17 @@ public class dao  extends DBContext{
           }
     return  false;
       }
+        public List<Public_club> getTop5() {
+        List<Public_club> list = new ArrayList<>();
+        String query = "select * from clubs LIMIT 5 ";
+        try {
+            stm = getConnection().prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+        list.add(new Public_club(rs.getString("ClubName"), rs.getString("Description"), rs.getString("ImageURL")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 }

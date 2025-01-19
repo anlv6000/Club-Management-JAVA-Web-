@@ -6,7 +6,7 @@
 package Controller;
 
 import DAO.dao;
-import Model.Account;
+import Model.Public_club;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,18 +14,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import org.mindrot.jbcrypt.BCrypt;
-import jakarta.servlet.http.HttpSession;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Doan Quan
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name="Public_ClubServlet", urlPatterns={"/Public_ClubServlet"})
+public class Public_ClubServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,28 +32,14 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException, SQLException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String user = request.getParameter("user");
-         String pass = request.getParameter("pass");
-         dao dao = new dao();
-         Account a = dao.login(user, pass);
-         if(a == null){
-             request.setAttribute("messerr", "Incorrect user or pass");
-             request.getRequestDispatcher("Login.jsp").forward(request, response);
-         }else{
-             if(BCrypt.checkpw(pass, a.getPassword() )|| dao.checkLogin2(user, pass)){
-                 HttpSession session = request.getSession();
-                 session.setAttribute("txtUsername", user);
-                 session.setAttribute("acc", a);
-                 session.setMaxInactiveInterval(1800);
-                response.sendRedirect("Home.jsp");
-             }else{
-                  request.setAttribute("mess", "Incorrect user or pass");
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
-             }
-         }
-    } 
+        
+        
+       
+       
+        
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -69,11 +52,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     } 
 
     /** 
@@ -86,11 +65,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        dao dao = new dao();
+       
+        List<Public_club> list = dao.getTop5();
+       
+            request.setAttribute("listP", list);
+          request.getRequestDispatcher("Home.jsp").forward(request, response);
     }
 
     /** 
