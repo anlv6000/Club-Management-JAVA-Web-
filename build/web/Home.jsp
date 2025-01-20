@@ -16,6 +16,7 @@
             background-color: #f4f4f9;
         }
 
+
         header {
             display: flex;
             justify-content: space-between;
@@ -23,6 +24,23 @@
             padding: 20px;
             background-color: #333;
             color: white;
+        }
+
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
         }
 
         header img {
@@ -115,7 +133,15 @@
 <body>
     <header>
         <div>
+
+
+            <img <img src="https://inkythuatso.com/uploads/thumbnails/800/2021/11/logo-mu-inkythuatso-3-01-05-15-53-03.jpg" alt="alt"/>
+
             <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.web" alt="alt"/>
+
+
+            <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.web" alt="alt"/>
+
             <h1>FPT Club Manager</h1>
         </div>
         
@@ -146,6 +172,24 @@
             <h2>Welcome to FPT Club!</h2>
             <p>Explore our club activities and join us today!</p>
 
+
+
+   <form id="autoSubmitForm" action="Public_ClubServlet" >
+    <!-- Hiển thị dữ liệu -->
+    <c:if test="${not empty listP}">
+        <c:forEach var="o" items="${listP}">
+            <div class="image-grid">
+                <div class="image-item">
+                    
+                    <img src="${o.imgURL}" alt="vov">
+                    <div>${o.clubName}</div>
+                    <div>${o.description}</div>
+                </div>
+            </div>
+        </c:forEach>
+    </c:if>
+</form>
+
             <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
                 <!-- Display data -->
                 <c:if test="${not empty listP}">
@@ -159,6 +203,23 @@
                 </c:if>
             </form>
         </div>
+
+
+
+            <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
+                <!-- Display data -->
+                <c:if test="${not empty listP}">
+                    <c:forEach var="o" items="${listP}">
+                        <div class="image-item">
+                            <img src="${o.imgURL}" alt="vov">
+                            <div>${o.clubName}</div>
+                            <div>${o.description}</div>
+                        </div>
+                    </c:forEach>
+                </c:if>
+            </form>
+        </div>
+
 
         <div class="column">
             <!-- Add additional content for the right column here -->
