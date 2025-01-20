@@ -6,6 +6,7 @@ package DAO;
 import Dal.DBContext;
 import Model.Account;
 import Model.Public_club;
+import Model.Setting;
 import com.sun.source.tree.ArrayAccessTree;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -126,5 +127,25 @@ public class dao  extends DBContext{
         } catch (Exception e) {
         }
         return list;
+    }
+        public void addSettings(List<Setting> settings) throws SQLException {
+        String sql = "INSERT INTO Settings (SettingName, SettingType, SettingValue, Priority, Status, UserType) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection con = getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            for (Setting setting : settings) {
+                stm.setString(1, setting.getName());
+                stm.setString(2, setting.getType());
+                stm.setString(3, setting.getValue());
+                stm.setInt(4, setting.getPriority());
+                stm.setString(5, setting.getStatus());
+                stm.setString(6, setting.getUserType());
+                stm.addBatch();
+            }
+            stm.executeBatch();
+            System.out.println("Thêm các thiết lập thành công!");
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi thêm các thiết lập: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
     }
 }
