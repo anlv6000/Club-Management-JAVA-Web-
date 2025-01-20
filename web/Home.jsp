@@ -25,15 +25,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : Jan 14, 2025, 9:58:46 PM
     Author     : Doan Quan
 */
-
-
     </style>
-   
 </head>
 <body>
     <header>
         <div>
-            <img <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.web" alt="alt"/>
+            <img <img src="https://inkythuatso.com/uploads/thumbnails/800/2021/11/logo-mu-inkythuatso-3-01-05-15-53-03.jpg" alt="alt"/>
             <h1>FPT Club Manager</h1>
         </div>
         
@@ -64,7 +61,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     <h2>Welcome to FPT Club!</h2>
     <p>Explore our club activities and join us today!</p>
 
-   <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
+   <form id="autoSubmitForm" action="Public_ClubServlet" >
     <!-- Hiển thị dữ liệu -->
     <c:if test="${not empty listP}">
         <c:forEach var="o" items="${listP}">
