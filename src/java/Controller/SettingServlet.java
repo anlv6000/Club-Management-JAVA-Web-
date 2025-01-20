@@ -1,6 +1,6 @@
 package Controller;
 
-import Dal.DBContext;
+import context.DBContext;
 import Model.Setting;
 import java.io.IOException;
 import java.sql.Connection;
