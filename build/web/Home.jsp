@@ -15,8 +15,25 @@
             padding: 0;
             background-color: #f4f4f9;
         }
+<<<<<<< HEAD
 
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> d2eed3358e4482e50d65286431d6555c71efc463
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+<<<<<<< HEAD
+>>>>>>> 98a84a58177f135de5702ea84dacd62f6172cbe3
         header {
             display: flex;
             justify-content: space-between;
@@ -50,6 +67,15 @@
             cursor: pointer;
         }
 
+=======
+        header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+>>>>>>> d2eed3358e4482e50d65286431d6555c71efc463
         nav {
             display: flex;
             gap: 15px;
@@ -133,15 +159,25 @@
 <body>
     <header>
         <div>
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> 98a84a58177f135de5702ea84dacd62f6172cbe3
 
             <img <img src="https://inkythuatso.com/uploads/thumbnails/800/2021/11/logo-mu-inkythuatso-3-01-05-15-53-03.jpg" alt="alt"/>
 
             <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.web" alt="alt"/>
 
+<<<<<<< HEAD
 
             <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.web" alt="alt"/>
 
+=======
+=======
+            <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.web" alt="alt"/>
+>>>>>>> d2eed3358e4482e50d65286431d6555c71efc463
+>>>>>>> 98a84a58177f135de5702ea84dacd62f6172cbe3
             <h1>FPT Club Manager</h1>
         </div>
         
@@ -172,7 +208,11 @@
             <h2>Welcome to FPT Club!</h2>
             <p>Explore our club activities and join us today!</p>
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> 98a84a58177f135de5702ea84dacd62f6172cbe3
 
    <form id="autoSubmitForm" action="Public_ClubServlet" >
     <!-- Hiển thị dữ liệu -->
@@ -205,7 +245,11 @@
         </div>
 
 
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> 98a84a58177f135de5702ea84dacd62f6172cbe3
             <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
                 <!-- Display data -->
                 <c:if test="${not empty listP}">
@@ -220,7 +264,11 @@
             </form>
         </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d2eed3358e4482e50d65286431d6555c71efc463
+>>>>>>> 98a84a58177f135de5702ea84dacd62f6172cbe3
         <div class="column">
             <!-- Add additional content for the right column here -->
         </div>
