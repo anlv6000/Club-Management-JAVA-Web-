@@ -15,17 +15,21 @@
             padding: 0;
             background-color: #f4f4f9;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d2eed3358e4482e50d65286431d6555c71efc463
 
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Jan 14, 2025, 9:58:46 PM
-    Author     : Doan Quan
-*/
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
 
+<<<<<<< HEAD
         header {
             display: flex;
             justify-content: space-between;
@@ -42,6 +46,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             cursor: pointer;
         }
 
+=======
+        header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+>>>>>>> d2eed3358e4482e50d65286431d6555c71efc463
         nav {
             display: flex;
             gap: 15px;
@@ -125,11 +138,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 <body>
     <header>
         <div>
+<<<<<<< HEAD
 
             <img <img src="https://inkythuatso.com/uploads/thumbnails/800/2021/11/logo-mu-inkythuatso-3-01-05-15-53-03.jpg" alt="alt"/>
 
             <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.web" alt="alt"/>
 
+=======
+            <img src="https://aothethaothietke.com/wp-content/uploads/2022/05/Logo-cau-lac-bo-bong-da-Ngoai-hang-Anh-%E2%80%93-Manchester-United.jpg.web" alt="alt"/>
+>>>>>>> d2eed3358e4482e50d65286431d6555c71efc463
             <h1>FPT Club Manager</h1>
         </div>
         
@@ -160,6 +177,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             <h2>Welcome to FPT Club!</h2>
             <p>Explore our club activities and join us today!</p>
 
+<<<<<<< HEAD
 
    <form id="autoSubmitForm" action="Public_ClubServlet" >
     <!-- Hiển thị dữ liệu -->
@@ -192,6 +210,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         </div>
 
 
+=======
+            <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
+                <!-- Display data -->
+                <c:if test="${not empty listP}">
+                    <c:forEach var="o" items="${listP}">
+                        <div class="image-item">
+                            <img src="${o.imgURL}" alt="vov">
+                            <div>${o.clubName}</div>
+                            <div>${o.description}</div>
+                        </div>
+                    </c:forEach>
+                </c:if>
+            </form>
+        </div>
+
+>>>>>>> d2eed3358e4482e50d65286431d6555c71efc463
         <div class="column">
             <!-- Add additional content for the right column here -->
         </div>
