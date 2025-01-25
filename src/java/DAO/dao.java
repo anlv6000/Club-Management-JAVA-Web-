@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
-import context.DBContext;
+import Dal.DBContext;
 import Model.Account;
 import Model.Public_club;
 import Model.Setting;

@@ -1,4 +1,4 @@
-package context;
+package Dal;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ public class DBContext {
 
     private final String url = "jdbc:mysql://localhost:3306/club_manager?useSSL=false";
     private final String user = "root";
-    private final String password = "12345";
+    private final String password = "qielli2007";
 
     public  Connection getConnection() throws SQLException {
         try {

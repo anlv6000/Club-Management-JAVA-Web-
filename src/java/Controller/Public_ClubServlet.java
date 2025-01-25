@@ -24,7 +24,13 @@ import java.util.List;
 @WebServlet(name="Public_ClubServlet", urlPatterns={"/Public_ClubServlet"})
 public class Public_ClubServlet extends HttpServlet {
    
-   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -64,7 +70,12 @@ public class Public_ClubServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        dao dao = new dao();
+       
+        List<Public_club> list = dao.getTop5();
+       
+            request.setAttribute("listP", list);
+          request.getRequestDispatcher("Home.jsp").forward(request, response);
     }
 
     /** 
