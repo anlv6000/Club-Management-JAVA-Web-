@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class DBContext {
 
     private final String url = "jdbc:mysql://localhost:3306/club_manager?useSSL=false";
-    private final String user = "root";
-    private final String password = "qielli2007";
+    private final String user = "kakakaka";
+    private final String password = "A123";
 
     public  Connection getConnection() throws SQLException {
         try {
