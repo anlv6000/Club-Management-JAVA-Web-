@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package Controller;
-
+import Services.SignUp_Validation;
 import DAO.dao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,32 +40,21 @@ public class RegisterServlet extends HttpServlet {
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
         String re_pass = request.getParameter("re_pass");
-        
+        SignUp_Validation SignupEr = new SignUp_Validation();
     // Validate username
-    if(user ==null || user.trim().isEmpty() || !user.matches("[a-zA-Z0-9_]+")){
-        request.setAttribute("messuser", "Invalid username. Only letters, digits, and underscores are allowed.");
-        request.getRequestDispatcher("Register.jsp").forward(request, response);
-        return;
-    }
-        //Validate password
-        if (pass==null || pass.length() < 8 || !pass.matches(".*[A-Z].*") || !pass.matches(".*[a-z].*") || !pass.matches(".*\\d.*") || !pass.matches(".*[!@#$%^&*].*")) {
-            request.setAttribute("messpass", "Password must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters.");
-            request.setAttribute("user", user); // Keep username filled in
-            request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return;
-        }
-        if (!pass.equals(re_pass)){
-            request.setAttribute("messverify", "Passwords do not match.");
-            request.setAttribute("user", user); // Keep username filled in
-            request.getRequestDispatcher("Register.jsp").forward(request, response);
-            return;
-        }
+    String ErrSignUp= SignupEr.validationUsername(user, pass, re_pass);
         
         dao dao = new dao();
         boolean a= dao.checkAccountExist(user);
+        if(!ErrSignUp.isEmpty() || ErrSignUp !=null){
+            request.setAttribute("er",ErrSignUp );
+         request.getRequestDispatcher("Register.jsp").forward(request, response);
+
+        }
         if(a == true){
             request.setAttribute("mess", "Username is already taken.");
             request.setAttribute("user", user); // Keep username filled in
+            
             request.getRequestDispatcher("Register.jsp").forward(request, response);
         }else{
             String hashedPassword = BCrypt.hashpw(pass, BCrypt.gensalt());

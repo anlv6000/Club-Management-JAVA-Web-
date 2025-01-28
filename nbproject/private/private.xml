@@ -2,6 +2,23 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/web/Home.jsp</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/src/java/Controller/LoginServlet.java</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/src/java/DAO/dao.java</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/web/Login.jsp</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/src/java/context/DBContext.java</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/src/java/Controller/NewSettingServlet.java</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/web/Register.jsp</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/web/PublicClubDetail.jsp</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/src/java/Controller/Public_ClubServlet.java</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/web/Account.jsp</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/src/java/Model/GoogleAccount.java</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/src/java/Controller/GoogleLogin.java</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/src/java/constant/Iconstant.java</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/src/java/Model/Account.java</file>
+            <file>file:/C:/Users/Doan%20Quan/Desktop/g5/web/META-INF/context.xml</file>
+        </group>
     </open-files>
 </project-private>

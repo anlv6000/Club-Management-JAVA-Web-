@@ -5,11 +5,12 @@
 package DAO;
 import Dal.DBContext;
 import Model.Account;
+import Model.GoogleAccount;
 import Model.Public_club;
 import Model.Setting;
 import com.sun.source.tree.ArrayAccessTree;
 
-import org.mindrot.jbcrypt.BCrypt;
+
 
 import java.lang.reflect.Array;
 import java.sql.Connection;
@@ -25,7 +26,7 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author Doan Quan
  */
 public class dao  extends DBContext{
-  Connection con ;
+ 
   PreparedStatement stm ;
   ResultSet rs;
   
@@ -72,7 +73,8 @@ public class dao  extends DBContext{
 
             if (rs.next()) {
                 // Tạo đối tượng Account từ kết quả truy vấn
-            Account a = new Account(rs.getString("Username"), rs.getString("Password"));
+            Account a = new Account(rs.getString("Username"), rs.getString("Password")
+                ,rs.getString("UserType"));
 
                 // Kiểm tra mật khẩu đã nhập với mật khẩu hash từ cơ sở dữ liệu
                 if (BCrypt.checkpw(pass, a.getPassword() )) {
@@ -148,4 +150,53 @@ public class dao  extends DBContext{
             throw e;
         }
     }
+        public Account UserType(String username){
+            List<Account> list = new ArrayList<>();
+            String sql = "select * from users where Username = ?; ";
+            try{
+                stm = getConnection().prepareStatement(sql);
+               stm.setString(1, username);
+               rs= stm.executeQuery();
+               if(rs.next())
+               {
+                   Account  acc = new Account(rs.getString("Username"), rs.getString("Password"), rs.getString("UserType"));
+                 return  acc;
+                   
+               }
+            }catch(Exception e){
+                
+            }
+      return null;
+            
+        }
+       public boolean isGoogleAccountExist(String googleId) {
+    String query = "SELECT * FROM GoogleAccount WHERE google_id = ?";
+    try (PreparedStatement ps = getConnection().prepareStatement(query)) {
+        ps.setString(1, googleId);
+        ResultSet rs = ps.executeQuery();
+        return rs.next();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+public void saveGoogleAccount(GoogleAccount googleAccount, String email) {
+    String query = "INSERT INTO users (google_id, Email,Username, namee) VALUES (?, ?, ?, ? ) ";
+    try (PreparedStatement ps = getConnection().prepareStatement(query)) {
+        ps.setString(1, googleAccount.getId());
+        ps.setString(2, email);
+                ps.setString(3, email);
+
+        ps.setString(4, googleAccount.getName());
+              
+
+        
+        ps.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+    
+
 }

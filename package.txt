@@ -14,13 +14,9 @@ User.java
 Validate
 Validate.java
 
-<<<<<<< HEAD
-an ngu vl
-=======
 
 
-quan ngu vail
->>>>>>> d2eed3358e4482e50d65286431d6555c71efc463
+
 
 
 Test Packages:

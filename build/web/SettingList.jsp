@@ -51,20 +51,28 @@
         <div class="container">
             <h1>Setting List</h1>
             <div>
-                <label for="typeFilter">All Types</label>
-                <select id="typeFilter">
-                    <option value="all">All Types</option>
-                </select>
-                <label for="statusFilter">All Statuses</label>
-                <select id="statusFilter">
-                    <option value="all">All Statuses</option>
-                </select>
-                <input type="text" id="searchKeyword" placeholder="Enter keyword(s) to search">
-                <button type="button" onclick="search()">Search</button>
+                <form action="${pageContext.request.contextPath}/settings" method="get" style="float: left;">
+                    <label for="typeSort">Sort type</label>
+                    <select id="typeSort" name="typeSort">
+                        <option value="az">A-Z</option>
+                        <option value="za">Z-A</option>
+                    </select>
+                    <label for="statusSort">Sort status</label>
+                    <select id="statusSort" name="statusSort">
+                        <option value="az">A-Z</option>
+                        <option value="za">Z-A</option>
+                    </select>
+                    <button type="submit">Sort</button>
+                </form>
+
+                <form action="${pageContext.request.contextPath}/settings" method="get" style="float: left; margin-left: 10px;">
+                    <input type="text" id="searchKeyword" name="searchKeyword" placeholder="Enter keyword(s) to search">
+                    <button type="submit">Search</button>
+                </form>
+
                 <form action="SettingDetails.jsp" method="post" style="float: right;">
                     <button type="submit">New Setting</button>
                 </form>
-
             </div>
             <table>
                 <thead>
@@ -105,10 +113,5 @@
                 <a href="#">10</a>
             </div>
         </div>
-        <script>
-            function search() {
-                // Implement search functionality here
-            }
-        </script>
     </body>
 </html>

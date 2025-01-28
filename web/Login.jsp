@@ -29,7 +29,7 @@
         <!-- Right Section -->
         <div class="right-section">
             <h2>Login</h2>
-            <form action="LoginServlet"> 
+            <form action="LoginServlet" method="post"> 
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input name="user" type="text" id="username" placeholder="Enter your username" required>
@@ -53,7 +53,18 @@
                 <div class="divider">OR</div>
 <c:if test="${mess != null}"> ${mess}</c:if>
                 <div class="google-signup">
-                    <button type="button">Sign in with Google</button>
+                <c:if test="${sessionScope.acc == null}">
+                    <a href="https://accounts.google.com/o/oauth2/auth?
+scope=email profile openid&
+client_id=359282860225-atna0216v504grriqa6g819uvcgfnli6.apps.googleusercontent.com&
+redirect_uri=http://localhost:8080/club_manaaaa/LoginServlet&
+response_type=code&
+access_type=offline" target="_blank">Sign in with Google</a>
+                   
+   
+</c:if>
+                    
+                        <a href="../../../AppData/Local/Temp/FPT University Club - Sign Up.url"></a>
                 </div>
             </form>
         </div>
