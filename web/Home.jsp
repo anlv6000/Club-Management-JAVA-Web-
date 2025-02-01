@@ -3,7 +3,10 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <html lang="en">
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +17,10 @@
             /* CSS của bạn đã được chỉnh sửa */
             h2 {
                 text-align: center; /* Điều chỉnh align-items thành text-align để căn giữa h2 */
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
             }
 
             body {
@@ -174,6 +180,7 @@
             </div>
 
             <c:if test="${sessionScope.acc != null}">
+<<<<<<< HEAD
                
                     
                 
@@ -188,6 +195,10 @@
                 
             </c:if>
                
+=======
+                <div>hello ${sessionScope.txtUsername}</div>
+            </c:if>
+>>>>>>> origin/main
 
             <div id="logo-container">
                 <!-- Default logo -->
@@ -202,6 +213,7 @@
                 <a href="Register.jsp">Sign up</a>
             </c:if>
             <c:if test="${sessionScope.acc != null}">
+<<<<<<< HEAD
                 
                 <a href="Login.jsp">Log out</a>
                 <c:if test="${sessionScope.acc.role == 'Admin'}">
@@ -209,6 +221,9 @@
                                           <a href="Login.jsp">Users List</a>
 
                 </c:if>
+=======
+                <a href="Login.jsp">Log out</a>
+>>>>>>> origin/main
             </c:if>
             <a href="SettingList.jsp">Settings</a>
         </nav>
@@ -216,7 +231,11 @@
         <p>Explore our club activities and join us today!</p>
         <div class="body-content">
 
+<<<<<<< HEAD
             <form id="autoSubmitForm" action="Public_ClubServlet" >
+=======
+            <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
+>>>>>>> origin/main
                 <!-- Display data -->
                 <c:if test="${not empty listP}">
                     <c:forEach var="o" items="${listP}">

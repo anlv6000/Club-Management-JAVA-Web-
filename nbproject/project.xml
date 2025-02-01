@@ -21,6 +21,7 @@
                     <file>${file.reference.jakarta.servlet.jsp.jstl-api-2.0.0.jar-3}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+<<<<<<< HEAD
                 <library dirs="200">
                     <file>${file.reference.mysql-connector-java-8.0.11.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
@@ -49,6 +50,8 @@
                     <file>${file.reference.json-lib-2.4-jdk15.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+=======
+>>>>>>> origin/main
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>

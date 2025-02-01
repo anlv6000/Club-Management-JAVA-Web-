@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
      */
    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException, SQLException {
+<<<<<<< HEAD
     response.setContentType("text/html;charset=UTF-8");
     String user = request.getParameter("user");
     String pass = request.getParameter("pass");
@@ -73,6 +74,29 @@ request.getRequestDispatcher("Public_ClubServlet").forward(request, response);  
     
     
    }
+=======
+        response.setContentType("text/html;charset=UTF-8");
+         String user = request.getParameter("user");
+         String pass = request.getParameter("pass");
+         dao dao = new dao();
+         Account a = dao.login(user, pass);
+         if(a == null){
+             request.setAttribute("messerr", "Incorrect user or pass");
+             request.getRequestDispatcher("Login.jsp").forward(request, response);
+         }else{
+             if(BCrypt.checkpw(pass, a.getPassword() )|| dao.checkLogin2(user, pass)){
+                 HttpSession session = request.getSession();
+                 session.setAttribute("txtUsername", user);
+                 session.setAttribute("acc", a);
+                 session.setMaxInactiveInterval(1800);
+                response.sendRedirect("Public_ClubServlet");
+             }else{
+                  request.setAttribute("mess", "Incorrect user or pass");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+             }
+         }
+    } 
+>>>>>>> origin/main
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
