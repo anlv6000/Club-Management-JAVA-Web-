@@ -42,21 +42,40 @@ public class RegisterServlet extends HttpServlet {
         String re_pass = request.getParameter("re_pass");
         SignUp_Validation SignupEr = new SignUp_Validation();
     // Validate username
-    String ErrSignUp= SignupEr.validationUsername(user, pass, re_pass);
-        
+   boolean b = false ;
+       
         dao dao = new dao();
         boolean a= dao.checkAccountExist(user);
-        if(!ErrSignUp.isEmpty() || ErrSignUp !=null){
-            request.setAttribute("er",ErrSignUp );
+       if(user ==null || user.trim().isEmpty() || !user.matches("[a-zA-Z0-9_]+")){
+        String  eru=  "Invalid username. Only letters, digits, and underscores are allowed." ; 
+        b=true;
+           request.setAttribute("eru", eru);
          request.getRequestDispatcher("Register.jsp").forward(request, response);
+         
+       }
+         if (pass==null || pass.length() < 8 || !pass.matches(".*[A-Z].*") || !pass.matches(".*[a-z].*") || !pass.matches(".*\\d.*") || !pass.matches(".*[!@#$%^&*].*")) {
+           String erp="Password must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters.";
+                  b=true;
 
-        }
+           request.setAttribute("erp", erp);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
+            
+      } 
+         if (!pass.equals(re_pass)){
+           String err= "Passwords do not match.";
+                   b=true;
+
+                       request.setAttribute("err", err);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
+
+          
+       }
         if(a == true){
             request.setAttribute("mess", "Username is already taken.");
             request.setAttribute("user", user); // Keep username filled in
             
             request.getRequestDispatcher("Register.jsp").forward(request, response);
-        }else{
+        }else if(a == false && b ==false ){
             String hashedPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
             dao.addAcount(user, hashedPassword);
             HttpSession session = request.getSession();

@@ -29,7 +29,7 @@
         <!-- Right Section -->
         <div class="right-section">
             <h2>Login</h2>
-            <form action="LoginServlet" method="post"> 
+            <form action="LoginServlet" > 
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input name="user" type="text" id="username" placeholder="Enter your username" required>
@@ -51,18 +51,14 @@
                 <button type="submit" class="btn">Sign in</button>
 
                 <div class="divider">OR</div>
-<c:if test="${mess != null}"> ${mess}</c:if>
+<c:if test="${mess != null}"> ${mess}</c:if></form>
+<form action="LoginGG">
                 <div class="google-signup">
-                <c:if test="${sessionScope.acc == null}">
-                    <a href="https://accounts.google.com/o/oauth2/auth?
-scope=email profile openid&
-client_id=359282860225-atna0216v504grriqa6g819uvcgfnli6.apps.googleusercontent.com&
-redirect_uri=http://localhost:8080/club_manaaaa/LoginServlet&
-response_type=code&
-access_type=offline" target="_blank">Sign in with Google</a>
+                
+                  <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&client_id=359282860225-atna0216v504grriqa6g819uvcgfnli6.apps.googleusercontent.com&redirect_uri=http://localhost:8080/club_manaaaa/LoginGG&response_type=code&access_type=offline" target="_blank">Sign in with Google</a>
                    
    
-</c:if>
+
                     
                         <a href="../../../AppData/Local/Temp/FPT University Club - Sign Up.url"></a>
                 </div>

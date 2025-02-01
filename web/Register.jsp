@@ -22,19 +22,19 @@
             <h2>Sign Up</h2>
             
                 <form action="RegisterServlet" >
-                    <c:if test="${er != null}">${er}</c:if>
+                    <c:if test="${eru != null}">${eru}</c:if>
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input name="user" type="text" id="username" placeholder="Enter your username" >
                 </div>
                
-
+<c:if test="${erp != null}">${erp}</c:if>
                 <div class="form-group password-toggle">
                     <label for="password">Password</label>
                     <input name="pass" type="password" id="password" placeholder="Enter new password" >
                     <span onclick="togglePassword('password')"></span>
                 </div>
-                
+                <c:if test="${err != null}">${err}</c:if>
                 <div class="form-group password-toggle">
                     <label for="verification">Verification</label>
                     <input name="re_pass" type="password" id="verification" placeholder="Confirm password" >

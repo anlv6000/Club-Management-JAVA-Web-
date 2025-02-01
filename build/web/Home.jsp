@@ -174,8 +174,20 @@
             </div>
 
             <c:if test="${sessionScope.acc != null}">
+               
+                    
+                
                 <div>hello ${sessionScope.txtUsername}</div>
+                
             </c:if>
+                 <c:if test="${sessionScope.googleAccount != null}">
+               
+                    
+                
+                <div>hello ${sessionScope.googleAccount}</div>
+                
+            </c:if>
+               
 
             <div id="logo-container">
                 <!-- Default logo -->
@@ -204,7 +216,7 @@
         <p>Explore our club activities and join us today!</p>
         <div class="body-content">
 
-            <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
+            <form id="autoSubmitForm" action="Public_ClubServlet" >
                 <!-- Display data -->
                 <c:if test="${not empty listP}">
                     <c:forEach var="o" items="${listP}">

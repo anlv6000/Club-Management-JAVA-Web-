@@ -169,34 +169,62 @@ public class dao  extends DBContext{
       return null;
             
         }
-       public boolean isGoogleAccountExist(String googleId) {
-    String query = "SELECT * FROM GoogleAccount WHERE google_id = ?";
-    try (PreparedStatement ps = getConnection().prepareStatement(query)) {
-        ps.setString(1, googleId);
-        ResultSet rs = ps.executeQuery();
-        return rs.next();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return false;
+    public boolean isGoogleAccountExist(String googleId) throws SQLException {
+    String query = "SELECT * FROM google_accounts WHERE google_id = ?";
+    try{
+         PreparedStatement pstmt = getConnection().prepareStatement(query) ;
+        pstmt.setString(1, googleId);
+        ResultSet rs = pstmt.executeQuery();
+      if(rs.next()){
+          return  true;
+      }else{
+          return  false;
+      }
+    }catch(Exception e ){
+        
 }
+      return false;
+     
+    }
+
 
 public void saveGoogleAccount(GoogleAccount googleAccount, String email) {
-    String query = "INSERT INTO users (google_id, Email,Username, namee) VALUES (?, ?, ?, ? ) ";
-    try (PreparedStatement ps = getConnection().prepareStatement(query)) {
-        ps.setString(1, googleAccount.getId());
-        ps.setString(2, email);
-                ps.setString(3, email);
-
-        ps.setString(4, googleAccount.getName());
-              
-
-        
-        ps.executeUpdate();
-    } catch (Exception e) {
+    String query = "INSERT INTO google_accounts (google_id, name, email) VALUES (?, ?, ?)";
+    try {
+         PreparedStatement pstmt = getConnection().prepareStatement(query) ;
+        pstmt.setString(1, googleAccount.getId());
+        pstmt.setString(2, googleAccount.getName());
+        pstmt.setString(3, email);
+       
+      pstmt.executeUpdate();
+    } catch (SQLException e) {
         e.printStackTrace();
+        
     }
+      
 }
+
+public GoogleAccount Login3(String email) {
+        String query = "SELECT * FROM google_accounts WHERE email = ? ";
+        try {
+            stm = getConnection().prepareStatement(query);
+            stm.setString(1, email);
+            rs = stm.executeQuery();
+
+            if (rs.next()) {
+                // Tạo đối tượng Account từ kết quả truy vấn
+            
+GoogleAccount ggacc = new GoogleAccount(rs.getString("email"));
+                // Kiểm tra mật khẩu đã nhập với mật khẩu hash từ cơ sở dữ liệu
+               return  ggacc;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // In ra lỗi để kiểm tra
+        }
+      return null;
+      
+     
+    }
     
 
 }

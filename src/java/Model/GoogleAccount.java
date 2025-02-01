@@ -23,6 +23,10 @@ public class GoogleAccount {
         this.verified_email = verified_email;
     }
 
+    public GoogleAccount(String email) {
+        this.email = email;
+    }
+
     public String getId() {
         return id;
     }

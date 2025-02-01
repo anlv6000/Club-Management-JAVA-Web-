@@ -11,16 +11,18 @@ package Services;
 public class SignUp_Validation {
 
     public SignUp_Validation() {
+        
     }
    public String validationUsername(String user, String pass, String RePass){
        if(user ==null || user.trim().isEmpty() || !user.matches("[a-zA-Z0-9_]+")){
-        return "Invalid username. Only letters, digits, and underscores are allowed." ;
+           return "Invalid username. Only letters, digits, and underscores are allowed." ; 
+       
    
    }
         
 
       if (pass==null || pass.length() < 8 || !pass.matches(".*[A-Z].*") || !pass.matches(".*[a-z].*") || !pass.matches(".*\\d.*") || !pass.matches(".*[!@#$%^&*].*")) {
-            return "Password must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters.";
+           return "Password must be at least 8 characters long and contain uppercase, lowercase, digits, and special characters.";
             
       }      
        
@@ -29,9 +31,11 @@ public class SignUp_Validation {
            return "Passwords do not match.";
           
        }
-        return null;
+       return null;
+        
        
     
     
 }
+   
 }
