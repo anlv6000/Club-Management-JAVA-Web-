@@ -216,6 +216,7 @@
                
 
             </c:if>
+	    <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
             <a href="${pageContext.request.contextPath}/settings">Settings</a>
 	    <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
         </nav>

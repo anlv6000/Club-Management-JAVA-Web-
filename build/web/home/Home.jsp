@@ -174,20 +174,20 @@
 
             <c:if test="${sessionScope.acc != null}">
 
-               
-                    
-                
+
+
+
                 <div>hello ${sessionScope.txtUsername}</div>
-                
+
             </c:if>
-                 <c:if test="${sessionScope.googleAccount != null}">
-               
-                    
-                
+            <c:if test="${sessionScope.googleAccount != null}">
+
+
+
                 <div>hello ${sessionScope.name}</div>
-                
+
             </c:if>
-               
+
 
 
 
@@ -205,17 +205,18 @@
             </c:if>
             <c:if test="${sessionScope.acc != null ||sessionScope.accc != null }">
 
-                
+
                 <a href="Login.jsp">Log out</a>
                 <c:if test="${sessionScope.acc.role == 'Admin' || sessionScope.accc.role == 'Admin'}">
-                     <a href="Login.jsp">Clubs List</a>
-                                          <a href="Login.jsp">Users List</a>
+                    <a href="Login.jsp">Clubs List</a>
+                    <a href="Login.jsp">Users List</a>
 
                 </c:if>
 
-               
+
 
             </c:if>
+            <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
             <a href="${pageContext.request.contextPath}/settings">Settings</a>
             <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
         </nav>
@@ -225,18 +226,18 @@
 
             <form id="autoSubmitForm" action="Public_ClubServlet" >
 
-            <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
+                <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
 
-                <!-- Display data -->
-                <c:if test="${not empty listP}">
-                    <c:forEach var="o" items="${listP}">
-                        <div class="image-item">
-                            <img src="${o.imgURL}" alt="vov">
-                            <div>${o.clubName}</div>
-                        </div>
-                    </c:forEach>
-                </c:if>
-            </form>
+                    <!-- Display data -->
+                    <c:if test="${not empty listP}">
+                        <c:forEach var="o" items="${listP}">
+                            <div class="image-item">
+                                <img src="${o.imgURL}" alt="vov">
+                                <div>${o.clubName}</div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                </form>
         </div>
 
 
