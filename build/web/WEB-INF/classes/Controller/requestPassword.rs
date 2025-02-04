@@ -1,0 +1,2 @@
+controller.requestPassword
+controller.RequestPassword

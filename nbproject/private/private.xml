@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Projects/SWP391-G5%20-%20Copy/g5/web/SettingList.jsp</file>
-            <file>file:/D:/Projects/SWP391-G5%20-%20Copy/g5/src/java/Model/Setting.java</file>
-            <file>file:/D:/Projects/SWP391-G5%20-%20Copy/g5/src/java/Controller/SettingServlet.java</file>
-            <file>file:/D:/Projects/SWP391-G5%20-%20Copy/g5/web/SettingDetails.jsp</file>
-            <file>file:/D:/Projects/SWP391-G5%20-%20Copy/g5/src/java/Controller/NewSettingServlet.java</file>
+            <file>file:/E:/ruby/g5_sorted/g5/src/java/dao/dao.java</file>
+            <file>file:/E:/ruby/g5_sorted/g5/src/java/controller/GoogleLogin.java</file>
+            <file>file:/E:/ruby/g5_sorted/g5/src/java/controller/LoginServlet.java</file>
+            <file>file:/E:/ruby/g5_sorted/g5/src/java/controller/LoginGG.java</file>
         </group>
     </open-files>
 </project-private>
