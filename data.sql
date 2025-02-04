@@ -1,6 +1,6 @@
-CREATE DATABASE club_Manager;
+CREATE DATABASE club_Manager1;
+USE club_Manager1;
 USE club_Manager;
-
 -- Tạo bảng Settings (Bảng 1)
 CREATE TABLE Settings (
     SettingID INT AUTO_INCREMENT PRIMARY KEY,
@@ -111,7 +111,8 @@ ALTER TABLE clubs DROP COLUMN Categories;
 select * from users
 select * from tokenForgetPassword
 Select * from users where Email = 'xuanquanyd@gmail.com'
-
+select * from clubs
+select * from settings
 
 
 UPDATE users 
@@ -150,6 +151,18 @@ SET UserType = 'Admin'
 WHERE email = 'quandxhe181250@fpt.edu.vn';
 SET SQL_SAFE_UPDATES = 1;
 
+DELETE FROM Settings;
+
+INSERT INTO Settings (SettingName, SettingType, SettingValue, Priority, Status, UserType)
+VALUES 
+('SiteTitle', 'String', 'My Awesome Website', 1, 'Active', 'Admin'),
+('MaxUsers', 'Integer', '100', 2, 'Active', 'Admin'),
+('EnableDarkMode', 'Boolean', 'true', 3, 'Active', 'WebUser'),
+('RegistrationDeadline', 'Date', '2025-12-31', 1, 'Active', 'ClubLeader'),
+('WelcomeMessage', 'Text', 'Welcome to our club!', 2, 'Active', 'ClubMember'),
+('PublicAccess', 'Boolean', 'false', 3, 'Active', 'WebUser');
+
+
 	
  INSERT INTO tokenForgetPassword (token, expiryTime, isUsed, userId) VALUES ( '1e9d1a69-cc5a-4383-9262-d248906bd5a0','2025-02-03T22:18:56.273925200', false, 0)
 
@@ -169,7 +182,10 @@ VALUES
  'https://makan.vn/wp-content/uploads/2023/04/logo-ao-bong-chuyen-01-2-768x768.jpg'),
 ('Muay Thai Club', 
  'Câu lạc bộ Muay Thai mang đến cơ hội khám phá môn võ thuật nổi tiếng của Thái Lan. Đây là nơi lý tưởng để rèn luyện sức mạnh, kỹ thuật đối kháng và khả năng chịu đựng. Với sự hướng dẫn tận tình từ huấn luyện viên chuyên nghiệp, bạn sẽ nhanh chóng nâng cao kỹ năng chiến đấu và sự tự tin trong cuộc sống hàng ngày.', 
- 'https://tse4.mm.bing.net/th?id=OIP.EC5b6aD_n5ic0QqjYcgAzQHaHa&rs=1&pid=ImgDetMain');
+ 'https://tse4.mm.bing.net/th?id=OIP.EC5b6aD_n5ic0QqjYcgAzQHaHa&rs=1&pid=ImgDetMain'),
+ ('Hackathon Club'	,
+ 'Câu lạc bộ Công nghệ Thông tin (CNTT) là nơi dành cho những bạn trẻ đam mê lập trình, công nghệ và khám phá những giải pháp sáng tạo trong lĩnh vực số. CLB thường xuyên tổ chức các buổi workshop, hacka...'	,
+ 'https://yt3.ggpht.com/a/AGF-l7-MtSt82Zw_Uk4ap9HhboZSCUCondclQ6cMQg=s900-c-k-c0xffffffff-no-rj-mo');
 INSERT INTO clubs (ClubName, Categories, Description, ImageURL) 
 VALUES 
 ('CLB Văn hóa nghệ thuật', 'Nghệ thuật', 'Câu lạc bộ văn hóa nghệ thuật dành cho những ai yêu thích sáng tạo và nghệ thuật.', 'https://image1.jpg'),

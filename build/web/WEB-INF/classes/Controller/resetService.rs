@@ -1,2 +1,1 @@
-controller.resetService$1
-controller.resetService
+Controller.resetService

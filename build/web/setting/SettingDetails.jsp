@@ -76,7 +76,7 @@
 </head>
 <body>
     <div class="form-container">
-        <h1>Setting Details</h1>
+        <h1>New Setting</h1>
         <form action="newSetting" method="post">
             <div class="form-group-horizontal">
                 <div class="form-group form-group-half">
@@ -86,9 +86,9 @@
                 <div class="form-group form-group-half">
                     <label for="type">Type</label>
                     <select id="type" name="type" required>
-                        <option value="Integer">Integer</option>
+                        <option value="Number">Number</option>
                         <option value="Boolean">Boolean</option>
-                        <option value="Text">Text</option>
+                        <option value="String">String</option>
                     </select>
                 </div>
             </div>

@@ -14,13 +14,53 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SettingServlet", urlPatterns = {"/settings"})
+@WebServlet(name = "SettingServlet", urlPatterns = {"/settings", "/toggleStatus"})
 public class SettingServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        String action = request.getServletPath();
+
+        if ("/toggleStatus".equals(action)) {
+            handleToggleStatus(request, response);
+        } else {
+            handleSettingsList(request, response);
+        }
+    }
+
+    private void handleToggleStatus(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String idStr = request.getParameter("id");
+        String currentStatus = request.getParameter("currentStatus");
+
+        int id = 0;
+        if (idStr != null && !idStr.trim().isEmpty()) {
+            id = Integer.parseInt(idStr);
+        }
+
+        // Đổi trạng thái giữa Active và Inactive
+        String newStatus = "Active".equals(currentStatus) ? "Inactive" : "Active";
+
+        DBContext dbContext = new DBContext();
+        try (Connection conn = dbContext.getConnection()) {
+            String sql = "UPDATE Settings SET Status = ? WHERE SettingID = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, newStatus);
+                stmt.setInt(2, id);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Chuyển hướng lại trang danh sách thiết lập
+        response.sendRedirect("settings");
+    }
+
+    private void handleSettingsList(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         DBContext dbContext = new DBContext();
         Connection conn = null;
         ArrayList<Setting> settingsList = new ArrayList<>();
@@ -66,6 +106,7 @@ public class SettingServlet extends HttpServlet {
             // Set search keyword parameter
             if (searchKeyword != null && !searchKeyword.isEmpty()) {
                 stmt.setString(parameterIndex, "%" + searchKeyword + "%");
+                parameterIndex++;
             }
 
             ResultSet rs = stmt.executeQuery();
@@ -113,6 +154,6 @@ public class SettingServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet to manage settings including toggling status";
     }
 }

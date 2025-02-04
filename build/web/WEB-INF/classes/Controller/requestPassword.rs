@@ -1,2 +1,2 @@
-controller.requestPassword
-controller.RequestPassword
+Controller.requestPassword$1
+Controller.requestPassword

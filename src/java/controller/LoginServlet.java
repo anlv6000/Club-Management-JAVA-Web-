@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("txtUsername", user);
             session.setAttribute("acc", a);
             session.setMaxInactiveInterval(1800);
-request.getRequestDispatcher("Public_ClubServlet").forward(request, response);        } else {
+request.getRequestDispatcher("Public_ClubServlet").forward(request, response);  } else {
             request.setAttribute("mess", "Incorrect user or pass");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }

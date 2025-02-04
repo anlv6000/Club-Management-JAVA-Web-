@@ -98,19 +98,19 @@
                             <td>${setting.status}</td>
                             <td>${setting.userType}</td>
                             <td>
-                                <a href="#">Edit</a> 
-                                <a href="#">${setting.status == 'Active' ? 'Deactivate' : 'Activate'}</a>
+                                <a href="SettingEdit.jsp?id=${setting.id}">Edit</a>
+                                <a href="toggleStatus?id=${setting.id}&currentStatus=${setting.status}">${setting.status == 'Active' ? 'Deactivate' : 'Activate'}</a>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
             <div class="pagination">
-                <a href="#">1</a>
+               <!-- <a href="#">1</a>
                 <a href="#">2</a>
                 <a href="#">...</a>
                 <a href="#">9</a>
-                <a href="#">10</a>
+                <a href="#">10</a>-->
             </div>
         </div>
     </body>

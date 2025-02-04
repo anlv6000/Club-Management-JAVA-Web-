@@ -11,8 +11,16 @@ package entity;
 public class User {
     private int id;
     private String userName, email, password;
-   
+   String LastLoginDate;
     public User() {
+    }
+
+    public User(int id, String userName, String email, String password, String LastLoginDate) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.LastLoginDate = LastLoginDate;
     }
 
     public User(int id, String userName, String email, String password) {

@@ -216,7 +216,8 @@
                
 
             </c:if>
-            <a href="SettingList.jsp">Settings</a>
+            <a href="${pageContext.request.contextPath}/settings">Settings</a>
+            <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
         </nav>
         <h2>Welcome to FPT Club!</h2>
         <p>Explore our club activities and join us today!</p>

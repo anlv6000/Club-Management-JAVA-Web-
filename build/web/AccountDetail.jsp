@@ -4,148 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Information</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 70%;
-            margin: 20px auto;
-            background: white;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-        }
-        .header {
-            text-align: center;
-            color: red;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .form-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 20px;
-        }
-        .profile-pic {
-            text-align: center;
-        }
-        .profile-pic img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 1px solid #ddd;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .form-group .radio-group {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .form-group .radio-group input {
-            margin-right: 5px;
-        }
-        .form-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .form-actions button {
-            padding: 10px 20px;
-            font-size: 14px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .form-actions .save {
-            background-color: #28a745;
-            color: white;
-        }
-        .form-actions .cancel {
-            background-color: #ddd;
-            color: black;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <div class="header">Account Information</div>
-        <form>
-            <div class="form-container">
-                <!-- Left Column -->
-                <div class="profile-pic">
-                    <img src="https://via.placeholder.com/100" alt="Profile Picture">
-                </div>
-                <!-- Right Column -->
-                <div>
-                    <div class="form-group">
-                        <label for="account-id">ID</label>
-                        <input type="text" id="account-id" name="account-id" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="account-name">Name Account</label>
-                        <input type="text" id="account-name" name="account-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <select id="role" name="role">
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Status</label>
-                        <div class="radio-group">
-                            <label>
-                                <input type="radio" name="status" value="active"> Active
-                            </label>
-                            <label>
-                                <input type="radio" name="status" value="inactive"> Inactive
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Name Club</label>
-                        <input type="text" name="name-club">
-                    </div>
-                    <!-- Adding creation date and last modified date -->
-                    <div class="form-group">
-                        <label for="created-at">Account Created</label>
-                        <input type="text" id="created-at" name="created-at" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="last-modified">Last Modified</label>
-                        <input type="text" id="last-modified" name="last-modified" readonly>
-                    </div>
-                </div>
+<body class="bg-gradient-to-r from-blue-400 to-indigo-500 flex items-center justify-center h-screen">
+
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+        <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Account Information</h1>
+
+        <form method="post" action="UpdateAccount" class="space-y-4">
+            <!-- Account ID (non-editable) -->
+            <div>
+                <label class="font-medium">Account ID:</label>
+                <input type="text" name="accountId" value="${account.id}" readonly 
+                       class="w-full border rounded-lg p-2 bg-gray-100 text-gray-600">
             </div>
-            <div class="form-actions">
-                <button type="submit" class="save">Save</button>
-                <button type="button" class="cancel">Cancel</button>
+
+            <!-- Username -->
+            <div>
+                <label class="font-medium">Username:</label>
+                <input type="text" name="username" value="${account.username}" 
+                       class="w-full border rounded-lg p-2">
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="font-medium">Email:</label>
+                <input type="email" name="email" value="${account.email}" 
+                       class="w-full border rounded-lg p-2">
+            </div>
+
+            <!-- Role -->
+            <div>
+                <label class="font-medium">Role:</label>
+                <select name="userType" class="w-full border rounded-lg p-2">
+                    <option value="Admin" ${account.role == 'Admin' ? 'selected' : ''}>Admin</option>
+                    <option value="ClubMember" ${account.role == 'Club Member' ? 'selected' : ''}>Club Member</option>
+                    <option value="ClubLeader" ${account.role == 'Club Leader' ? 'selected' : ''}>Club Leader</option>
+                    <option value="WebUser" ${account.role == 'Web User' ? 'selected' : ''}>Web User</option>
+                </select>
+            </div>
+
+            <!-- Status -->
+            <div>
+                <label class="font-medium">Status:</label>
+                <select name="status" class="w-full border rounded-lg p-2">
+                    <option value="Active" ${account.status == 'Active' ? 'selected' : ''}>Active</option>
+                    <option value="Inactive" ${account.status == 'Inactive' ? 'selected' : ''}>Inactive</option>
+                </select>
+            </div>
+
+            <!-- Created Date (non-editable) -->
+            <div>
+                <label class="font-medium">Created Date:</label>
+                <input type="text" name="accountCreatedDate" value="${account.accountCreatedDate}" readonly 
+                       class="w-full border rounded-lg p-2 bg-gray-100 text-gray-600">
+            </div>
+
+            <!-- Last Login Date (non-editable) -->
+            <div>
+                <label class="font-medium">Last Login Date:</label>
+                <input type="text" name="lastLoginDate" value="${account.lastLoginDate}" readonly 
+                       class="w-full border rounded-lg p-2 bg-gray-100 text-gray-600">
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-between mt-4">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                    Save Changes
+                </button>
+                <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+                        onclick="window.location.href='ManageAccount'">
+                    Cancel
+                </button>
             </div>
         </form>
     </div>
+
 </body>
 </html>

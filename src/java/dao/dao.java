@@ -79,7 +79,7 @@ public class dao extends DBContext {
             if (rs.next()) {
                 // Tạo đối tượng Account từ kết quả truy vấn
                 Account a = new Account(rs.getString("Username"), rs.getString("Password"),
-                         rs.getString("UserType"));
+                        rs.getString("UserType"));
 
                 // Kiểm tra mật khẩu đã nhập với mật khẩu hash từ cơ sở dữ liệu
                 if (BCrypt.checkpw(pass, a.getPassword())) {
@@ -126,7 +126,7 @@ public class dao extends DBContext {
 
     public List<Public_club> getTop5() {
         List<Public_club> list = new ArrayList<>();
-        String query = "select * from clubs LIMIT 5 ";
+        String query = "select * from clubs LIMIT 6 ";
         try {
             stm = getConnection().prepareStatement(query);
             rs = stm.executeQuery();
@@ -151,10 +151,67 @@ public class dao extends DBContext {
                 stm.addBatch();
             }
             stm.executeBatch();
-            System.out.println("Thêm các thiết lập thành công!");
         } catch (SQLException e) {
-            System.out.println("Lỗi khi thêm các thiết lập: " + e.getMessage());
-            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public void updateSettings(List<Setting> settings) throws SQLException {
+        String sql = "UPDATE Settings "
+                + "SET SettingName = ?, "
+                + "SettingType = ?, "
+                + "SettingValue = ?, "
+                + "Priority = ?, "
+                + "Status = ?, "
+                + "UserType = ? "
+                + "WHERE SettingID = ?";
+        try (Connection con = getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            for (Setting setting : settings) {
+                stm.setString(1, setting.getName());
+                stm.setString(2, setting.getType());
+                stm.setString(3, setting.getValue());
+                stm.setInt(4, setting.getPriority());
+                stm.setString(5, setting.getStatus());
+                stm.setString(6, setting.getUserType());
+                stm.setInt(7, setting.getId()); // SettingID
+                stm.addBatch();
+            }
+            stm.executeBatch();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public Setting getSettingById(int id) throws SQLException {
+        String sql = "SELECT * FROM Settings WHERE SettingID = ?";
+        try (Connection con = getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setInt(1, id);
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    return new Setting(
+                            rs.getInt("SettingID"),
+                            rs.getString("SettingName"),
+                            rs.getString("SettingType"),
+                            rs.getString("SettingValue"),
+                            rs.getInt("Priority"),
+                            rs.getString("Status"),
+                            rs.getString("UserType")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return null;
+    }
+
+    public void updateStatus(int id, String newStatus) throws SQLException {
+        String sql = "UPDATE Settings SET Status = ? WHERE SettingID = ?";
+        try (Connection con = getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
+            stm.setString(1, newStatus);
+            stm.setInt(2, id);
+            stm.executeUpdate();
+        } catch (SQLException e) {
             throw e;
         }
     }
@@ -231,29 +288,31 @@ public class dao extends DBContext {
         }
         return null; // Trả về null nếu không tìm thấy tài khoản
     }
-     public String getFormatDate(LocalDateTime myDateObj) {
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
-        String formattedDate = myDateObj.format(myFormatObj);  
+
+    public String getFormatDate(LocalDateTime myDateObj) {
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
         return formattedDate;
-     }
-    
+    }
+
     public boolean insertTokenForget(TokenFogotPass tokenForget) {
-         String sql = "INSERT INTO tokenForgetPassword (token, expiryTime, isUsed, userId) VALUES (?, ?, ?, ?)"; 
+        String sql = "INSERT INTO tokenForgetPassword (token, expiryTime, isUsed, userId) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ps.setString(1, tokenForget.getToken());
             ps.setTimestamp(2, Timestamp.valueOf(getFormatDate(tokenForget.getExpiryTime())));
             ps.setBoolean(3, tokenForget.isIsUsed());
             ps.setInt(4, tokenForget.getUserId());
-            
-            if(ps.executeUpdate() > 0){
-                return  true;
+
+            if (ps.executeUpdate() > 0) {
+                return true;
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return false;
     }
+
     public TokenFogotPass getTokenPassword(String token) {
         String sql = "Select * from tokenForgetPassword where token = ?";
         try {
@@ -274,9 +333,9 @@ public class dao extends DBContext {
         }
         return null;
     }
-    
+
     public void updateStatus(TokenFogotPass token) {
-        System.out.println("token = "+token);
+        System.out.println("token = " + token);
         String sql = "UPDATE tokenForgetPassword \n"
                 + "   SET isUsed = ?\n"
                 + " WHERE token = ?";
@@ -289,17 +348,18 @@ public class dao extends DBContext {
             System.out.println(e);
         }
     }
-     public User getUserByEmail(String email) {
+
+    public User getUserByEmail(String email) {
         String sql = "Select * from users where Email = ?";
         try {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 return new User(
                         rs.getInt("UserID"),
-                        rs.getString("Username"), 
-                        rs.getString("Email"), 
+                        rs.getString("Username"),
+                        rs.getString("Email"),
                         rs.getString("Password"));
             }
         } catch (SQLException e) {
@@ -307,17 +367,18 @@ public class dao extends DBContext {
         }
         return null;
     }
+
     public User getUserById(int userId) {
         String sql = "Select * from users where UserID = ?";
         try {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-               return new User(
+            while (rs.next()) {
+                return new User(
                         rs.getInt("UserID"),
-                        rs.getString("Username"), 
-                        rs.getString("Email"), 
+                        rs.getString("Username"),
+                        rs.getString("Email"),
                         rs.getString("Password"));
             }
         } catch (SQLException e) {
@@ -325,7 +386,7 @@ public class dao extends DBContext {
         }
         return null;
     }
-    
+
     public void updatePassword(String email, String password) {
         String sql = "UPDATE users \n"
                 + "   SET  Password = ?\n"
@@ -339,33 +400,167 @@ public class dao extends DBContext {
             System.out.println(e);
         }
     }
-  
-public void updateLastLoginTime(int userId) {
-    String sql = "UPDATE users \n" +
-"SET LastLoginDate = NOW() \n" +
-"WHERE UserID =  ? ";
-    try {
-          stm = getConnection().prepareStatement(sql) ;
-        stm.setInt(1, userId);
-        stm.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}
-public User select(String username) {
-    String sql = "Select * from users where Username = ?  ";
-    try {
-          stm = getConnection().prepareStatement(sql) ;
-       stm.setString(1, username);
-        rs= stm.executeQuery();
-       while(rs.next()){
-           return new User(rs.getInt("UserID"), rs.getString("Username"), rs.getString("Email"), rs.getString("Password"), rs.getString("LastLoginDate"));
-       }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-        return null;
-}
 
+    public boolean insertAccount(String username, String password, String email, String userType, String status, String imageURL) {
+        String sql = "INSERT INTO Users (Username, Password, Email, UserType, Status, AccountCreatedDate, LastLoginDate, ImageURL) "
+                + "VALUES (?, ?, ?, ?, ?, NOW(), NULL, ?)";
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+            ps.setString(1, username);
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
+            ps.setString(2, hashedPassword);
+            ps.setString(3, email);
+            ps.setString(4, userType);
+            ps.setString(5, status);
+            // Kiểm tra nếu imageURL rỗng thì đặt ảnh mặc định
+            if (imageURL == null || imageURL.isEmpty()) {
+                imageURL = "default.jpg";
+            }
+            ps.setString(6, imageURL);
+
+            int rows = ps.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<Account> getAllAccounts() {
+        List<Account> accounts = new ArrayList<>();
+        String sql = "SELECT * FROM Users";
+        try {
+            PreparedStatement ps = getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String imageURL = rs.getString("ImageURL");
+                // Nếu không có ảnh, gán ảnh mặc định
+                if (imageURL == null || imageURL.isEmpty()) {
+                    imageURL = "default.jpg";
+                }
+
+                accounts.add(new Account(
+                        rs.getInt("UserID"),
+                        rs.getString("Password"),
+                        rs.getString("Username"),
+                        rs.getString("Email"),
+                        rs.getString("UserType"),
+                        rs.getString("Status"),
+                        rs.getDate("AccountCreatedDate"),
+                        rs.getTimestamp("LastLoginDate"),
+                        rs.getString("ImageURL")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accounts;
+    }
+
+    public Account getAccountById(String accountId) {
+        String sql = "SELECT * FROM Users WHERE UserID = ?";
+        try {
+            PreparedStatement ps = getConnection().prepareStatement(sql);
+
+            ps.setString(1, accountId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Account(
+                        rs.getInt("UserID"),
+                        rs.getString("Password"),
+                        rs.getString("Username"),
+                        rs.getString("Email"),
+                        rs.getString("UserType"),
+                        rs.getString("Status"),
+                        rs.getDate("AccountCreatedDate"),
+                        rs.getDate("LastLoginDate"),
+                        rs.getString("ImageURL")
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateAccount(Account account) throws SQLException {
+        String sql = "UPDATE Users SET Username = ?, Email = ?, UserType = ?, Status = ? WHERE UserID = ?";
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+            ps.setString(1, account.getUsername());
+            ps.setString(2, account.getEmail());
+            ps.setString(3, account.getRole());
+            ps.setString(4, account.getStatus());
+            ps.setInt(5, account.getId());
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteAccount(String accountId) throws SQLException {
+        String sql = "DELETE FROM Users WHERE UserID = ?";
+        try {
+            PreparedStatement ps = getConnection().prepareStatement(sql);
+            ps.setString(1, accountId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public List<Account> searchAccounts(String role, String status, String keyword) throws SQLException {
+        List<Account> accounts = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT * FROM Users WHERE 1=1"); // Adjust table name if needed
+
+        if (role != null && !role.isEmpty()) {
+            sql.append(" AND UserType = ?"); // Adjust field names if needed
+        }
+        if (status != null && !status.isEmpty()) {
+            sql.append(" AND Status = ?");
+        }
+        if (keyword != null && !keyword.isEmpty()) {
+            sql.append(" AND (Username LIKE ? OR Email LIKE ?)");
+        }
+
+        try (PreparedStatement ps = getConnection().prepareStatement(sql.toString())) {
+            int index = 1;
+
+            // Set the dynamic parameters
+            if (role != null && !role.isEmpty()) {
+                ps.setString(index++, role);
+            }
+            if (status != null && !status.isEmpty()) {
+                ps.setString(index++, status);
+            }
+            if (keyword != null && !keyword.isEmpty()) {
+                ps.setString(index++, "%" + keyword + "%");
+                ps.setString(index++, "%" + keyword + "%");
+            }
+
+            // Execute the query and process the results
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    accounts.add(new Account(
+                            rs.getInt("UserID"),
+                            rs.getString("Password"),
+                            rs.getString("Username"),
+                            rs.getString("Email"),
+                            rs.getString("UserType"),
+                            rs.getString("Status"),
+                            rs.getDate("AccountCreatedDate"),
+                            rs.getDate("LastLoginDate"),
+                            rs.getString("ImageURL")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Consider logging the error for better monitoring
+        }
+
+        return accounts;
+    }
 
 }

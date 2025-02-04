@@ -1,1 +1,1 @@
-controller.resetPassword
+Controller.resetPassword

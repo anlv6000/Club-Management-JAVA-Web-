@@ -1,150 +1,117 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Account</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Thêm tài khoản mới</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fb;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
-
-        .modal-content {
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
             padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        .modal-header {
-            border-bottom: 2px solid #007bff;
-            text-align: center;
+        .form-group {
+            margin-bottom: 15px;
         }
-
-        .modal-header h4 {
-            color: #007bff;
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
         }
-
-        .modal-footer {
-            border-top: 2px solid #007bff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-footer .btn {
-            padding: 8px 20px;
-            font-size: 14px;
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 5px;
         }
-
-        .btn-success {
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #fff;
             background-color: #28a745;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-
-        .btn-default {
-            background-color: #f8f9fa;
-            border: none;
+        .btn:hover {
+            background-color: #218838;
         }
-
-        .form-group {
-            margin-bottom: 20px;
+        .error-message {
+            color: red;
+            margin-bottom: 15px;
         }
-
-        .form-group label {
-            font-weight: bold;
-            color: #555;
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
         }
-
-        .form-control {
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            font-size: 14px;
-            transition: all 0.3s ease;
+        .password-wrapper {
+            position: relative;
         }
-
-        .form-control:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-        }
-
-        .form-group input[type="radio"] {
-            margin-right: 10px;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .form-group .radio-group {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .form-group .radio-group input {
-            margin-right: 5px;
-        }
-
     </style>
 </head>
 <body>
-    <div id="addAccountModal" class="modal fade show" style="display:block;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="AddAccountServlet" method="post">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Add Account</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="user">User</label>
-                            <input name="user" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="em">Email</label>
-                            <input name="em" type="email" class="form-control" required>
-                        </div>
-
-                        <!-- Thêm phần chọn Role -->
-                        <div class="form-group">
-                            <label for="role">Role</label>
-                            <select name="role" class="form-control" required>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                                <option value="guest">Guest</option>
-                            </select>
-                        </div>
-
-                        <!-- Thêm phần chọn Status -->
-                        <div class="form-group">
-                            <label>Status</label>
-                            <div class="radio-group">
-                                <label>
-                                    <input type="radio" name="status" value="active" id="active" required> Active
-                                </label>
-                                <label>
-                                    <input type="radio" name="status" value="inactive" id="inactive"> Inactive
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-success" value="Add">
-                    </div>
-                </form>
+    <div class="container">
+        <h2>Thêm tài khoản mới</h2>
+        <form action="AddAccount" method="post">
+            <!-- Hiển thị thông báo lỗi nếu có -->
+            <c:if test="${not empty mess}">
+                <div class="error-message">${mess}</div>
+            </c:if>
+            <div class="form-group">
+                <label for="username">Tên tài khoản:</label>
+                <input type="text" id="username" name="username" placeholder="Nhập tên tài khoản" required>
             </div>
-        </div>
+            <div class="form-group password-wrapper">
+                <label for="password">Mật khẩu:</label>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                <span class="eye-icon" onclick="togglePassword()">👁️</span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Nhập email" required>
+            </div>
+            <div class="form-group">
+                <label for="usertype">Role:</label>
+                <select id="usertype" name="usertype">
+                    <option value="Admin">Admin</option>
+                    <option value="ClubLeader">Club Leader</option>
+                    <option value="ClubMember">Club Member</option>
+                    <option value="WebUser">Web User</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" name="status">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="imageURL">Ảnh đại diện:</label>
+                <input type="text" id="imageURL" name="imageURL">
+            </div>
+            <button type="submit" class="btn">Thêm tài khoản</button>
+        </form>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var type = passwordField.type === "password" ? "text" : "password";
+            passwordField.type = type;
+        }
+    </script>
 </body>
 </html>
