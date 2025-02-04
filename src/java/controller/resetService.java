@@ -1,0 +1,41 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Controller;
+
+import java.time.LocalDateTime;
+import java.util.Properties;
+import java.util.UUID;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+/**
+ *
+ * @author HP
+ */
+public class resetService {
+    private final int LIMIT_MINUS = 10;
+    static final String from = "xuanquanyd@gmail.com";
+    static final String password = "skgt waor gqiv jpkr";
+    
+    public String generateToken() {
+        return UUID.randomUUID().toString();
+    }
+        
+    public LocalDateTime expireDateTime() {
+        return LocalDateTime.now().plusMinutes(LIMIT_MINUS);
+    }
+    
+    public boolean isExpireTime(LocalDateTime time) {
+        return LocalDateTime.now().isAfter(time);
+    }
+    
+    
+   
+}

@@ -12,11 +12,20 @@ CREATE TABLE Settings (
     UserType ENUM('Admin', 'ClubLeader', 'ClubMember', 'WebUser') NOT NULL
 );
 
+CREATE TABLE tokenForgetPassword (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) NOT NULL,
+    expiryTime TIMESTAMP NOT NULL,
+    isUsed BOOLEAN NOT NULL,
+    userId INT NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Users(UserID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 -- Tạo bảng Users
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Username VARCHAR(50) NOT NULL,
-    Password VARCHAR(255) NOT NULL,
+    Username VARCHAR(50) not null  ,
+    Password VARCHAR(255) not null ,
     Email VARCHAR(100),
     UserType ENUM('Admin', 'ClubLeader', 'ClubMember', 'WebUser') DEFAULT 'WebUser',
     SettingID INT,
@@ -27,7 +36,11 @@ CREATE TABLE Users (
     Status ENUM('Active', 'Suspended', 'Inactive') DEFAULT 'Active',
     ImageURL VARCHAR(255),
     FOREIGN KEY (SettingID) REFERENCES Settings(SettingID) ON DELETE SET NULL
+    
+    
 );
+
+
 
 -- Tạo bảng Clubs
 CREATE TABLE Clubs (
@@ -75,13 +88,42 @@ CREATE TABLE UserRole (
 );
 
 
+CREATE TABLE google_accounts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    google_id VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+     UserType ENUM('Admin', 'ClubLeader', 'ClubMember', 'WebUser') DEFAULT 'WebUser',
+     SettingID INT,
+    CreatedDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    LastLoginDate DATETIME DEFAULT NULL,
+    AccountCreatedDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    AccountLastModifiedDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    Status ENUM('Active', 'Suspended', 'Inactive') DEFAULT 'Active',
+    ImageURL VARCHAR(255),
+    UNIQUE (google_id)
+);
+select * from google_accounts
+INSERT INTO google_accounts (google_id, name, email) VALUES ( 1, 'quan' , 'xuanquanyd@gmail.com' )
+
 ALTER TABLE clubs ADD Categories VARCHAR(100) NOT NULL;
 ALTER TABLE clubs DROP COLUMN Categories;
+select * from users
+select * from tokenForgetPassword
+Select * from users where Email = 'xuanquanyd@gmail.com'
+
+
+
+UPDATE users 
+SET LastLoginDate = NOW() 
+WHERE UserID = 1;
+
 
 
 -- B? các ràng bu?c d? xóa các b?ng n?u c?n
 SET FOREIGN_KEY_CHECKS = 0;
-
+$2a$10$YdrbtvZV/yXqzSm8DX.G.eJ9q6l7J4Z6nac4AiRFVaBe7EWBYMsVS
+$2a$10$tdzSA19SuEbLWs2/U9nU/uHayWepH1gqTbi6KWqyJbG1BiK05xCQm
 -- Xóa các b?ng cu n?u t?n t?i
 DROP TABLE IF EXISTS Events;
 DROP TABLE IF EXISTS UserClubs;
@@ -89,14 +131,28 @@ DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Clubs;
 DROP TABLE IF EXISTS Settings;
 DROP TABLE IF EXISTS UserRole;
+DROP TABLE IF EXISTS google_accounts;
+DROP TABLE IF EXISTS tokenForgetPassword;
+
+
+
+
 
 
 SET FOREIGN_KEY_CHECKS = 1;
 
-delete from settings;
-select * from settings;
-  select * from users;
- select * from clubs limit 45;
+
+
+/*chay từng lệnh 1 để bao toàn update */
+SET SQL_SAFE_UPDATES = 0;
+UPDATE google_accounts
+SET UserType = 'Admin'
+WHERE email = 'quandxhe181250@fpt.edu.vn';
+SET SQL_SAFE_UPDATES = 1;
+
+	
+ INSERT INTO tokenForgetPassword (token, expiryTime, isUsed, userId) VALUES ( '1e9d1a69-cc5a-4383-9262-d248906bd5a0','2025-02-03T22:18:56.273925200', false, 0)
+
   INSERT INTO clubs (ClubName, Description, ImageURL) 
 VALUES 
 ('FPTU Vovinam Club', 
@@ -114,7 +170,7 @@ VALUES
 ('Muay Thai Club', 
  'Câu lạc bộ Muay Thai mang đến cơ hội khám phá môn võ thuật nổi tiếng của Thái Lan. Đây là nơi lý tưởng để rèn luyện sức mạnh, kỹ thuật đối kháng và khả năng chịu đựng. Với sự hướng dẫn tận tình từ huấn luyện viên chuyên nghiệp, bạn sẽ nhanh chóng nâng cao kỹ năng chiến đấu và sự tự tin trong cuộc sống hàng ngày.', 
  'https://tse4.mm.bing.net/th?id=OIP.EC5b6aD_n5ic0QqjYcgAzQHaHa&rs=1&pid=ImgDetMain');
-INSERT INTO clubs (ClubName, Catagories, Description, ImageURL) 
+INSERT INTO clubs (ClubName, Categories, Description, ImageURL) 
 VALUES 
 ('CLB Văn hóa nghệ thuật', 'Nghệ thuật', 'Câu lạc bộ văn hóa nghệ thuật dành cho những ai yêu thích sáng tạo và nghệ thuật.', 'https://image1.jpg'),
 ('CLB Melody', 'Âm nhạc', 'Câu lạc bộ Melody dành cho những người đam mê âm nhạc và ca hát.', 'https://image2.jpg'),
