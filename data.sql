@@ -163,6 +163,7 @@ VALUES
 ('PublicAccess', 'Boolean', 'false', 3, 'Active', 'WebUser');
 
 
+
 	
  INSERT INTO tokenForgetPassword (token, expiryTime, isUsed, userId) VALUES ( '1e9d1a69-cc5a-4383-9262-d248906bd5a0','2025-02-03T22:18:56.273925200', false, 0)
 
@@ -188,13 +189,20 @@ VALUES
  'https://yt3.ggpht.com/a/AGF-l7-MtSt82Zw_Uk4ap9HhboZSCUCondclQ6cMQg=s900-c-k-c0xffffffff-no-rj-mo');
 INSERT INTO clubs (ClubName, Categories, Description, ImageURL) 
 VALUES 
-('CLB Văn hóa nghệ thuật', 'Nghệ thuật', 'Câu lạc bộ văn hóa nghệ thuật dành cho những ai yêu thích sáng tạo và nghệ thuật.', 'https://image1.jpg'),
-('CLB Melody', 'Âm nhạc', 'Câu lạc bộ Melody dành cho những người đam mê âm nhạc và ca hát.', 'https://image2.jpg'),
-('CLB Tiếng Trung', 'Ngôn ngữ', 'Câu lạc bộ Tiếng Trung giúp nâng cao khả năng giao tiếp và học ngôn ngữ Trung Quốc.', 'https://image3.jpg'),
-('CLB Business', 'Kinh doanh', 'Câu lạc bộ Business giúp phát triển kỹ năng lãnh đạo và quản lý trong lĩnh vực kinh doanh.', 'https://image4.jpg'),
-('CLB Tình nguyện – vì cộng đồng iGo', 'Tình nguyện', 'Câu lạc bộ iGo hoạt động tình nguyện vì cộng đồng, mang đến những hành động ý nghĩa.', 'https://image5.jpg'),
-('CLB Kỹ sư phần mềm Nhật Bản JS', 'Công nghệ', 'Câu lạc bộ JS giúp học hỏi kỹ năng lập trình phần mềm với phương pháp Nhật Bản.', 'https://image6.jpg'),
-('CLB Guitar', 'Âm nhạc', 'Câu lạc bộ Guitar dành cho những người yêu thích chơi đàn và âm nhạc.', 'https://image7.jpg');
+('CLB Văn hóa nghệ thuật', 'Nghệ thuật', 'Câu lạc bộ văn hóa nghệ thuật dành cho những ai yêu thích sáng tạo và nghệ thuật.',
+ 'https://th.bing.com/th/id/OIP.O9hT2bIXaWFpdUX-lxh4MAHaHa?rs=1&pid=ImgDetMain'),
+('CLB Melody', 'Âm nhạc', 'Câu lạc bộ Melody dành cho những người đam mê âm nhạc và ca hát.', 
+'https://static.vecteezy.com/system/resources/previews/015/718/690/non_2x/melody-logo-colorful-gradient-style-vector.jpg'),
+('CLB Tiếng Trung', 'Ngôn ngữ', 'Câu lạc bộ Tiếng Trung giúp nâng cao khả năng giao tiếp và học ngôn ngữ Trung Quốc.', 
+'https://files01.duytan.edu.vn/svruploads/ktiengtrung-duytan/upload/images/638670938698138746-49.jpg'),
+('CLB Business', 'Kinh doanh', 'Câu lạc bộ Business giúp phát triển kỹ năng lãnh đạo và quản lý trong lĩnh vực kinh doanh.',
+'https://cdn.pixabay.com/photo/2015/04/22/21/19/club-735353_960_720.png'),
+('CLB Tình nguyện – vì cộng đồng iGo', 'Tình nguyện', 'Câu lạc bộ iGo hoạt động tình nguyện vì cộng đồng, mang đến những hành động ý nghĩa.', 
+'https://haitrieu.com/wp-content/uploads/2022/01/Logo-Chien-Dich-Xuan-Tinh-Nguyen-635x642.png'),
+('CLB Kỹ sư phần mềm Nhật Bản JS', 'Công nghệ', 'Câu lạc bộ JS giúp học hỏi kỹ năng lập trình phần mềm với phương pháp Nhật Bản.', 
+'https://gudlogo.com/wp-content/uploads/2019/05/logo-nhat-ban-42.jpg'),
+('CLB Guitar', 'Âm nhạc', 'Câu lạc bộ Guitar dành cho những người yêu thích chơi đàn và âm nhạc.', 
+'https://th.bing.com/th/id/OIP.4OaanNRSUFnIkMnVPCpiVwHaHa?rs=1&pid=ImgDetMain');
 -- ('CLB Street Workout', 'Thể thao', 'Câu lạc bộ Street Workout giúp phát triển sức mạnh cơ thể qua các bài tập ngoài trời.', 'https://image8.jpg'),
 -- ('Unicamp', 'Công nghệ', 'Câu lạc bộ Unicamp chuyên tổ chức các chương trình công nghệ sáng tạo cho sinh viên.', 'https://image9.jpg'),
 -- ('CLB F-Code', 'Công nghệ', 'Câu lạc bộ F-Code phát triển kỹ năng lập trình và ứng dụng phần mềm.', 'https://image10.jpg'),
