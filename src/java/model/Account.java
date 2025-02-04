@@ -9,12 +9,20 @@ package Model;
  * @author Doan Quan
  */
 public class Account {
+<<<<<<< HEAD:src/java/model/Account.java
     private int id;
+=======
+    private String id;
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Model/Account.java
     String username;
     String password;
     String email;
     String role ;
+<<<<<<< HEAD:src/java/model/Account.java
    
+=======
+    private String name;
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Model/Account.java
     
     
     public Account() {
@@ -38,6 +46,7 @@ public class Account {
         this.role = role;
     }
 
+<<<<<<< HEAD:src/java/model/Account.java
     public int getId() {
         return id;
     }
@@ -49,6 +58,24 @@ public class Account {
     
 
    
+=======
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Model/Account.java
       
     
     

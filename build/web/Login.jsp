@@ -55,7 +55,11 @@
 <form action="LoginGG">
                 <div class="google-signup">
                 
+<<<<<<< HEAD
                  <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&redirect_uri=http://localhost:8080/club_manaaaa/welcome.jsp&response_type=code&client_id=359282860225-atna0216v504grriqa6g819uvcgfnli6.apps.googleusercontent.com&approval_prompt=force" target="_blank">Sign in with Google</a>
+=======
+                  <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&client_id=359282860225-atna0216v504grriqa6g819uvcgfnli6.apps.googleusercontent.com&redirect_uri=http://localhost:8080/club_manaaaa/LoginGG&response_type=code&access_type=offline" target="_blank">Sign in with Google</a>
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64
                    
    
 

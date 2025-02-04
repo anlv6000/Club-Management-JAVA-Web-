@@ -5,7 +5,7 @@ USE club_Manager;
 CREATE TABLE Settings (
     SettingID INT AUTO_INCREMENT PRIMARY KEY,
     SettingName VARCHAR(100) NOT NULL,
-    SettingType ENUM('String', 'Integer', 'Boolean', 'Date', 'Text') NOT NULL,
+    SettingType ENUM('String', 'Number', 'Boolean', 'Date', 'Text') NOT NULL,
     SettingValue TEXT NOT NULL,
     Priority INT DEFAULT 1,
     Status ENUM('Active', 'Inactive') DEFAULT 'Active',
@@ -141,6 +141,7 @@ DROP TABLE IF EXISTS tokenForgetPassword;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+<<<<<<< HEAD
 
 
 /*chay từng lệnh 1 để bao toàn update */
@@ -153,6 +154,17 @@ SET SQL_SAFE_UPDATES = 1;
 	
  INSERT INTO tokenForgetPassword (token, expiryTime, isUsed, userId) VALUES ( '1e9d1a69-cc5a-4383-9262-d248906bd5a0','2025-02-03T22:18:56.273925200', false, 0)
 
+=======
+delete from settings;
+select * from settings;
+  select * from users;
+ select * from clubs limit 45;
+ 
+   INSERT INTO UserRole (ClubID, SettingID, Status) 
+VALUES 
+(1, 1, Admin);
+ 
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64
   INSERT INTO clubs (ClubName, Description, ImageURL) 
 VALUES 
 ('FPTU Vovinam Club', 
@@ -169,8 +181,16 @@ VALUES
  'https://makan.vn/wp-content/uploads/2023/04/logo-ao-bong-chuyen-01-2-768x768.jpg'),
 ('Muay Thai Club', 
  'Câu lạc bộ Muay Thai mang đến cơ hội khám phá môn võ thuật nổi tiếng của Thái Lan. Đây là nơi lý tưởng để rèn luyện sức mạnh, kỹ thuật đối kháng và khả năng chịu đựng. Với sự hướng dẫn tận tình từ huấn luyện viên chuyên nghiệp, bạn sẽ nhanh chóng nâng cao kỹ năng chiến đấu và sự tự tin trong cuộc sống hàng ngày.', 
+<<<<<<< HEAD
  'https://tse4.mm.bing.net/th?id=OIP.EC5b6aD_n5ic0QqjYcgAzQHaHa&rs=1&pid=ImgDetMain');
 INSERT INTO clubs (ClubName, Categories, Description, ImageURL) 
+=======
+ 'https://tse4.mm.bing.net/th?id=OIP.EC5b6aD_n5ic0QqjYcgAzQHaHa&rs=1&pid=ImgDetMain'),
+ ('Hackathon Club', 
+ 'Câu lạc bộ Công nghệ Thông tin (CNTT) là nơi dành cho những bạn trẻ đam mê lập trình, công nghệ và khám phá những giải pháp sáng tạo trong lĩnh vực số. CLB thường xuyên tổ chức các buổi workshop, hackathon và đào tạo về các chủ đề như lập trình, AI, cybersecurity và phát triển ứng dụng. Đây là cơ hội tuyệt vời để học hỏi, kết nối và phát triển sự nghiệp trong ngành CNTT.', 
+ 'https://yt3.ggpht.com/a/AGF-l7-MtSt82Zw_Uk4ap9HhboZSCUCondclQ6cMQg=s900-c-k-c0xffffffff-no-rj-mo');
+INSERT INTO clubs (ClubName, Catagories, Description, ImageURL) 
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64
 VALUES 
 ('CLB Văn hóa nghệ thuật', 'Nghệ thuật', 'Câu lạc bộ văn hóa nghệ thuật dành cho những ai yêu thích sáng tạo và nghệ thuật.', 'https://image1.jpg'),
 ('CLB Melody', 'Âm nhạc', 'Câu lạc bộ Melody dành cho những người đam mê âm nhạc và ca hát.', 'https://image2.jpg'),

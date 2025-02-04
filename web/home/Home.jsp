@@ -3,6 +3,10 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <html lang="en">
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/main
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +17,14 @@
             /* CSS của bạn đã được chỉnh sửa */
             h2 {
                 text-align: center; /* Điều chỉnh align-items thành text-align để căn giữa h2 */
+<<<<<<< HEAD:web/home/Home.jsp
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/main
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:web/Home.jsp
             }
 
             body {
@@ -173,7 +184,13 @@
             </div>
 
             <c:if test="${sessionScope.acc != null}">
+<<<<<<< HEAD:web/home/Home.jsp
 
+               
+                    
+                
+=======
+<<<<<<< HEAD
                
                     
                 
@@ -184,12 +201,29 @@
                
                     
                 
+                <div>hello ${sessionScope.googleAccount}</div>
+                
+            </c:if>
+               
+=======
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:web/Home.jsp
+                <div>hello ${sessionScope.txtUsername}</div>
+                
+            </c:if>
+<<<<<<< HEAD:web/home/Home.jsp
+                 <c:if test="${sessionScope.googleAccount != null}">
+               
+                    
+                
                 <div>hello ${sessionScope.name}</div>
                 
             </c:if>
                
 
 
+=======
+>>>>>>> origin/main
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:web/Home.jsp
 
             <div id="logo-container">
                 <!-- Default logo -->
@@ -203,18 +237,32 @@
                 <a href="Login.jsp">Sign in</a>
                 <a href="Register.jsp">Sign up</a>
             </c:if>
+<<<<<<< HEAD:web/home/Home.jsp
             <c:if test="${sessionScope.acc != null ||sessionScope.accc != null }">
 
                 
                 <a href="Login.jsp">Log out</a>
                 <c:if test="${sessionScope.acc.role == 'Admin' || sessionScope.accc.role == 'Admin'}">
+=======
+            <c:if test="${sessionScope.acc != null}">
+<<<<<<< HEAD
+                
+                <a href="Login.jsp">Log out</a>
+                <c:if test="${sessionScope.acc.role == 'Admin'}">
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:web/Home.jsp
                      <a href="Login.jsp">Clubs List</a>
                                           <a href="Login.jsp">Users List</a>
 
                 </c:if>
+<<<<<<< HEAD:web/home/Home.jsp
 
                
 
+=======
+=======
+                <a href="Login.jsp">Log out</a>
+>>>>>>> origin/main
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:web/Home.jsp
             </c:if>
             <a href="SettingList.jsp">Settings</a>
         </nav>
@@ -222,10 +270,18 @@
         <p>Explore our club activities and join us today!</p>
         <div class="body-content">
 
+<<<<<<< HEAD:web/home/Home.jsp
             <form id="autoSubmitForm" action="Public_ClubServlet" >
 
             <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
 
+=======
+<<<<<<< HEAD
+            <form id="autoSubmitForm" action="Public_ClubServlet" >
+=======
+            <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
+>>>>>>> origin/main
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:web/Home.jsp
                 <!-- Display data -->
                 <c:if test="${not empty listP}">
                     <c:forEach var="o" items="${listP}">

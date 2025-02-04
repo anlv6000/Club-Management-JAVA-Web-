@@ -11,12 +11,15 @@ package Model;
 public class GoogleAccount {
     private String  id, email, name, first_name, given_name, family_name, picture;
     private boolean verified_email;
+<<<<<<< HEAD:src/java/model/GoogleAccount.java
     private String role;
 
     public GoogleAccount(String email, String role) {
         this.email = email;
         this.role = role;
     }
+=======
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Model/GoogleAccount.java
 
     public GoogleAccount(String id, String email, String name, String first_name, String given_name, String family_name, String picture, boolean verified_email) {
         this.id = id;
@@ -97,6 +100,7 @@ public class GoogleAccount {
         this.verified_email = verified_email;
     }
 
+<<<<<<< HEAD:src/java/model/GoogleAccount.java
     public String getRole() {
         return role;
     }
@@ -105,6 +109,8 @@ public class GoogleAccount {
         this.role = role;
     }
 
+=======
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Model/GoogleAccount.java
     @Override
     public String toString() {
         return "GoogleAccount{" + "id=" + id + ", email=" + email + ", name=" + name + ", first_name=" + first_name + ", given_name=" + given_name + ", family_name=" + family_name + ", picture=" + picture + ", verified_email=" + verified_email + '}';

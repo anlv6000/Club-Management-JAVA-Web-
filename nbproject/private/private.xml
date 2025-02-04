@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/E:/ruby/g5_sorted/g5/src/java/dao/dao.java</file>
             <file>file:/E:/ruby/g5_sorted/g5/src/java/controller/GoogleLogin.java</file>
             <file>file:/E:/ruby/g5_sorted/g5/src/java/controller/LoginServlet.java</file>
             <file>file:/E:/ruby/g5_sorted/g5/src/java/controller/LoginGG.java</file>
+=======
+            <file>file:/E:/g5sample%2029tet/src/java/Controller/LoginServlet.java</file>
+            <file>file:/E:/g5sample%2029tet/src/java/DAO/dao.java</file>
+            <file>file:/E:/g5sample%2029tet/src/java/Controller/LoginGG.java</file>
+            <file>file:/E:/g5sample%2029tet/src/java/Controller/RegisterServlet.java</file>
+            <file>file:/E:/g5sample%2029tet/web/Login.jsp</file>
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64
         </group>
     </open-files>
 </project-private>

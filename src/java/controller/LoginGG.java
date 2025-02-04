@@ -15,8 +15,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+<<<<<<< HEAD:src/java/controller/LoginGG.java
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Controller/LoginGG.java
 import net.sf.json.JSONException;
 
 /**
@@ -36,7 +39,11 @@ public class LoginGG extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+<<<<<<< HEAD:src/java/controller/LoginGG.java
             throws ServletException, IOException, SQLException {
+=======
+            throws ServletException, IOException {
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Controller/LoginGG.java
         response.setContentType("text/html;charset=UTF-8");
         // Xử lý đăng nhập bằng Google
         String code = request.getParameter("code");
@@ -48,7 +55,11 @@ public class LoginGG extends HttpServlet {
         }
 
         if (code != null) {
+<<<<<<< HEAD:src/java/controller/LoginGG.java
             
+=======
+            try {
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Controller/LoginGG.java
                 // Lấy access token từ Google
                 String accessToken = GoogleLogin.getToken(code);
 
@@ -71,7 +82,30 @@ public class LoginGG extends HttpServlet {
                 }
 
                 // Thiết lập session và chuyển hướng
+<<<<<<< HEAD:src/java/controller/LoginGG.java
            
+=======
+            } catch (IOException e) {
+                e.printStackTrace();
+                request.setAttribute("messerr", "Network error. Please try again.");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                request.setAttribute("messerr", "Session expired. Please log in again.");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+
+                String accessToken = GoogleLogin.getToken(code);
+                GoogleAccount googleAccount = GoogleLogin.getUserInfo(accessToken);
+                request.setAttribute("messerr", "Unexpected error: Missing user information." + googleAccount);
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+                request.setAttribute("messerr", "An unexpected error occurred.");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            }
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Controller/LoginGG.java
 
         }
     }
@@ -88,11 +122,15 @@ public class LoginGG extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD:src/java/controller/LoginGG.java
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(LoginGG.class.getName()).log(Level.SEVERE, null, ex);
         }
+=======
+        processRequest(request, response);
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Controller/LoginGG.java
     }
 
     /**
@@ -106,11 +144,15 @@ public class LoginGG extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD:src/java/controller/LoginGG.java
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(LoginGG.class.getName()).log(Level.SEVERE, null, ex);
         }
+=======
+        processRequest(request, response);
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:src/java/Controller/LoginGG.java
     }
 
     /**

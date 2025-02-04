@@ -27,10 +27,13 @@
                     <label for="username">Username</label>
                     <input name="user" type="text" id="username" placeholder="Enter your username" >
                 </div>
+<<<<<<< HEAD:web/auth/Register.jsp
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input name="email" type="text" id="Email" placeholder="Enter your Email" >
                 </div>
+=======
+>>>>>>> fd702484aa86f26afacfef749177bb05115a7d64:web/Register.jsp
                
 <c:if test="${erp != null}">${erp}</c:if>
                 <div class="form-group password-toggle">
