@@ -100,7 +100,7 @@
             </div>
             <div class="form-group">
                 <label for="imageURL">Ảnh đại diện:</label>
-                <input type="text" id="imageURL" name="imageURL">
+                <input type="file" id="imageURL" name="imageURL">
             </div>
             <button type="submit" class="btn">Thêm tài khoản</button>
         </form>

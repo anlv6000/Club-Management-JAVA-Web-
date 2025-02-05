@@ -180,6 +180,7 @@
                 <div>hello ${sessionScope.txtUsername}</div>
 
             </c:if>
+
             <c:if test="${sessionScope.googleAccount != null}">
 
 
@@ -207,18 +208,17 @@
 
 
                 <a href="Login.jsp">Log out</a>
-                <c:if test="${sessionScope.acc.role == 'Admin' || sessionScope.accc.role == 'Admin'}">
-                    <a href="Login.jsp">Clubs List</a>
-                    <a href="Login.jsp">Users List</a>
-
-                </c:if>
+                
+                    <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
+                    <a href="${pageContext.request.contextPath}/settings">Settings</a>
+                    <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
+                    <a href="${pageContext.request.contextPath}/listEvent">Event</a>
+          
 
 
 
             </c:if>
-            <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
-            <a href="${pageContext.request.contextPath}/settings">Settings</a>
-            <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
+
         </nav>
         <h2>Welcome to FPT Club!</h2>
         <p>Explore our club activities and join us today!</p>
@@ -252,9 +252,9 @@
             </div>
             <div>
                 <p>Follow us on:</p>
-                <a href="#"><img src="https://example.com/facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="https://example.com/twitter-icon.png" alt="Twitter"></a>
-                <a href="#"><img src="https://example.com/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="" alt="Facebook"></a>
+                <a href="#"><img src="" alt="Twitter"></a>
+                <a href="#"><img src="" alt="Instagram"></a>
             </div>
         </footer>
 

@@ -174,20 +174,21 @@
 
             <c:if test="${sessionScope.acc != null}">
 
-               
-                    
-                
+
+
+
                 <div>hello ${sessionScope.txtUsername}</div>
-                
+
             </c:if>
-                 <c:if test="${sessionScope.googleAccount != null}">
-               
-                    
-                
+
+            <c:if test="${sessionScope.googleAccount != null}">
+
+
+
                 <div>hello ${sessionScope.name}</div>
-                
+
             </c:if>
-               
+
 
 
 
@@ -205,20 +206,20 @@
             </c:if>
             <c:if test="${sessionScope.acc != null ||sessionScope.accc != null }">
 
-                
+
                 <a href="Login.jsp">Log out</a>
-                <c:if test="${sessionScope.acc.role == 'Admin' || sessionScope.accc.role == 'Admin'}">
-                     <a href="Login.jsp">Clubs List</a>
-                                          <a href="Login.jsp">Users List</a>
+                
+                    <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
+                    <a href="${pageContext.request.contextPath}/settings">Settings</a>
+                    <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
+		    <a href="${pageContext.request.contextPath}/listEvent">Event</a>
 
-                </c:if>
+                
 
-               
+
 
             </c:if>
-	    <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
-            <a href="${pageContext.request.contextPath}/settings">Settings</a>
-	    <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
+
         </nav>
         <h2>Welcome to FPT Club!</h2>
         <p>Explore our club activities and join us today!</p>
@@ -226,18 +227,18 @@
 
             <form id="autoSubmitForm" action="Public_ClubServlet" >
 
-            <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
+                <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
 
-                <!-- Display data -->
-                <c:if test="${not empty listP}">
-                    <c:forEach var="o" items="${listP}">
-                        <div class="image-item">
-                            <img src="${o.imgURL}" alt="vov">
-                            <div>${o.clubName}</div>
-                        </div>
-                    </c:forEach>
-                </c:if>
-            </form>
+                    <!-- Display data -->
+                    <c:if test="${not empty listP}">
+                        <c:forEach var="o" items="${listP}">
+                            <div class="image-item">
+                                <img src="${o.imgURL}" alt="vov">
+                                <div>${o.clubName}</div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                </form>
         </div>
 
 
@@ -252,9 +253,9 @@
             </div>
             <div>
                 <p>Follow us on:</p>
-                <a href="#"><img src="https://example.com/facebook-icon.png" alt="Facebook"></a>
-                <a href="#"><img src="https://example.com/twitter-icon.png" alt="Twitter"></a>
-                <a href="#"><img src="https://example.com/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="" alt="Facebook"></a>
+                <a href="#"><img src="" alt="Twitter"></a>
+                <a href="#"><img src="" alt="Instagram"></a>
             </div>
         </footer>
 

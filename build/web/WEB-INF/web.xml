@@ -3,4 +3,52 @@
     <welcome-file-list>
         <welcome-file>Home.jsp</welcome-file>
     </welcome-file-list>
+    <servlet>
+        <servlet-name>ListEvent</servlet-name>
+        <servlet-class>Controller.ListEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditEvent</servlet-name>
+        <servlet-class>Controller.EditEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEvent</servlet-name>
+        <servlet-class>Controller.AddEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteEvent</servlet-name>
+        <servlet-class>Controller.DeleteEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EventDetail</servlet-name>
+        <servlet-class>Controller.EventDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchEvent</servlet-name>
+        <servlet-class>Controller.SearchEvent</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListEvent</servlet-name>
+        <url-pattern>/listEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditEvent</servlet-name>
+        <url-pattern>/editEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEvent</servlet-name>
+        <url-pattern>/addEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEvent</servlet-name>
+        <url-pattern>/deleteEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventDetail</servlet-name>
+        <url-pattern>/eventDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchEvent</servlet-name>
+        <url-pattern>/searchEvent</url-pattern>
+    </servlet-mapping>
 </web-app>

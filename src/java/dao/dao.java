@@ -6,6 +6,7 @@ package DAO;
 
 import Dal.DBContext;
 import Model.Account;
+import Model.Event;
 import Model.GoogleAccount;
 import Model.Public_club;
 import Model.Setting;
@@ -561,6 +562,220 @@ public class dao extends DBContext {
         }
 
         return accounts;
+    }
+
+    public List<Event> getAllEvents() {
+        List<Event> events = new ArrayList<>();
+        String sql = "SELECT * FROM Events";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Event event = new Event(
+                        rs.getInt("EventID"),
+                        rs.getInt("ClubID"),
+                        rs.getString("EventName"),
+                        rs.getString("Description"),
+                        rs.getString("EventDate"),
+                        rs.getInt("CreatedBy"), // Lấy giá trị CreatedBy, có thể là null
+                        rs.getString("CreatedDate"),
+                        rs.getString("EventImageURL")
+                );
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi lấy danh sách sự kiện: " + e.getMessage());
+        }
+        return events;
+    }
+
+    public boolean addEvent(int clubId, String eventName, String description, String eventDate, int createdBy, String createdDate, String eventImageURL) {
+        String sql = "INSERT INTO Events (ClubID, EventName, Description, EventDate, CreatedBy, CreatedDate, EventImageURL) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, clubId);
+            ps.setString(2, eventName);
+            ps.setString(3, description);
+            ps.setString(4, eventDate);
+
+            if (createdBy != -1) {
+                ps.setInt(5, createdBy);
+            } else {
+                ps.setNull(5, java.sql.Types.INTEGER);
+            }
+
+            ps.setString(6, createdDate);
+            ps.setString(7, eventImageURL);
+
+            int rowsInserted = ps.executeUpdate();
+            return rowsInserted > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi thêm sự kiện: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean editEvent(int eventID, String eventName, String description, String eventDate, String eventImageURL) {
+        String sql = "UPDATE Events SET EventName = ?, Description = ?, EventDate = ?, EventImageURL = ? WHERE EventID = ?";
+
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Gán giá trị các tham số vào câu lệnh SQL
+            ps.setString(1, eventName);
+            ps.setString(2, description);
+            ps.setString(3, eventDate);
+            ps.setString(4, eventImageURL);
+            ps.setInt(5, eventID); // Không thay đổi EventID, chỉ sử dụng để tìm sự kiện cần sửa
+
+            // Thực thi câu lệnh UPDATE và kiểm tra số dòng bị ảnh hưởng
+            int rowsAffected = ps.executeUpdate();
+
+            // Nếu có ít nhất một dòng bị thay đổi, trả về true, ngược lại trả về false
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi chỉnh sửa sự kiện: " + e.getMessage());
+        }
+        return false; // Trả về false nếu có lỗi xảy ra
+    }
+
+    public boolean deleteEvent(int eventID) {
+        String sql = "DELETE FROM Events WHERE EventID = ?";
+
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Gán giá trị EventID vào tham số của câu lệnh SQL
+            ps.setInt(1, eventID);
+
+            // Thực thi câu lệnh DELETE và kiểm tra số dòng bị ảnh hưởng
+            int rowsAffected = ps.executeUpdate();
+
+            // Nếu có ít nhất một dòng bị xóa, trả về true, ngược lại trả về false
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi xóa sự kiện: " + e.getMessage());
+        }
+        return false; // Trả về false nếu có lỗi xảy ra
+    }
+
+    public Event getEventById(int eventId) {
+        String sql = "SELECT * FROM Events WHERE EventID = ?";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Thiết lập tham số cho câu lệnh SQL
+            ps.setInt(1, eventId);
+
+            // Thực thi truy vấn
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Tạo đối tượng Event từ dữ liệu trong ResultSet
+                    return new Event(
+                            rs.getInt("EventID"),
+                            rs.getInt("ClubID"),
+                            rs.getString("EventName"),
+                            rs.getString("Description"),
+                            rs.getString("EventDate"),
+                            rs.getInt("CreatedBy"), // Lấy giá trị CreatedBy, có thể là null
+                            rs.getString("CreatedDate"),
+                            rs.getString("EventImageURL")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi lấy sự kiện theo ID: " + e.getMessage());
+        }
+        return null; // Trả về null nếu không tìm thấy sự kiện
+    }
+
+    public List<Event> eventSearchByName(String eventName) {
+        List<Event> events = new ArrayList<>();
+        String sql = "SELECT * FROM Events WHERE EventName LIKE ?";
+
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Sử dụng dấu '%' để tìm kiếm theo tên sự kiện có chứa chuỗi tìm kiếm
+            ps.setString(1, "%" + eventName + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Event event = new Event(
+                            rs.getInt("EventID"),
+                            rs.getInt("ClubID"),
+                            rs.getString("EventName"),
+                            rs.getString("Description"),
+                            rs.getString("EventDate"),
+                            rs.getInt("CreatedBy"),
+                            rs.getString("CreatedDate"),
+                            rs.getString("EventImageURL")
+                    );
+                    events.add(event);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi tìm kiếm sự kiện: " + e.getMessage());
+        }
+        return events;
+    }
+
+    public boolean updateEvent(int eventId, int clubId, String eventName, String description, String eventDate, Integer createdBy, String createdDate, String eventImageURL) {
+        String sql = "UPDATE Events SET ClubID = ?, EventName = ?, Description = ?, EventDate = ?, "
+                + "CreatedBy = ?, CreatedDate = ?, EventImageURL = ? WHERE EventID = ?";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Thiết lập các tham số cho câu lệnh SQL
+            ps.setInt(1, clubId);
+            ps.setString(2, eventName);
+            ps.setString(3, description);
+            ps.setString(4, eventDate);
+
+            // Xử lý trường hợp CreatedBy có thể là null
+            if (createdBy != null) {
+                ps.setInt(5, createdBy);
+            } else {
+                ps.setNull(5, java.sql.Types.INTEGER);
+            }
+
+            ps.setString(6, createdDate);
+            ps.setString(7, eventImageURL);
+            ps.setInt(8, eventId); // EventID để xác định sự kiện cần cập nhật
+
+            // Thực thi câu lệnh SQL
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0; // Trả về true nếu cập nhật thành công
+
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi cập nhật sự kiện: " + e.getMessage());
+            e.printStackTrace(); // In lỗi ra console
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        dao eventDAO = new dao();
+// check list
+        List<Event> events = eventDAO.getAllEvents();
+
+        // In ra danh sách sự kiện
+        for (Event event : events) {
+            System.out.println(event);
+        }
+
+        boolean isSuccess = eventDAO.updateEvent(
+                6, // EventID cần cập nhật
+                1, // ClubID
+                "Workshop Lập Trình Java Nâng Cao", // EventName (cập nhật)
+                "Học lập trình Java từ cơ bản đến nâng cao với chuyên gia", // Description (cập nhật)
+                "2024-11-25 14:00:00", // EventDate (cập nhật)
+                null, // CreatedBy (có thể là null)
+                "2023-10-10 12:00:00", // CreatedDate
+                "java_workshop_updated.jpg" // EventImageURL (cập nhật)
+        );
+
+        if (isSuccess) {
+            System.out.println("Cập nhật sự kiện thành công!");
+        } else {
+            System.out.println("Cập nhật sự kiện thất bại.");
+        }
+
     }
 
 }

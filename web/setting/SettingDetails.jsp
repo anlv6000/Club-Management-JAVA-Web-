@@ -98,7 +98,7 @@
             </div>
             <div class="form-group">
                 <label for="priority">Priority</label>
-                <input type="number" id="priority" name="priority" value="2" required>
+                <input type="number" id="priority" name="priority" value="" required>
             </div>
             <div class="form-group">
                 <label for="status">Status</label>
