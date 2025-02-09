@@ -412,10 +412,7 @@ public class dao extends DBContext {
             ps.setString(3, email);
             ps.setString(4, userType);
             ps.setString(5, status);
-            // Kiểm tra nếu imageURL rỗng thì đặt ảnh mặc định
-            if (imageURL == null || imageURL.isEmpty()) {
-                imageURL = "default.jpg";
-            }
+               
             ps.setString(6, imageURL);
 
             int rows = ps.executeUpdate();
@@ -433,11 +430,6 @@ public class dao extends DBContext {
             PreparedStatement ps = getConnection().prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                String imageURL = rs.getString("ImageURL");
-                // Nếu không có ảnh, gán ảnh mặc định
-                if (imageURL == null || imageURL.isEmpty()) {
-                    imageURL = "default.jpg";
-                }
 
                 accounts.add(new Account(
                         rs.getInt("UserID"),

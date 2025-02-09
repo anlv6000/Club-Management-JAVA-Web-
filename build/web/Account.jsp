@@ -193,7 +193,11 @@ margin-top: 20px;
                     <tbody>
                         <c:forEach items="${accountlist}" var="o">
                             <tr>
-                                <td><img src="${o.imageURL != null && !o.imageURL.isEmpty() ? o.imageURL : 'https://i.pinimg.com/236x/5e/e0/82/5ee082781b8c41406a2a50a0f32d6aa6.jpg'}" alt="Avarta" /></td>
+                                <td>
+                                    <c:if test="${not empty o.imageURL}">
+                                        <img src="${o.imageURL}" alt="Avatar" />
+                                    </c:if>
+                                </td>
                                 <td>${o.id}</td>
                                 <td>${o.username}</td>
                                 <td>${o.email}</td>
