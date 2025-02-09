@@ -1,132 +1,110 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package Controller;
 
 import DAO.dao;
 import Model.Account;
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.io.File;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.List;
 
+/**
+ *
+ * @author ADMIN
+ */
 @WebServlet(name = "AddAccount", urlPatterns = {"/AddAccount"})
-@MultipartConfig(
-    fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-    maxFileSize = 1024 * 1024 * 10, // 10MB
-    maxRequestSize = 1024 * 1024 * 50 // 50MB
-)
 public class AddAccount extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
+        String password = request.getParameter("password");
         String userType = request.getParameter("usertype");
         String status = request.getParameter("status");
-
         dao dao = new dao();
-
-        if (username == null || username.isEmpty() || email == null || email.isEmpty()) {
+        if (username == null || username.isEmpty()
+                || email == null || email.isEmpty()
+                || password == null || password.isEmpty()) {
             request.setAttribute("mess", "Vui lòng nhập đầy đủ thông tin.");
             request.getRequestDispatcher("AddAccount.jsp").forward(request, response);
             return;
         }
-
         if (dao.checkAccountExist(username)) {
             request.setAttribute("mess", "Tài khoản đã tồn tại! Vui lòng chọn tên khác.");
             request.getRequestDispatcher("AddAccount.jsp").forward(request, response);
-            return;
-        }
-
-        // Tạo mật khẩu ngẫu nhiên
-        String password = generateRandomPassword(10);
-
-        // Xử lý ảnh đại diện
-        Part filePart = request.getPart("profileImage");
-        String imageURL = "";
-        if (filePart != null && filePart.getSize() > 0) {
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
-
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+        } else {
+            String imageURL = request.getParameter("imageURL");
+            if (imageURL == null || imageURL.isEmpty()) {
+                imageURL = "https://i.pinimg.com/236x/5e/e0/82/5ee082781b8c41406a2a50a0f32d6aa6.jpg"; 
             }
-
-            String filePath = uploadPath + File.separator + fileName;
-            filePart.write(filePath);
-
-            imageURL = "uploads/" + fileName;
+            dao.insertAccount(username, password, email, userType, status, imageURL);
+            List<Account> accounts = dao.getAllAccounts();
+            request.setAttribute("accountlist", accounts);
+            request.getRequestDispatcher("Account.jsp").forward(request, response);
         }
 
-        // Lưu tài khoản vào database
-        dao.insertAccount(username, password, email, userType, status, imageURL);
-
-        // Gửi email mật khẩu
-        sendEmail(email, password);
-
-        // Chuyển hướng về danh sách tài khoản
-        List<Account> accounts = dao.getAllAccounts();
-        request.setAttribute("accountlist", accounts);
-        request.getRequestDispatcher("Account.jsp").forward(request, response);
     }
 
-    // Tạo mật khẩu ngẫu nhiên
-    private String generateRandomPassword(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%";
-        StringBuilder password = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            password.append(characters.charAt(random.nextInt(characters.length())));
-        }
-        return password.toString();
-    }
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
-    // Gửi email chứa mật khẩu ngẫu nhiên
-    private void sendEmail(String recipientEmail, String password) {
-        String senderEmail = "tuan71105@gmail.com"; // Thay bằng email của bạn
-        String senderPassword = "tuet knic axgk svgw"; // Thay bằng mật khẩu ứng dụng email của bạn
-
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");
-
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new javax.mail.PasswordAuthentication(senderEmail, senderPassword);
-            }
-        });
-
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
-            message.setSubject("Tài khoản mới của bạn");
-            message.setText("Chào bạn,\n\nTài khoản của bạn đã được tạo thành công.\n" +
-                            "Tên đăng nhập: " + recipientEmail + "\n" +
-                            "Mật khẩu: " + password + "\n\n" +
-                            "Vui lòng đăng nhập và thay đổi mật khẩu.\n\n" +
-                            "Trân trọng,\nHệ thống quản lý tài khoản");
-
-            Transport.send(message);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }
 }

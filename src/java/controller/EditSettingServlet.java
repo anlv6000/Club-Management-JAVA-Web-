@@ -26,6 +26,7 @@ public class EditSettingServlet extends HttpServlet {
         String priorityStr = request.getParameter("priority");
         String status = request.getParameter("status");
         String userType = request.getParameter("userType");
+        String description = request.getParameter("description");
 
         int id = 0;
         int priority = 0;
@@ -50,9 +51,10 @@ public class EditSettingServlet extends HttpServlet {
         System.out.println("Priority: " + priority);
         System.out.println("Status: " + status);
         System.out.println("UserType: " + userType);
+        System.out.println("Description: " + description);
 
         List<Setting> settings = new ArrayList<>();
-        settings.add(new Setting(id, name, type, value, priority, status, userType));
+        settings.add(new Setting(id, name, type, value, priority, status, userType, description));
 
         dao dao = new dao();
         try {
@@ -79,6 +81,6 @@ public class EditSettingServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet to update settings";
     }
 }

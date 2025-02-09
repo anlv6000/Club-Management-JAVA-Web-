@@ -67,7 +67,7 @@ public class SettingServlet extends HttpServlet {
 
         // Get sorting parameters from the request
         String typeSort = request.getParameter("typeSort"); // A-Z hoặc Z-A cho loại
-        String statusSort = request.getParameter("statusSort"); // A-Z hoặc Z-A cho trạng thá
+        String statusSort = request.getParameter("statusSort"); // A-Z hoặc Z-A cho trạng thái
         String searchKeyword = request.getParameter("searchKeyword"); // nhập từ khóa để tìm kiếm
 
         try {
@@ -119,7 +119,8 @@ public class SettingServlet extends HttpServlet {
                         rs.getString("SettingValue"),
                         rs.getInt("Priority"),
                         rs.getString("Status"),
-                        rs.getString("UserType")
+                        rs.getString("UserType"),
+                        rs.getString("Description") // thêm Description
                 );
                 settingsList.add(setting);
             }

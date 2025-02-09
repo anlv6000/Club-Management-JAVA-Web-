@@ -125,8 +125,7 @@
                 </div>
                 <button type="submit" class="edit-btn">Edit</button>
             </form>
-            
-	    <a href="${pageContext.request.contextPath}/listEvent">Back to Event List</a>
+            <a href="EventList.jsp">Back to Event List</a>
         </div>
     </body>
 </html>

@@ -204,20 +204,24 @@
                 <a href="Login.jsp">Sign in</a>
                 <a href="Register.jsp">Sign up</a>
             </c:if>
-            <c:if test="${sessionScope.acc != null ||sessionScope.accc != null }">
+            <c:if test="${sessionScope.acc != null||sessionScope.accc != null}">
 
 
                 <a href="Login.jsp">Log out</a>
                 
-                    <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
+                   <c:if test="${sessionScope.acc.role == 'Admin'|| sessionScope.accc.role == 'Admin'}">
+                     <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
                     <a href="${pageContext.request.contextPath}/settings">Settings</a>
                     <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
                     <a href="${pageContext.request.contextPath}/listEvent">Event</a>
+
+                </c:if>
           
 
 
 
             </c:if>
+                 
 
         </nav>
         <h2>Welcome to FPT Club!</h2>

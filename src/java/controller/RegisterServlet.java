@@ -47,6 +47,7 @@ public class RegisterServlet extends HttpServlet {
        
         dao dao = new dao();
         boolean a= dao.checkAccountExist(user);
+        boolean c=dao.checkemailExist(email);
        if(user ==null || user.trim().isEmpty() || !user.matches("[a-zA-Z0-9_]+")){
         String  eru=  "Invalid username. Only letters, digits, and underscores are allowed." ; 
         b=true;
@@ -71,12 +72,12 @@ public class RegisterServlet extends HttpServlet {
 
           
        }
-        if(a == true){
-            request.setAttribute("mess", "Username is already taken.");
+        if(a == true || c ==true){
+            request.setAttribute("mess", "Username or Email is already taken.");
             request.setAttribute("user", user); // Keep username filled in
             
             request.getRequestDispatcher("Register.jsp").forward(request, response);
-        }else if(a == false && b ==false ){
+        }else if(a == false && b ==false && c==false){
             String hashedPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
             dao.addAcount(user, hashedPassword, email);
             HttpSession session = request.getSession();

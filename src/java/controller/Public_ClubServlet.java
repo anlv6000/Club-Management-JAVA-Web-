@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.dao;
+import Model.Club;
 import Model.Public_club;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,15 +35,21 @@ public class Public_ClubServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-          dao dao = new dao();
+        String url = request.getParameter("URL");
+        dao dao = new dao();
+       Club c = dao.getdetail(url);
+       if(c != null){
+           request.setAttribute("detail", c);
+           request.getRequestDispatcher("PublicClub.jsp").forward(request, response);
+       }
+
        
-        List<Public_club> list = dao.getTop5();
+        List<Club> list = dao.getTop5();
        
             request.setAttribute("listP", list);
           request.getRequestDispatcher("Home.jsp").forward(request, response);
        
-       
+      
         
     }
 
@@ -58,6 +65,7 @@ public class Public_ClubServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
+        
     } 
 
     /** 
@@ -72,7 +80,7 @@ public class Public_ClubServlet extends HttpServlet {
     throws ServletException, IOException {
         dao dao = new dao();
        
-        List<Public_club> list = dao.getTop5();
+        List<Club> list = dao.getTop5();
        
             request.setAttribute("listP", list);
           request.getRequestDispatcher("Home.jsp").forward(request, response);

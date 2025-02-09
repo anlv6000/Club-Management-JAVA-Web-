@@ -12,7 +12,15 @@ public class User {
     private int id;
     private String userName, email, password;
    String LastLoginDate;
+   String role;
+   
     public User() {
+    }
+
+    public User(String userName, String password, String role) {
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
     }
 
     public User(int id, String userName, String email, String password, String LastLoginDate) {
@@ -28,6 +36,22 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.password = password;
+    }
+
+    public String getLastLoginDate() {
+        return LastLoginDate;
+    }
+
+    public void setLastLoginDate(String LastLoginDate) {
+        this.LastLoginDate = LastLoginDate;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getId() {

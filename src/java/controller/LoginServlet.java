@@ -11,6 +11,7 @@ import static Controller.GoogleLogin.getUserInfo;
 import DAO.dao;
 import Model.Account;
 import Model.GoogleAccount;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -54,7 +55,7 @@ public class LoginServlet extends HttpServlet {
     String user = request.getParameter("user");
     String pass = request.getParameter("pass");
     dao dao = new dao();
-    Account a = dao.login(user, pass);
+    User a = dao.login(user, pass);
 
     if (a == null) {
         request.setAttribute("messerr", "Incorrect user or pass");
