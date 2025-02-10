@@ -324,7 +324,11 @@ public class dao extends DBContext {
 
             if (rs.next()) {
                 // Tạo đối tượng Account từ kết quả truy vấn
+<<<<<<< HEAD
                 GoogleAccount a = new GoogleAccount(rs.getString("Email"), rs.getString("Username") ,rs.getString("UserType"));
+=======
+                GoogleAccount a = new GoogleAccount(rs.getString("Email"), rs.getString("UserType"));
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
 
                 // Kiểm tra mật khẩu đã nhập với mật khẩu hash từ cơ sở dữ liệu
                 return a;

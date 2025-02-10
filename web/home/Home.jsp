@@ -205,6 +205,10 @@
                 <a href="Register.jsp">Sign up</a>
             </c:if>
             <c:if test="${sessionScope.acc != null||sessionScope.accc != null}">
+<<<<<<< HEAD
+=======
+
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
 
 <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
                 <a href="Login.jsp">Log out</a>

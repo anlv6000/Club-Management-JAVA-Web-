@@ -228,11 +228,19 @@
                 <a href="Register.jsp">Sign up</a>
             </c:if>
             <c:if test="${sessionScope.acc != null}">
+<<<<<<< HEAD
+=======
+
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
 
 <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
                 <a href="Login.jsp">Log out</a>
 
+<<<<<<< HEAD
               <c:if test="${sessionScope.acc.role == 'Admin'|| sessionScope.accc.role == 'Admin'}">
+=======
+                <c:if test="${sessionScope.acc.role == 'Admin'}">
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
                     <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
                     <a href="${pageContext.request.contextPath}/settings">Settings</a>
                     <a href="ManageAccount" class="btn btn-primary">Manage Account</a>

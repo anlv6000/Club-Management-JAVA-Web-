@@ -15,7 +15,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <link href="css/manager.css" rel="stylesheet" type="text/css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
         <style>
             body {
                 font-family: 'Varela Round', sans-serif;
@@ -106,7 +110,11 @@
             .search-container {
                 display: flex;
                 align-items: center;
+<<<<<<< HEAD
                 margin-top: 15px;
+=======
+margin-top: 15px;
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
                 gap: 15px;
                 flex-wrap: nowrap;
             }
@@ -129,7 +137,11 @@
             .search-container button {
                 white-space: nowrap;
                 padding: 8px 20px;
+<<<<<<< HEAD
                 margin-top: 20px;
+=======
+margin-top: 20px;
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
                 height: 35px;
             }
         </style>
@@ -193,10 +205,14 @@
                     <tbody>
                         <c:forEach items="${accountlist}" var="o">
                             <tr>
+<<<<<<< HEAD
                                 <td>
                                     <img src="${not empty o.imageURL ? o.imageURL : 'https://i.pinimg.com/236x/5e/e0/82/5ee082781b8c41406a2a50a0f32d6aa6.jpg'}" alt="Avatar" />
                                 </td>
 
+=======
+                                <td><img src="${o.imageURL != null && !o.imageURL.isEmpty() ? o.imageURL : 'https://i.pinimg.com/236x/5e/e0/82/5ee082781b8c41406a2a50a0f32d6aa6.jpg'}" alt="Avarta" /></td>
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
                                 <td>${o.id}</td>
                                 <td>${o.username}</td>
                                 <td>${o.email}</td>

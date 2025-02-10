@@ -133,7 +133,11 @@
                 </div>
                 <button type="submit" class="edit-btn">Edit</button>
             </form>
+<<<<<<< HEAD
             <a href="listEvent">Back to Event List</a>
+=======
+            <a href="EventList.jsp">Back to Event List</a>
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
         </div>
     </body>
 </html>

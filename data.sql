@@ -1,9 +1,14 @@
 
 
 /*part 3": */
+<<<<<<< HEAD
 CREATE DATABASE club_Manager1;
 USE club_Manager1;
+=======
+CREATE DATABASE club_Manager;
+>>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
 USE club_Manager;
+
 -- Tạo bảng Settings (Bảng 1)
 CREATE TABLE Settings (
     SettingID INT AUTO_INCREMENT PRIMARY KEY,
