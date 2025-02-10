@@ -29,22 +29,13 @@
                 String email = acc.getEmail();
                 String name = acc.getName();
                
-<<<<<<< HEAD
                 if (dao.isGoogleAccountExist(acc.getId())|| dao.checkemailExist(email)) {
-=======
-                if (dao.isGoogleAccountExist(acc.getId())) {
->>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
                     session = request.getSession();
                      GoogleAccount a = dao.loginggg(email);
                     session.setAttribute("accc", a);
 
-<<<<<<< HEAD
                     session.setAttribute("name", a.getName());
                     session.setAttribute("googleAccount", a);
-=======
-                    session.setAttribute("name", acc.getName());
-                    session.setAttribute("googleAccount", acc);
->>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
                                         request.getRequestDispatcher("Home.jsp").forward(request, response);
 
                 } else {

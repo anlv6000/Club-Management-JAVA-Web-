@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SettingServlet", urlPatterns = {"/settings", "/toggleStatus"})
+@WebServlet(name = "SettingServlet", urlPatterns = {"/settings", "/toggleStatus", "/deleteSetting"})
 public class SettingServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -23,10 +23,16 @@ public class SettingServlet extends HttpServlet {
 
         String action = request.getServletPath();
 
-        if ("/toggleStatus".equals(action)) {
-            handleToggleStatus(request, response);
-        } else {
-            handleSettingsList(request, response);
+        switch (action) {
+            case "/toggleStatus":
+                handleToggleStatus(request, response);
+                break;
+            case "/deleteSetting":
+                handleDeleteSetting(request, response);
+                break;
+            default:
+                handleSettingsList(request, response);
+                break;
         }
     }
 
@@ -56,6 +62,30 @@ public class SettingServlet extends HttpServlet {
         }
 
         // Chuyển hướng lại trang danh sách thiết lập
+        response.sendRedirect("settings");
+    }
+
+    private void handleDeleteSetting(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String idStr = request.getParameter("id");
+
+        int id = 0;
+        if (idStr != null && !idStr.trim().isEmpty()) {
+            id = Integer.parseInt(idStr);
+        }
+
+        DBContext dbContext = new DBContext();
+        try (Connection conn = dbContext.getConnection()) {
+            String sql = "DELETE FROM Settings WHERE SettingID = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Redirect to the settings list page
         response.sendRedirect("settings");
     }
 

@@ -155,9 +155,12 @@
                     <textarea id="description" name="description" required><%=setting.getDescription()%></textarea>
                 </div>
                 <div class="form-group" style="align-items: center;">
-                    <button type="submit">Update</button>
+                    <button type="submit">Update</button><br><!-- comment -->
+                    <button class="back-btn" onclick="window.location.href='settings'">Back to List</button>
                 </div>
+                
             </form>
         </div>
+                
     </body>
 </html>

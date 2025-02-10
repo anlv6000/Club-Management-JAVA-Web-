@@ -3,7 +3,7 @@
     <welcome-file-list>
         <welcome-file>Home.jsp</welcome-file>
     </welcome-file-list>
-    <servlet>
+     <servlet>
         <servlet-name>ListEvent</servlet-name>
         <servlet-class>Controller.ListEvent</servlet-class>
     </servlet>
@@ -26,6 +26,10 @@
     <servlet>
         <servlet-name>SearchEvent</servlet-name>
         <servlet-class>Controller.SearchEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchType</servlet-name>
+        <servlet-class>Controller.SearchType</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListEvent</servlet-name>
@@ -50,5 +54,9 @@
     <servlet-mapping>
         <servlet-name>SearchEvent</servlet-name>
         <url-pattern>/searchEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchType</servlet-name>
+        <url-pattern>/searchType</url-pattern>
     </servlet-mapping>
 </web-app>

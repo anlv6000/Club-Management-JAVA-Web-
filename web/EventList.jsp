@@ -113,6 +113,12 @@
             alert("Vui lòng chọn loại sự kiện!");
         }
     }
+     function confirmDelete(eventId) {
+                let confirmAction = confirm("Bạn có chắc chắn muốn xóa sự kiện này?");
+                if (confirmAction) {
+                    window.location.href = "deleteEvent?id=" + eventId;
+                }
+            }
 </script>
 <script>
     function filterByType() {
@@ -126,12 +132,10 @@
     <body>
         <div class="container">
             <h1>Event List</h1>
-            <div class="search-container">
-                <input type="text" id="searchInput" class="search-box" placeholder="Search by event name...">
-                <button class="search-btn" onclick="searchEvent()">Tìm kiếm</button>
-                
-                
-            </div>
+           <form class="search-container" action="searchEvent" method="get">
+                <input type="text" name="searchQuery" class="search-box" placeholder="Search by event name...">
+                <button type="submit" class="search-btn">Tìm kiếm</button>
+            </form>
            <div class="search-container">
                <!-- Dropdown chọn loại sự kiện -->
                <select id="eventTypeSelect" class="search-box" onchange="filterByType()">

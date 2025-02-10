@@ -94,13 +94,8 @@
                 </select>
             </div>
             <div class="form-group">
-<<<<<<< HEAD
                 <label for="profileImage">Avarta:</label>
         <input type="file" id="profileImage" name="profileImage" accept="image/*" required>
-=======
-                <label for="imageURL">Ảnh đại diện:</label>
-                <input type="text" id="imageURL" name="imageURL">
->>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
             </div>
             <button type="submit" class="btn">ADD ACCOUNT</button>
         </form>

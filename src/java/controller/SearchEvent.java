@@ -56,7 +56,7 @@ public class SearchEvent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String eventName = request.getParameter("query");
+        String eventName = request.getParameter("searchQuery");
         
         dao dao = new DAO.dao();
         List<Event> event = dao.eventSearchByName(eventName);

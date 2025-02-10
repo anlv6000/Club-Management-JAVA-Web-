@@ -126,7 +126,7 @@
             <label>Description:</label>
             <div>${detail.description}</div><br>
         </form>
-        <button class="back-btn" onclick="window.location.href='Public_ClubServlet'">Back to List</button>
+        <button class="back-btn" onclick="window.location.href='Public_ClubServlet'">Back to Home</button>
     </div>
         
 </body>

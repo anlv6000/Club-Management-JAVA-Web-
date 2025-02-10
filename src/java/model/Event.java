@@ -1,5 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Model;
 
+/**
+ *
+ * @author User
+ */
 public class Event {
     private int id;
     private int clubId;
@@ -9,11 +17,24 @@ public class Event {
     private Integer createdBy; // Cho phép null
     private String createdDate;
     private String eventImageURL;
-    private boolean status; // Cột mới
-    private boolean type; // Cột mới
-
+    private Boolean Status;
+    private Boolean Type;
     public Event() {
     }
+
+    public Event(int id, int clubId, String eventName, String description, String eventDate, Integer createdBy, String createdDate, String eventImageURL, Boolean Status, Boolean Type) {
+        this.id = id;
+        this.clubId = clubId;
+        this.eventName = eventName;
+        this.description = description;
+        this.eventDate = eventDate;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.eventImageURL = eventImageURL;
+        this.Status = Status;
+        this.Type = Type;
+    }
+    
 
     public Event(int id, int clubId, String eventName, String description, String eventDate, Integer createdBy, String createdDate, String eventImageURL) {
         this.id = id;
@@ -37,18 +58,22 @@ public class Event {
         this.createdBy = null; // Không có người tạo
     }
 
-    public Event(int id, int clubId, String eventName, String description, String eventDate, Integer createdBy, String createdDate, String eventImageURL, boolean status, boolean type) {
-        this.id = id;
-        this.clubId = clubId;
-        this.eventName = eventName;
-        this.description = description;
-        this.eventDate = eventDate;
-        this.createdBy = createdBy;
-        this.createdDate = createdDate;
-        this.eventImageURL = eventImageURL;
-        this.status = status;
-        this.type = type;
+    public Boolean getStatus() {
+        return Status;
     }
+
+    public void setStatus(Boolean Status) {
+        this.Status = Status;
+    }
+
+    public Boolean getType() {
+        return Type;
+    }
+
+    public void setType(Boolean Type) {
+        this.Type = Type;
+    }
+    
 
     public int getId() {
         return id;
@@ -114,28 +139,12 @@ public class Event {
         this.eventImageURL = eventImageURL;
     }
 
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public boolean getType() {
-        return type;
-    }
-
-    public void setType(boolean type) {
-        this.type = type;
-    }
-
     @Override
     public String toString() {
-        return "Event{" + "id=" + id + ", clubId=" + clubId + ", eventName='" + eventName + '\'' +
-                ", description='" + description + '\'' + ", eventDate='" + eventDate + '\'' +
-                ", createdBy=" + createdBy + ", createdDate='" + createdDate + '\'' +
-                ", eventImageURL='" + eventImageURL + '\'' + ", status=" + status + 
-                ", type=" + type + '}';
+        return "Event{" + "id=" + id + ", clubId=" + clubId + ", eventName=" + eventName + ", description=" + description + ", eventDate=" + eventDate + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", eventImageURL=" + eventImageURL + ", Status=" + Status + ", Type=" + Type + '}';
     }
+
+    
+    
 }
+

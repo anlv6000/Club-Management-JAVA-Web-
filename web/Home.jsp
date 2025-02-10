@@ -208,11 +208,7 @@
 
 
 
-<<<<<<< HEAD
                 <div>Hello ${sessionScope.name}</div>
-=======
-                <div>hello ${sessionScope.name}</div>
->>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
 
             </c:if>
 
@@ -233,17 +229,10 @@
             </c:if>
             <c:if test="${sessionScope.acc != null}">
 
-<<<<<<< HEAD
 <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
                 <a href="Login.jsp">Log out</a>
 
               <c:if test="${sessionScope.acc.role == 'Admin'|| sessionScope.accc.role == 'Admin'}">
-=======
-
-                <a href="Login.jsp">Log out</a>
-
-                <c:if test="${sessionScope.acc.role == 'Admin'}">
->>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
                     <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
                     <a href="${pageContext.request.contextPath}/settings">Settings</a>
                     <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
@@ -282,7 +271,7 @@
                             <div class="image-item">
                                 <img src="${o.imgURL}" alt="vov">
                                 <div>${o.clubName}
-                                    <a href="Public_ClubServlet?URL=${o.imgURL}">=></a>                                    
+                                    <a href="Public_ClubServlet?clubName=${o.clubName}">=></a>                                    
                                 </div>                              
                             </div>
                         </c:forEach>

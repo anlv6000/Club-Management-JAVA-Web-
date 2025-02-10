@@ -1,14 +1,9 @@
 
 
 /*part 3": */
-<<<<<<< HEAD
 CREATE DATABASE club_Manager1;
 USE club_Manager1;
-=======
-CREATE DATABASE club_Manager;
->>>>>>> f070f6629f27f2e5e7822a22bc8b8b972c053149
 USE club_Manager;
-
 -- Tạo bảng Settings (Bảng 1)
 CREATE TABLE Settings (
     SettingID INT AUTO_INCREMENT PRIMARY KEY,
@@ -153,3 +148,18 @@ VALUES
 'https://gudlogo.com/wp-content/uploads/2019/05/logo-nhat-ban-42.jpg'),
 ('CLB Guitar', 'Âm nhạc', 'Câu lạc bộ Guitar dành cho những người yêu thích chơi đàn và âm nhạc.', 
 'https://th.bing.com/th/id/OIP.4OaanNRSUFnIkMnVPCpiVwHaHa?rs=1&pid=ImgDetMain');
+
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Xóa các b?ng cu n?u t?n t?i
+DROP TABLE IF EXISTS Events;
+DROP TABLE IF EXISTS UserClubs;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Clubs;
+DROP TABLE IF EXISTS Settings;
+DROP TABLE IF EXISTS UserRole;
+DROP TABLE IF EXISTS tokenForgetPassword;
+
+
+SET FOREIGN_KEY_CHECKS = 1;
