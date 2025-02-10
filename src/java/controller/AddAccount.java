@@ -15,12 +15,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
 @WebServlet(name = "AddAccount", urlPatterns = {"/AddAccount"})
 @MultipartConfig(
@@ -78,7 +78,8 @@ public class AddAccount extends HttpServlet {
 
         // Gửi email mật khẩu
         sendEmail(email, password);
-// Chuyển hướng về danh sách tài khoản
+
+        // Chuyển hướng về danh sách tài khoản
         List<Account> accounts = dao.getAllAccounts();
         request.setAttribute("accountlist", accounts);
         request.getRequestDispatcher("Account.jsp").forward(request, response);
@@ -106,9 +107,9 @@ public class AddAccount extends HttpServlet {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new javax.mail.PasswordAuthentication(senderEmail, senderPassword);
+        Session session = Session.getInstance(properties, new jakarta.mail.Authenticator() {
+            protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new jakarta.mail.PasswordAuthentication(senderEmail, senderPassword);
             }
         });
 
@@ -117,11 +118,14 @@ public class AddAccount extends HttpServlet {
             message.setFrom(new InternetAddress(senderEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             message.setSubject("Tài khoản mới của bạn");
-            message.setText("Chào bạn,\n\nTài khoản của bạn đã được tạo thành công.\n" +
-                            "Tên đăng nhập: " + recipientEmail + "\n" +
-                            "Mật khẩu: " + password + "\n\n" +
-                            "Vui lòng đăng nhập và thay đổi mật khẩu.\n\n" +
-                            "Trân trọng,\nHệ thống quản lý tài khoản");
+            message.setContent("<p>Chào bạn,</p>" +
+                   "<p>Tài khoản của bạn đã được tạo thành công.</p>" +
+                   "<p><b>Tên đăng nhập:</b> " + recipientEmail + "</p>" +
+                   "<p><b>Mật khẩu:</b> " + password + "</p>" +
+                   "<p>Vui lòng đăng nhập và thay đổi mật khẩu.</p>" +
+                   "<p>Trân trọng,<br>Hệ thống quản lý tài khoản</p>",
+                   "text/html; charset=UTF-8");
+
 
             Transport.send(message);
         } catch (MessagingException e) {

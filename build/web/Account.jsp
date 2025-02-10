@@ -218,7 +218,7 @@
                 </table>
             </div>
             <div>
-                <a href="Home.jsp"><button type="button" class="btn btn-primary">Back to home</button></a>
+                </div><button class="back-btn" onclick="window.location.href = 'Public_ClubServlet'">Back to Home</button>
             </div>
         </div>
     </body>
