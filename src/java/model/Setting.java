@@ -8,12 +8,13 @@ public class Setting {
     private int priority;
     private String status;
     private String userType;
+    private String description;
 
     // Constructors
     public Setting() {
     }
 
-    public Setting(int id, String name, String type, String value, int priority, String status, String userType) {
+    public Setting(int id, String name, String type, String value, int priority, String status, String userType, String description) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -21,6 +22,7 @@ public class Setting {
         this.priority = priority;
         this.status = status;
         this.userType = userType;
+        this.description = description;
     }
 
     // Getters and setters
@@ -78,5 +80,13 @@ public class Setting {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

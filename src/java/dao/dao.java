@@ -6,6 +6,7 @@ package DAO;
 
 import Dal.DBContext;
 import Model.Account;
+import Model.Club;
 import Model.Event;
 import Model.GoogleAccount;
 import Model.Public_club;
@@ -53,6 +54,24 @@ public class dao extends DBContext {
 
     }
 
+    public boolean checkemailExist(String email) {
+        String query = "select * from users \n"
+                + "where Email = ? \n";
+        try {
+            stm = getConnection().prepareStatement(query);
+            stm.setString(1, email);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+
+    }
+
     public boolean checkAccountExist(String user) {
         String query = "select * from users \n"
                 + "where Username = ? \n";
@@ -70,7 +89,7 @@ public class dao extends DBContext {
         return false;
     }
 
-    public Account login(String user, String pass) {
+    public User login(String user, String pass) {
         String query = "SELECT * FROM users WHERE Username = ?";
         try {
             stm = getConnection().prepareStatement(query);
@@ -79,7 +98,7 @@ public class dao extends DBContext {
 
             if (rs.next()) {
                 // Tạo đối tượng Account từ kết quả truy vấn
-                Account a = new Account(rs.getString("Username"), rs.getString("Password"),
+                User a = new User(rs.getString("Username"), rs.getString("Password"),
                         rs.getString("UserType"));
 
                 // Kiểm tra mật khẩu đã nhập với mật khẩu hash từ cơ sở dữ liệu
@@ -125,22 +144,40 @@ public class dao extends DBContext {
         return false;
     }
 
-    public List<Public_club> getTop5() {
-        List<Public_club> list = new ArrayList<>();
+    public List<Club> getTop5() {
+        List<Club> list = new ArrayList<>();
         String query = "select * from clubs LIMIT 6 ";
         try {
             stm = getConnection().prepareStatement(query);
             rs = stm.executeQuery();
             while (rs.next()) {
-                list.add(new Public_club(rs.getString("ClubName"), rs.getString("Description"), rs.getString("ImageURL")));
+                list.add(new Club(rs.getString("ClubName"), rs.getString("Description"), rs.getString("ImageURL")));
             }
         } catch (Exception e) {
         }
         return list;
     }
 
+    public Club getdetail(String url) {
+        List<Club> list = new ArrayList<>();
+        String query = "select * from clubs where ImageURL = ? ";
+        try {
+            stm = getConnection().prepareStatement(query);
+            stm.setString(1, url);
+            rs = stm.executeQuery();
+
+            if (rs.next()) {
+                Club c = new Club(rs.getString("ClubName"), rs.getString("Description"), rs.getString("ImageURL"));
+                return c;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
     public void addSettings(List<Setting> settings) throws SQLException {
-        String sql = "INSERT INTO Settings (SettingName, SettingType, SettingValue, Priority, Status, UserType) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Settings (SettingName, SettingType, SettingValue, Priority, Status, UserType, Description) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection con = getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
             for (Setting setting : settings) {
                 stm.setString(1, setting.getName());
@@ -149,10 +186,12 @@ public class dao extends DBContext {
                 stm.setInt(4, setting.getPriority());
                 stm.setString(5, setting.getStatus());
                 stm.setString(6, setting.getUserType());
+                stm.setString(7, setting.getDescription());
                 stm.addBatch();
             }
             stm.executeBatch();
         } catch (SQLException e) {
+            System.err.println("Error inserting settings: " + e.getMessage());
             throw e;
         }
     }
@@ -164,7 +203,8 @@ public class dao extends DBContext {
                 + "SettingValue = ?, "
                 + "Priority = ?, "
                 + "Status = ?, "
-                + "UserType = ? "
+                + "UserType = ?, "
+                + "Description = ? "
                 + "WHERE SettingID = ?";
         try (Connection con = getConnection(); PreparedStatement stm = con.prepareStatement(sql)) {
             for (Setting setting : settings) {
@@ -174,11 +214,13 @@ public class dao extends DBContext {
                 stm.setInt(4, setting.getPriority());
                 stm.setString(5, setting.getStatus());
                 stm.setString(6, setting.getUserType());
-                stm.setInt(7, setting.getId()); // SettingID
+                stm.setString(7, setting.getDescription());
+                stm.setInt(8, setting.getId()); // SettingID
                 stm.addBatch();
             }
             stm.executeBatch();
         } catch (SQLException e) {
+            System.err.println("Error updating settings: " + e.getMessage());
             throw e;
         }
     }
@@ -196,11 +238,13 @@ public class dao extends DBContext {
                             rs.getString("SettingValue"),
                             rs.getInt("Priority"),
                             rs.getString("Status"),
-                            rs.getString("UserType")
+                            rs.getString("UserType"),
+                            rs.getString("Description") // thêm Description
                     );
                 }
             }
         } catch (SQLException e) {
+            System.err.println("Error retrieving setting: " + e.getMessage());
             throw e;
         }
         return null;
@@ -237,7 +281,7 @@ public class dao extends DBContext {
     }
 
     public boolean isGoogleAccountExist(String googleId) throws SQLException {
-        String query = "SELECT * FROM google_accounts WHERE google_id = ?";
+        String query = "SELECT * FROM users WHERE google_id = ?";
         try {
             PreparedStatement pstmt = getConnection().prepareStatement(query);
             pstmt.setString(1, googleId);
@@ -255,12 +299,13 @@ public class dao extends DBContext {
     }
 
     public void saveGoogleAccount(GoogleAccount googleAccount, String email) {
-        String query = "INSERT INTO google_accounts (google_id, name, email) VALUES (?, ?, ?)";
+        String query = "INSERT INTO users (google_id, Username, Email ,Password ) VALUES (?, ?, ?, ?) ";
         try {
             PreparedStatement pstmt = getConnection().prepareStatement(query);
             pstmt.setString(1, googleAccount.getId());
             pstmt.setString(2, googleAccount.getName());
             pstmt.setString(3, email);
+            pstmt.setString(4, email);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -271,7 +316,7 @@ public class dao extends DBContext {
     }
 
     public GoogleAccount loginggg(String email) {
-        String query = "SELECT * FROM google_accounts WHERE email = ?";
+        String query = "SELECT * FROM users WHERE Email = ?";
         try {
             stm = getConnection().prepareStatement(query);
             stm.setString(1, email);
@@ -279,7 +324,7 @@ public class dao extends DBContext {
 
             if (rs.next()) {
                 // Tạo đối tượng Account từ kết quả truy vấn
-                GoogleAccount a = new GoogleAccount(rs.getString("email"), rs.getString("UserType"));
+                GoogleAccount a = new GoogleAccount(rs.getString("Email"), rs.getString("Username") ,rs.getString("UserType"));
 
                 // Kiểm tra mật khẩu đã nhập với mật khẩu hash từ cơ sở dữ liệu
                 return a;
@@ -289,6 +334,7 @@ public class dao extends DBContext {
         }
         return null; // Trả về null nếu không tìm thấy tài khoản
     }
+
 
     public String getFormatDate(LocalDateTime myDateObj) {
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -564,73 +610,94 @@ public class dao extends DBContext {
         return accounts;
     }
 
+
+
+
+
+    
     public List<Event> getAllEvents() {
-        List<Event> events = new ArrayList<>();
-        String sql = "SELECT * FROM Events";
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+    List<Event> events = new ArrayList<>();
+    String sql = "SELECT * FROM Events";
 
-            while (rs.next()) {
-                Event event = new Event(
-                        rs.getInt("EventID"),
-                        rs.getInt("ClubID"),
-                        rs.getString("EventName"),
-                        rs.getString("Description"),
-                        rs.getString("EventDate"),
-                        rs.getInt("CreatedBy"), // Lấy giá trị CreatedBy, có thể là null
-                        rs.getString("CreatedDate"),
-                        rs.getString("EventImageURL")
-                );
-                events.add(event);
-            }
-        } catch (SQLException e) {
-            System.out.println("Lỗi khi lấy danh sách sự kiện: " + e.getMessage());
+    try (Connection conn = getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            Event event = new Event(
+                    rs.getInt("EventID"),
+                    rs.getInt("ClubID"),
+                    rs.getString("EventName"),
+                    rs.getString("Description"),
+                    rs.getString("EventDate"),
+                    rs.getInt("CreatedBy"), // Có thể null
+                    rs.getString("CreatedDate"),
+                    rs.getString("EventImageURL"),
+                    rs.getBoolean("Status"), // Cột mới
+                    rs.getBoolean("Type") // Cột mới
+            );
+            events.add(event);
         }
-        return events;
+    } catch (SQLException e) {
+        System.out.println("Lỗi khi lấy danh sách sự kiện: " + e.getMessage());
     }
+    return events;
+}
+     
+     
+     
+public boolean addEvent(int clubId, String eventName, String description, String eventDate, int createdBy, String createdDate, String eventImageURL, boolean type, boolean status) {
+    String sql = "INSERT INTO Events (ClubID, EventName, Description, EventDate, CreatedBy, CreatedDate, EventImageURL, Status, Type) " +
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    public boolean addEvent(int clubId, String eventName, String description, String eventDate, int createdBy, String createdDate, String eventImageURL) {
-        String sql = "INSERT INTO Events (ClubID, EventName, Description, EventDate, CreatedBy, CreatedDate, EventImageURL) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+    try (Connection conn = getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, clubId);
-            ps.setString(2, eventName);
-            ps.setString(3, description);
-            ps.setString(4, eventDate);
-
-            if (createdBy != -1) {
-                ps.setInt(5, createdBy);
-            } else {
-                ps.setNull(5, java.sql.Types.INTEGER);
-            }
-
-            ps.setString(6, createdDate);
-            ps.setString(7, eventImageURL);
-
-            int rowsInserted = ps.executeUpdate();
-            return rowsInserted > 0;
-
-        } catch (SQLException e) {
-            System.out.println("Lỗi khi thêm sự kiện: " + e.getMessage());
-            return false;
+        ps.setInt(1, clubId);
+        ps.setString(2, eventName);
+        ps.setString(3, description);
+        ps.setString(4, eventDate);
+        
+        if (createdBy != -1) {
+            ps.setInt(5, createdBy);
+        } else {
+            ps.setNull(5, java.sql.Types.INTEGER);
         }
-    }
 
+        ps.setString(6, createdDate);
+        ps.setString(7, eventImageURL);
+        ps.setBoolean(8, status);   // Thêm status
+        ps.setBoolean(9, type); // Thêm type
+
+        int rowsInserted = ps.executeUpdate();
+        return rowsInserted > 0;
+
+    } catch (SQLException e) {
+        System.out.println("Lỗi khi thêm sự kiện: " + e.getMessage());
+        return false;
+    }
+}
+
+
+
+
+    
     public boolean editEvent(int eventID, String eventName, String description, String eventDate, String eventImageURL) {
         String sql = "UPDATE Events SET EventName = ?, Description = ?, EventDate = ?, EventImageURL = ? WHERE EventID = ?";
-
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-
+        
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            
             // Gán giá trị các tham số vào câu lệnh SQL
             ps.setString(1, eventName);
             ps.setString(2, description);
             ps.setString(3, eventDate);
             ps.setString(4, eventImageURL);
             ps.setInt(5, eventID); // Không thay đổi EventID, chỉ sử dụng để tìm sự kiện cần sửa
-
+            
             // Thực thi câu lệnh UPDATE và kiểm tra số dòng bị ảnh hưởng
             int rowsAffected = ps.executeUpdate();
-
+            
             // Nếu có ít nhất một dòng bị thay đổi, trả về true, ngược lại trả về false
             return rowsAffected > 0;
         } catch (SQLException e) {
@@ -639,17 +706,19 @@ public class dao extends DBContext {
         return false; // Trả về false nếu có lỗi xảy ra
     }
 
-    public boolean deleteEvent(int eventID) {
+
+public boolean deleteEvent(int eventID) {
         String sql = "DELETE FROM Events WHERE EventID = ?";
-
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-
+        
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            
             // Gán giá trị EventID vào tham số của câu lệnh SQL
             ps.setInt(1, eventID);
-
+            
             // Thực thi câu lệnh DELETE và kiểm tra số dòng bị ảnh hưởng
             int rowsAffected = ps.executeUpdate();
-
+            
             // Nếu có ít nhất một dòng bị xóa, trả về true, ngược lại trả về false
             return rowsAffected > 0;
         } catch (SQLException e) {
@@ -658,9 +727,10 @@ public class dao extends DBContext {
         return false; // Trả về false nếu có lỗi xảy ra
     }
 
-    public Event getEventById(int eventId) {
+public Event getEventById(int eventId) {
         String sql = "SELECT * FROM Events WHERE EventID = ?";
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
             // Thiết lập tham số cho câu lệnh SQL
             ps.setInt(1, eventId);
@@ -671,13 +741,15 @@ public class dao extends DBContext {
                     // Tạo đối tượng Event từ dữ liệu trong ResultSet
                     return new Event(
                             rs.getInt("EventID"),
-                            rs.getInt("ClubID"),
-                            rs.getString("EventName"),
-                            rs.getString("Description"),
-                            rs.getString("EventDate"),
-                            rs.getInt("CreatedBy"), // Lấy giá trị CreatedBy, có thể là null
-                            rs.getString("CreatedDate"),
-                            rs.getString("EventImageURL")
+                    rs.getInt("ClubID"),
+                    rs.getString("EventName"),
+                    rs.getString("Description"),
+                    rs.getString("EventDate"),
+                    rs.getInt("CreatedBy"), // Có thể null
+                    rs.getString("CreatedDate"),
+                    rs.getString("EventImageURL"),
+                    rs.getBoolean("Status"), // Cột mới
+                    rs.getBoolean("Type") // Cột mới
                     );
                 }
             }
@@ -687,25 +759,28 @@ public class dao extends DBContext {
         return null; // Trả về null nếu không tìm thấy sự kiện
     }
 
-    public List<Event> eventSearchByName(String eventName) {
+ public List<Event> eventSearchByName(String eventName) {
         List<Event> events = new ArrayList<>();
         String sql = "SELECT * FROM Events WHERE EventName LIKE ?";
-
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-
+        
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            
             // Sử dụng dấu '%' để tìm kiếm theo tên sự kiện có chứa chuỗi tìm kiếm
             ps.setString(1, "%" + eventName + "%");
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Event event = new Event(
-                            rs.getInt("EventID"),
-                            rs.getInt("ClubID"),
-                            rs.getString("EventName"),
-                            rs.getString("Description"),
-                            rs.getString("EventDate"),
-                            rs.getInt("CreatedBy"),
-                            rs.getString("CreatedDate"),
-                            rs.getString("EventImageURL")
+                              rs.getInt("EventID"),
+                    rs.getInt("ClubID"),
+                    rs.getString("EventName"),
+                    rs.getString("Description"),
+                    rs.getString("EventDate"),
+                    rs.getInt("CreatedBy"), // Có thể null
+                    rs.getString("CreatedDate"),
+                    rs.getString("EventImageURL"),
+                    rs.getBoolean("Status"), // Cột mới
+                    rs.getBoolean("Type") // Cột mới
                     );
                     events.add(event);
                 }
@@ -715,67 +790,90 @@ public class dao extends DBContext {
         }
         return events;
     }
+  public List<Event> searchByType(boolean eventType) {
+    List<Event> events = new ArrayList<>();
+    String sql = "SELECT * FROM Events WHERE Type = ?";
 
-    public boolean updateEvent(int eventId, int clubId, String eventName, String description, String eventDate, Integer createdBy, String createdDate, String eventImageURL) {
-        String sql = "UPDATE Events SET ClubID = ?, EventName = ?, Description = ?, EventDate = ?, "
-                + "CreatedBy = ?, CreatedDate = ?, EventImageURL = ? WHERE EventID = ?";
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+    try (Connection conn = getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setBoolean(1, eventType);
 
-            // Thiết lập các tham số cho câu lệnh SQL
-            ps.setInt(1, clubId);
-            ps.setString(2, eventName);
-            ps.setString(3, description);
-            ps.setString(4, eventDate);
-
-            // Xử lý trường hợp CreatedBy có thể là null
-            if (createdBy != null) {
-                ps.setInt(5, createdBy);
-            } else {
-                ps.setNull(5, java.sql.Types.INTEGER);
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Event event = new Event(
+                    rs.getInt("EventID"),
+                    rs.getInt("ClubID"),
+                    rs.getString("EventName"),
+                    rs.getString("Description"),
+                    rs.getString("EventDate"),
+                    rs.getInt("CreatedBy"),
+                    rs.getString("CreatedDate"),
+                    rs.getString("EventImageURL"),
+                    rs.getBoolean("Status"),
+                    rs.getBoolean("Type")
+                );
+                events.add(event);
             }
-
-            ps.setString(6, createdDate);
-            ps.setString(7, eventImageURL);
-            ps.setInt(8, eventId); // EventID để xác định sự kiện cần cập nhật
-
-            // Thực thi câu lệnh SQL
-            int rowsUpdated = ps.executeUpdate();
-            return rowsUpdated > 0; // Trả về true nếu cập nhật thành công
-
-        } catch (SQLException e) {
-            System.out.println("Lỗi khi cập nhật sự kiện: " + e.getMessage());
-            e.printStackTrace(); // In lỗi ra console
-            return false;
         }
+    } catch (SQLException e) {
+        System.out.println("Lỗi khi tìm kiếm sự kiện theo loại: " + e.getMessage());
+    }
+    return events;
+}
+ 
+  public boolean updateEvent(int eventId, int clubId, String eventName, String description, String eventDate, Integer createdBy, String createdDate, String eventImageURL, boolean eventStatus, boolean eventType) {
+    String sql = "UPDATE Events SET ClubID = ?, EventName = ?, Description = ?, EventDate = ?, " +
+                 "CreatedBy = ?, CreatedDate = ?, EventImageURL = ?, Type = ?, Status = ? WHERE EventID = ?";
+    
+    try (Connection conn = getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        
+        // Thiết lập các tham số cho câu lệnh SQL
+        ps.setInt(1, clubId);
+        ps.setString(2, eventName);
+        ps.setString(3, description);
+        ps.setString(4, eventDate);
+        
+        // Xử lý trường hợp CreatedBy có thể là null
+        if (createdBy != null) {
+            ps.setInt(5, createdBy);
+        } else {
+            ps.setNull(5, java.sql.Types.INTEGER);
+        }
+        
+        ps.setString(6, createdDate);
+        ps.setString(7, eventImageURL);
+        ps.setBoolean(8, eventStatus); // Thêm Type
+        ps.setBoolean(9, eventType); // Thêm Status
+        ps.setInt(10, eventId); // EventID để xác định sự kiện cần cập nhật
+        
+        // Thực thi câu lệnh SQL
+        int rowsUpdated = ps.executeUpdate();
+        return rowsUpdated > 0; // Trả về true nếu cập nhật thành công
+        
+    } catch (SQLException e) {
+        System.out.println("Lỗi khi cập nhật sự kiện: " + e.getMessage());
+        e.printStackTrace(); // In lỗi ra console để dễ debug
+        return false;
     }
 
-    public static void main(String[] args) {
+
+    }
+
+ 
+
+     
+     
+      public static void main(String[] args) {
         dao eventDAO = new dao();
-// check list
-        List<Event> events = eventDAO.getAllEvents();
+
+              List<Event> events = eventDAO.searchByType( Boolean.parseBoolean("false"));
 
         // In ra danh sách sự kiện
         for (Event event : events) {
             System.out.println(event);
         }
-
-        boolean isSuccess = eventDAO.updateEvent(
-                6, // EventID cần cập nhật
-                1, // ClubID
-                "Workshop Lập Trình Java Nâng Cao", // EventName (cập nhật)
-                "Học lập trình Java từ cơ bản đến nâng cao với chuyên gia", // Description (cập nhật)
-                "2024-11-25 14:00:00", // EventDate (cập nhật)
-                null, // CreatedBy (có thể là null)
-                "2023-10-10 12:00:00", // CreatedDate
-                "java_workshop_updated.jpg" // EventImageURL (cập nhật)
-        );
-
-        if (isSuccess) {
-            System.out.println("Cập nhật sự kiện thành công!");
-        } else {
-            System.out.println("Cập nhật sự kiện thất bại.");
-        }
-
-    }
-
+      
+      }
+    
 }

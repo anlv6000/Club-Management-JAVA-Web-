@@ -74,13 +74,18 @@ public class AddEvent extends HttpServlet {
         String eventName = request.getParameter("eventName");
         String clubDescription = request.getParameter("clubDescription");
         String eventTime = request.getParameter("eventTime");
-        String eventType = request.getParameter("eventType");
-        String eventStatus = request.getParameter("eventStatus");
+      
         String Images = request.getParameter("Images");
         String contactInfo = request.getParameter("contactInfo");
         String currentTime = getCurrentTime();
+      String eventTypeStr = request.getParameter("eventType");
+      String eventStatusStr = request.getParameter("eventStatus");
+        System.out.println(eventStatusStr);
+// Chuyển đổi từ String → Boolean
+boolean eventType = "true".equals(eventTypeStr);
+boolean eventStatus = "true".equals(eventStatusStr);
         dao dao = new dao();
-        dao.addEvent(1, eventName, clubDescription, eventTime, -1, currentTime , Images);
+        dao.addEvent(1, eventName, clubDescription, eventTime, -1, currentTime , Images,eventStatus,eventType);
         
        response.sendRedirect("listEvent");
     }

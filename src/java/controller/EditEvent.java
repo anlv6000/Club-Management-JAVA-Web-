@@ -80,16 +80,20 @@ public class EditEvent extends HttpServlet {
         int clubId = Integer.parseInt(request.getParameter("ID"));
         String eventName = request.getParameter("eventName");
         String description = request.getParameter("clubDescription");
-        String eventType = request.getParameter("eventType");
-        String eventStatus = request.getParameter("eventStatus");
+        
         String eventImageURL = request.getParameter("clubMembers");
         String contactInfo = request.getParameter("contactInfo");
-        
+          String eventTypeStr = request.getParameter("eventType");
+      String eventStatusStr = request.getParameter("eventStatus");
+        System.out.println(eventStatusStr);
+// Chuyển đổi từ String → Boolean
+boolean eventType = "true".equals(eventTypeStr);
+boolean eventStatus = "true".equals(eventStatusStr);
         // Chuyển đổi thời gian từ String -> Date
         String eventTimeStr = request.getParameter("eventTime");
         String currentTime = getCurrentTime();
         dao dao = new dao();
-        dao.updateEvent( id , clubId, eventName, description,  eventTimeStr, null, currentTime, eventImageURL);
+        dao.updateEvent( id , clubId, eventName, description,  eventTimeStr, null, currentTime, eventImageURL,eventStatus,eventType);
         response.sendRedirect("listEvent");
         
     }

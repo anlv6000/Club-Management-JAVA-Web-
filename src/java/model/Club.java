@@ -30,7 +30,7 @@ public class Club {
     //contructor with name, description, imgUrl
      public Club(String clubName,String description,String imgURL) {
         this.clubName = clubName;
-        this.isPublic = isPublic;
+        this.description = description;
         this.imgURL = imgURL;
     }
      

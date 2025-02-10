@@ -25,20 +25,36 @@ public class NewSettingServlet extends HttpServlet {
         String name = request.getParameter("name");
         String type = request.getParameter("type");
         String value = request.getParameter("value");
-        int priority = Integer.parseInt(request.getParameter("priority"));
+        int priority = 0;
+        try {
+            priority = Integer.parseInt(request.getParameter("priority"));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            response.getWriter().write("Invalid priority value.");
+            return;
+        }
         String status = request.getParameter("status");
         String userType = request.getParameter("userType");
+        String description = request.getParameter("description");
+
+        // Kiểm tra và sửa dữ liệu đầu vào SettingType
+        if (!type.equals("String") && !type.equals("Integer") && !type.equals("Boolean") && !type.equals("Date") && !type.equals("Text")) {
+            response.getWriter().write("Invalid SettingType value.");
+            return;
+        }
 
         // Tạo danh sách các thiết lập mới từ dữ liệu đầu vào
         List<Setting> settings = new ArrayList<>();
-        settings.add(new Setting(0, name, type, value, priority, status, userType));
+        settings.add(new Setting(0, name, type, value, priority, status, userType, description));
 
         dao dao = new dao();
         try {
             dao.addSettings(settings);
+            System.out.println("Settings added successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("SQL Error: " + e.getMessage());
+            response.getWriter().write("SQL Error: " + e.getMessage());
+            return;
         }
 
         // Chuyển hướng đến trang settings
@@ -62,3 +78,5 @@ public class NewSettingServlet extends HttpServlet {
         return "Short description";
     }
 }
+
+

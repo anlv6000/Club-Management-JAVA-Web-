@@ -18,6 +18,13 @@ public class GoogleAccount {
         this.role = role;
     }
 
+    public GoogleAccount(String email, String name, String role) {
+        this.email = email;
+        this.name = name;
+        this.role = role;
+    }
+    
+
     public GoogleAccount(String id, String email, String name, String first_name, String given_name, String family_name, String picture, boolean verified_email) {
         this.id = id;
         this.email = email;
