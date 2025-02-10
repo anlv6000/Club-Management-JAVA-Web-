@@ -229,7 +229,7 @@
             </c:if>
             <c:if test="${sessionScope.acc != null}">
 
-<a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
+
                 <a href="Login.jsp">Log out</a>
 
               <c:if test="${sessionScope.acc.role == 'Admin'|| sessionScope.accc.role == 'Admin'}">
