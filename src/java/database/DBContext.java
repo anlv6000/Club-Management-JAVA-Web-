@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBContext {
 
-    private final String url = "jdbc:mysql://localhost:3306/club_manager?useSSL=false";
+    private final String url = "jdbc:mysql://localhost:3306/club_Manager?useSSL=false";
     private final String user = "root";
     private final String password = "qielli2007";
 

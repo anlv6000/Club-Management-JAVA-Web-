@@ -4,7 +4,6 @@
 <html>
     <head>
         <meta charset="UTF-8">
-       
         <title>Event List</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <style>
@@ -17,14 +16,22 @@
                 margin: 0;
                 background-color: #f4f4f9;
                 flex-direction: column;
+                position: relative; /* Để định vị biểu tượng "x" */
             }
-            .search-container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 10px; /* Khoảng cách giữa các phần tử */
+            .close-icon {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 24px;
+                color: #ff0000;
+                cursor: pointer;
+                text-decoration: none;
+            }
+            .close-icon:hover {
+                color: #cc0000;
             }
             .container {
+                position: relative; /* Để biểu tượng "X" có thể bám vào */
                 width: 90%;
                 max-width: 1000px;
                 padding: 20px;
@@ -103,51 +110,46 @@
                 background-color: #218838;
             }
         </style>
-    
+
         <script>
-    function filterByType() {
-        let selectedType = document.getElementById("eventTypeSelect").value;
-        if (selectedType !== "") {
-            window.location.href = "searchByType?type=" + encodeURIComponent(selectedType);
-        } else {
-            alert("Vui lòng chọn loại sự kiện!");
-        }
-    }
-     function confirmDelete(eventId) {
+            function filterByType() {
+                let selectedType = document.getElementById("eventTypeSelect").value;
+                if (selectedType !== "") {
+                    window.location.href = "searchType?type=" + encodeURIComponent(selectedType);
+                } else {
+                    alert("Vui lòng chọn loại sự kiện!");
+                }
+            }
+            function confirmDelete(eventId) {
                 let confirmAction = confirm("Bạn có chắc chắn muốn xóa sự kiện này?");
                 if (confirmAction) {
                     window.location.href = "deleteEvent?id=" + eventId;
                 }
             }
-</script>
-<script>
-    function filterByType() {
-        let selectedType = document.getElementById("eventTypeSelect").value;
-        if (selectedType !== "") {
-            window.location.href = "searchType?type=" + encodeURIComponent(selectedType);
-        }
-    }
-</script>
+        </script>
     </head>
     <body>
+
         <div class="container">
-            <h1>Event List</h1>
-           <form class="search-container" action="searchEvent" method="get">
+            <!-- Biểu tượng "X" đóng trang -->
+            <a href="Public_ClubServlet" class="close-icon">
+                <i class="fas fa-times"></i>
+            </a>
+
+            <h1><a href="listEvent" style="text-decoration: none; color: inherit;">Event List</a></h1>
+            <form class="search-container" action="searchEvent" method="get">
                 <input type="text" name="searchQuery" class="search-box" placeholder="Search by event name...">
                 <button type="submit" class="search-btn">Tìm kiếm</button>
             </form>
-           <div class="search-container">
-               <!-- Dropdown chọn loại sự kiện -->
-               <select id="eventTypeSelect" class="search-box" onchange="filterByType()">
-                   <option value="">-- Chọn loại sự kiện --</option>
-                   <option value="true">Online</option>
-                   <option value="false">Offline</option>
-               </select>
-           </div>
+            <div class="search-container">
+                <!-- Dropdown chọn loại sự kiện -->
+                <select id="eventTypeSelect" class="search-box" onchange="filterByType()">
+                    <option value="">-- Chọn loại sự kiện --</option>
+                    <option value="true">Online</option>
+                    <option value="false">Offline</option>
+                </select>
+            </div>
 
-
-
-            
             <table class="event-table">
                 <thead>
                     <tr>
@@ -160,27 +162,24 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${e}" var="o">
-                    <tr>
-                        <td>${o.getId()}</td>
-                        <td>${o.eventName}</td>
-                        <td><img src="${o.eventImageURL}" alt="Event Image" width="50"></td>
-                        <td>${o.description}</td>
-                        <td class="action-links">
-                            
-                            <a href="editEvent?id=${o.getId()}">Edit</a> 
-                            <a href="eventDetail?id=${o.getId()}">Details</a>
-                            <button class="delete-btn" onclick="confirmDelete(${o.getId()})">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </td>
-                    </tr>
-                
+                        <tr>
+                            <td>${o.getId()}</td>
+                            <td>${o.eventName}</td>
+                            <td><img src="${o.eventImageURL}" alt="Event Image" width="50"></td>
+                            <td>${o.description}</td>
+                            <td class="action-links">
+                                <a href="editEvent?id=${o.getId()}">Edit</a> 
+                                <a href="eventDetail?id=${o.getId()}">Details</a>
+                                <button class="delete-btn" onclick="confirmDelete(${o.getId()})">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
                     </c:forEach>
-                
                 </tbody>
             </table>
-              
+
             <a href="AddEvent.jsp" class="home-btn">Add Event</a>
         </div>
-    </body>
+
 </html>

@@ -843,7 +843,7 @@ public class dao extends DBContext {
     public static void main(String[] args) {
         dao eventDAO = new dao();
 // check list
-//        List<Event> events = eventDAO.getAllEvents();
+        List<Event> events = eventDAO.getAllEvents();
 
 //        // In ra danh sách sự kiện
 //        for (Event event : events) {
@@ -876,13 +876,13 @@ public class dao extends DBContext {
 //        }
 //      
         //check xoa 
-        boolean isDeleted = eventDAO.deleteEvent(11);
-
-        if (isDeleted) {
-            System.out.println("Sự kiện đã được xóa thành công.");
-        } else {
-            System.out.println("Không thể xóa sự kiện.");
-        }
+//        boolean isDeleted = eventDAO.deleteEvent(11);
+//
+//        if (isDeleted) {
+//            System.out.println("Sự kiện đã được xóa thành công.");
+//        } else {
+//            System.out.println("Không thể xóa sự kiện.");
+//        }
 
 //check event byID
 //Event e = eventDAO.getEventById(6);
@@ -906,7 +906,7 @@ public class dao extends DBContext {
 //        } else {
 //            System.out.println("Cập nhật sự kiện thất bại.");
 //        }
-        List<Event> events = eventDAO.searchByType(Boolean.parseBoolean("false"));
+//        List<Event> events = eventDAO.searchByType(Boolean.parseBoolean("false"));
 
         // In ra danh sách sự kiện
         for (Event event : events) {
