@@ -31,8 +31,8 @@ public class OTPggSignUp {
 
     // Hàm gửi OTP qua email
     public static boolean sendOTP(String recipientEmail, String otpCode) {
-        final String senderEmail = "...";  // Email của bạn
-        final String senderPassword = "...."; // Mật khẩu ứng dụng (App Password)
+        final String senderEmail = "xuanquanyd@gmail.com";  // Email của bạn
+        final String senderPassword = "rjdf fdgh vqhn hmph"; // Mật khẩu ứng dụng (App Password)
 
    Properties props = new Properties();
     props.put("mail.smtp.host", "smtp.gmail.com");
