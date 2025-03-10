@@ -1,8 +1,11 @@
 Club Management System
+
 Giới thiệu
+
 Hệ thống quản lý câu lạc bộ (Club Management System) là một nền tảng toàn diện được thiết kế để hỗ trợ việc quản lý hoạt động của các câu lạc bộ. Từ việc quản lý thành viên, sự kiện, tài chính đến tích hợp báo cáo chi tiết, giải pháp này giúp các nhà quản lý tiết kiệm thời gian và nâng cao hiệu quả.
 
 Các tính năng chính
+
 . Quản lý thành viên: Thêm, chỉnh sửa, và theo dõi thông tin cá nhân của từng thành viên.
 
 . Quản lý sự kiện: Tổ chức và theo dõi các sự kiện, bao gồm lịch trình và ngân sách.
@@ -28,11 +31,13 @@ Yêu cầu hệ thống:
 . Công cụ bổ sung: Git, Maven
 
 Hướng dẫn cài đặt:
+
 1. Clone repository:
    
    git clone https://github.com/anlv6000/Club-Management-JAVA-Web-.git
    
    cd Club-Management-JAVA-Web-
+   
 3. Cấu hình cơ sở dữ liệu:
    
 Tạo một cơ sở dữ liệu MySQL mới (ví dụ: club_management).
@@ -66,11 +71,14 @@ Hướng dẫn sử dụng:
 . Theo dõi thông báo và thống kê trong dashboard chính.
 
 Tác giả và ghi nhận
+
 Dự án được xây dựng và phát triển bởi Nhóm G5 trong khóa học SE1870-NJ SWP490. Xin cảm ơn tất cả thành viên đã đóng góp và hỗ trợ!
 
 Giấy phép
+
 Dự án được phát hành dưới giấy phép MIT License. Vui lòng xem chi tiết trong file LICENSE.
 
 Trạng thái dự án
+
 Dự án đang trong quá trình phát triển. Các tính năng mới sẽ được cập nhật trong các phiên bản tiếp theo.
 
