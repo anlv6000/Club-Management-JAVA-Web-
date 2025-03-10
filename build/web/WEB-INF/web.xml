@@ -3,33 +3,33 @@
     <welcome-file-list>
         <welcome-file>Home.jsp</welcome-file>
     </welcome-file-list>
-     <servlet>
+    <servlet>
         <servlet-name>ListEvent</servlet-name>
-        <servlet-class>Controller.ListEvent</servlet-class>
+        <servlet-class>controller.event.ListEvent</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditEvent</servlet-name>
-        <servlet-class>Controller.EditEvent</servlet-class>
+        <servlet-class>controller.event.EditEvent</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddEvent</servlet-name>
-        <servlet-class>Controller.AddEvent</servlet-class>
+        <servlet-class>controller.event.AddEvent</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteEvent</servlet-name>
-        <servlet-class>Controller.DeleteEvent</servlet-class>
+        <servlet-class>controller.event.DeleteEvent</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EventDetail</servlet-name>
-        <servlet-class>Controller.EventDetail</servlet-class>
+        <servlet-class>controller.event.EventDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchEvent</servlet-name>
-        <servlet-class>Controller.SearchEvent</servlet-class>
+        <servlet-class>controller.event.SearchEvent</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchType</servlet-name>
-        <servlet-class>Controller.SearchType</servlet-class>
+        <servlet-class>controller.event.SearchType</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListEvent</servlet-name>
@@ -59,4 +59,8 @@
         <servlet-name>SearchType</servlet-name>
         <url-pattern>/searchType</url-pattern>
     </servlet-mapping>
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
+
 </web-app>

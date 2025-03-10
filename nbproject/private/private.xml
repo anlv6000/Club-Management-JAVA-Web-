@@ -3,7 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Projects/SSSS/g5.an/g5/src/java/database/DBContext.java</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/src/java/controller/finance/FinanceServlet.java</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/web/footer.jsp</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/web/FinanceDetail.jsp</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/web/WEB-INF/finance/FinanceDetail.jsp</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/src/java/dao/financeDAO.java</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/web/WEB-INF/finance/header.jsp</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/web/FinanceList.jsp</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/src/java/model/Finance.java</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/src/java/controller/finance/FinanceDetailsServlet.java</file>
+            <file>file:/D:/Projects/NEWiter2.5/NEWiter2%20(1)/web/WEB-INF/finance/footer.jsp</file>
         </group>
     </open-files>
 </project-private>

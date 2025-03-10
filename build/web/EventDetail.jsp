@@ -55,8 +55,8 @@
           
             <div class="club-section">
                 
-                <label for="clubName">ID</label>
-                <div class="content" id="clubName">${o.clubId}</div>
+                <label for="clubName">Name Club</label>
+                <div class="content" id="clubName">${o.getNameCLub()}</div>
             </div>
             
             <div class="club-section">
@@ -103,8 +103,8 @@
             
             
             <div class="club-section">
-                <label for="clubMembers">Event Club</label>
-                <div class="content" id="clubMembers">${o.eventName}</div>
+                <label for="clubMembers">Name Club</label>
+                <div class="content" id="clubMembers">${o.getNameCLub()}</div>
             </div>
             
             <div class="club-section">

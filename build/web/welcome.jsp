@@ -5,7 +5,7 @@
 --%>
 
 <%@ page import="Model.GoogleAccount" %>
-<%@ page import="Controller.GoogleLogin" %>
+<%@ page import="controller.account.GoogleLogin" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="DAO.dao" %>
 

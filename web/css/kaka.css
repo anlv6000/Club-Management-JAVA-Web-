@@ -1,0 +1,121 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Feb 20, 2025, 7:18:08 PM
+    Author     : Quandxnunxi28
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: linear-gradient(135deg, #007bff, #00c853);
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: #ffeb3b;
+}
+
+/* Hero Section */
+#fh5co-hero {
+    position: relative;
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.fh5co-property-brief {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.fh5co-property-brief h3 a {
+    color: #00c853;
+    transition: color 0.3s;
+}
+
+.fh5co-property-brief h3 a:hover {
+    color: #ffeb3b;
+}
+
+/* Club Section */
+#best-deal {
+    padding: 50px 0;
+    background: #fff;
+    text-align: center;
+}
+
+.fh5co-property {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.fh5co-property:hover {
+    transform: translateY(-10px);
+}
+
+.fh5co-property img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #007bff, #00c853);
+    border: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #00c853, #007bff);
+    transform: scale(1.05);
+}
+
+/* Testimonials */
+#fh5co-testimonial {
+    background: #f1f1f1;
+    padding: 60px 0;
+    text-align: center;
+}
+
+blockquote {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-style: italic;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .fh5co-property {
+        margin-bottom: 20px;
+    }
+}

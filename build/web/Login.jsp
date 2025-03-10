@@ -1,124 +1,131 @@
-<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>FPT University Club - Sign Up</title>
-        <link href="css/Register.css" rel="stylesheet" type="text/css"/>
-        <style> .google-signup button {
-                background-color: #f5f5f5;
-                color: #333;
-                border: 1px solid #ccc;
-                padding: 10px 20px;
-                border-radius: 4px;
-                cursor: pointer;
-                text-decoration: underline;
-            }</style>
-    </head>
-    <body>
-        <div class="container">
-            <!-- Left Section -->
-            <div class="left-section">
-                <h1>FPT University Club</h1>
-                <img src="https://via.placeholder.com/400" alt="Club Banner">
-                <p>Join us to connect, learn, and grow with fellow students!</p>
-            </div>
-
-            <!-- Right Section -->
-            <div class="right-section">
-                <h2>Login</h2>
-                <form action="LoginServlet" > 
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input name="user" type="text" id="username" placeholder="Enter your username" required>
-                    </div>
-
-                    <div class="form-group password-toggle">
-                        <label for="password">Password</label>
-                        <input name="pass" type="password" id="password" placeholder="Enter your password" required>
-                        <span onclick="togglePassword('password')"></span>
-                    </div>
-
-                    <c:if test="${messerr !=null}" > ${messerr} </c:if>
 
 
+<head>
 
-                        <div class="google-signup">
-                            <a href="requestPassword.jsp">Forgot Password</a>
-                        </div>
-                        <button type="submit" class="btn">Sign in</button>
-
-                        <div class="divider">OR</div>
-                    <c:if test="${mess != null}"> ${mess}</c:if></form>
-                <form action="LoginGG">
-                    <div class="google-signup">
-
-                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&redirect_uri=http://localhost:8080/club_manaaaa/welcome.jsp&response_type=code&client_id=359282860225-atna0216v504grriqa6g819uvcgfnli6.apps.googleusercontent.com&approval_prompt=force" target="_blank">Sign in with Google</a>
-
-
-
-
-                        <a href="../../../AppData/Local/Temp/FPT University Club - Sign Up.url"></a>
-                    </div>
-                    <a href="Register.jsp">Sign up</a>
-                </form>
+	<!-- META ============================================= -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	
+	<!-- DESCRIPTION -->
+	<meta name="description" content="Club FPT University" />
+	
+	<!-- OG -->
+	<meta property="og:title" content="Club FPT University" />
+	<meta property="og:description" content="Club FPT University" />
+	<meta property="og:image" content="" />
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- FAVICONS ICON ============================================= -->
+	<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
+	
+	<!-- PAGE TITLE HERE ============================================= -->
+	<title>Club FPT University</title>
+	
+	<!-- MOBILE SPECIFIC ============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.min.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+	
+	<!-- All PLUGINS CSS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="assets/css/assets.css">
+	
+	<!-- TYPOGRAPHY ============================================= -->
+	<link rel="stylesheet" type="text/css" href="assets/css/typography.css">
+	
+	<!-- SHORTCODES ============================================= -->
+	<link rel="stylesheet" type="text/css" href="assets/css/shortcodes/shortcodes.css">
+	
+	<!-- STYLESHEETS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
+	
+</head>
+<body id="bg">
+<div class="page-wraper">
+	<div id="loading-icon-bx"></div>
+	<div class="account-form">
+		<div class="account-head" style="background-image:url(https://daihoc.fpt.edu.vn/en/wp-content/uploads/2024/09/DHFPT6-1.webp);">
+			<a href="index.html"><img src="assets/images/logo-white-2.png" alt=""></a>
+		</div>
+		<div class="account-form-inner">
+			<div class="account-container">
+				<div class="heading-bx left">
+					<h2 class="title-head">Login to your <span>Account</span></h2>
+					<p>Don't have an account? <a href="Register.jsp">Create one here</a></p>
+				</div>	
+                            <div style="color: #28a745"><c:if test="${SUCC !=null}">${SUCC}</c:if></div>
                 
-            </div>
-        </div>
+                               <div style="color: #28a745"><c:if test="${erqqq !=null}">${erqqq}</c:if></div>
+				<form class="contact-bx" action="LoginServlet" method="post">
+					<div class="row placeani">
+						<div class="col-lg-12">
+							<div class="form-group">
+								<div class="input-group">
+                                                                <c:if test="${users ==null}"><label>Your Username or Email</label></c:if>
+									<input name="user" type="text" required=""   value="${users}" class="form-control">
+								</div>
+							</div>
+						</div>
+                                                                
+						<div class="col-lg-12">
+							<div class="form-group">
+								<div class="input-group"> 
+                                                                    <c:if test="${pass == null }"><label>Your Password</label></c:if>
+									<input name="pass" type="password" class="form-control"  value="${pass}" required="">
+								</div>
+							</div>
+						</div>
+                                                                <c:if test="${messerr !=null}" ><div style="color: red">${messerr}</div>  </c:if>
+						<div class="col-lg-12">
+                                                    <c:if test="${mess != null}"> <div style="color: red">${mess}</div></c:if></form>
+							<div class="form-group form-forget">
+								
+								<a href="requestPassword.jsp" class="ml-auto">Forgot Password?</a>
+							</div>
+						</div>
+						<div class="col-lg-12 m-b30">
+							<button name="submit" type="submit" value="Submit" class="btn button-md">Login</button>
+						</div>
+						<div class="col-lg-12">
+							<h6>Login with Social media</h6>
+							<div class="d-flex">
+			
+								<a class="btn flex-fill m-l5 google-plus" href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&redirect_uri=http://localhost:8080/club_manaaaa/welcome&response_type=code&client_id=359282860225-atna0216v504grriqa6g819uvcgfnli6.apps.googleusercontent.com&approval_prompt=force" target="_blank"><i class="fa fa-google-plus"></i>Google Plus</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- External JavaScripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/vendors/bootstrap/js/popper.min.js"></script>
+<script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+<script src="assets/vendors/magnific-popup/magnific-popup.js"></script>
+<script src="assets/vendors/counter/waypoints-min.js"></script>
+<script src="assets/vendors/counter/counterup.min.js"></script>
+<script src="assets/vendors/imagesloaded/imagesloaded.js"></script>
+<script src="assets/vendors/masonry/masonry.js"></script>
+<script src="assets/vendors/masonry/filter.js"></script>
+<script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
+<script src="assets/js/functions.js"></script>
+<script src="assets/js/contact.js"></script>
+<script src='assets/vendors/switcher/switcher.js'></script>
+</body>
 
-        <script>
-            function togglePassword(id) {
-                const input = document.getElementById(id);
-                if (input.type === 'password') {
-                    input.type = 'text';
-                } else {
-                    input.type = 'password';
-                }
-            }
-            document.addEventListener("DOMContentLoaded", function () {
-                const logoContainer = document.getElementById("logo-container");
-
-                // Create navigation container
-                const nav = document.createElement("nav");
-                nav.innerHTML = `
-                <a href="#">Home</a>
-                <a href="PublicClub.jsp">Public Club</a>
-                <a href="Login.jsp">Login</a>
-                <a href="Register.jsp">Register</a>
-            `;
-
-                // Append navigation to logo container
-                logoContainer.appendChild(nav);
-
-                // Add style to align navigation inside logo-container
-                const style = document.createElement("style");
-                style.innerHTML = `
-                #logo-container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-
-                #logo-container nav {
-                    margin-top: 10px;
-                    display: flex;
-                    gap: 15px;
-                }
-
-                #logo-container nav a {
-                    text-decoration: none;
-                    color: #000;
-                    font-weight: bold;
-                }
-
-                #logo-container nav a:hover {
-                    text-decoration: underline;
-                }
-            `;
-                document.head.appendChild(style);
-            });
-        </script>
-    </body>
 </html>

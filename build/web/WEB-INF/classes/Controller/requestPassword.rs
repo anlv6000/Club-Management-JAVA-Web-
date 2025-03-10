@@ -1,2 +1,0 @@
-Controller.requestPassword$1
-Controller.requestPassword

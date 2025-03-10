@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import Dal.DBContext;
+import database.DBContext;
 import Model.Club;
 import java.util.List;
 import java.sql.*;
@@ -28,7 +28,7 @@ public class ClubDAO extends DBContext {
                 club.setClubName(rs.getString("ClubName"));
                 club.setCategory(rs.getString("Categories"));
                 club.setDescription(rs.getString("Description"));
-                club.setIsPublic(rs.getBoolean("IsPublic"));
+                club.setIsPublic(rs.getString("IsPublic"));
                 club.setImgURL(rs.getString("ImageURL"));
 
                 clubs.add(club);
@@ -56,7 +56,7 @@ public class ClubDAO extends DBContext {
                 club.setClubName(rs.getString("ClubName"));
                 club.setCategory(rs.getString("Categories"));
                 club.setDescription(rs.getString("Description"));
-                club.setIsPublic(rs.getBoolean("IsPublic"));
+                club.setIsPublic(rs.getString("IsPublic"));
                 club.setImgURL(rs.getString("ImageURL"));
 
                 clubs.add(club);
@@ -114,7 +114,7 @@ public class ClubDAO extends DBContext {
                 club.setClubID(rs.getInt("ClubID"));
                 club.setClubName(rs.getString("ClubName"));
                 club.setCategory(rs.getString("Categories"));
-                club.setIsPublic(rs.getBoolean("IsPublic"));
+                club.setIsPublic(rs.getString("IsPublic"));
                 club.setImgURL(rs.getString("ImageURL"));
                 clubs.add(club);
             }
@@ -125,22 +125,21 @@ public class ClubDAO extends DBContext {
     }
 
     // Update club information
-    public void updateClub(int clubID, String name, String category, String description, boolean isPublic, String image){
-    String sql = "UPDATE clubs SET ClubName = ?, Categories = ?, Description = ?, IsPublic = ?, ImageURL = ? WHERE ClubID = ?";
-    
-    try (Connection conn = getConnection(); 
-         PreparedStatement stm = conn.prepareStatement(sql)) {
-        stm.setString(1, name);
-        stm.setString(2, category);
-        stm.setString(3, description);
-        stm.setBoolean(4, isPublic);
-        stm.setString(5, image);
-        stm.setInt(6, clubID);
-        stm.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
+    public void updateClub(int clubID, String name, String category, String description, boolean isPublic, String image) {
+        String sql = "UPDATE clubs SET ClubName = ?, Categories = ?, Description = ?, IsPublic = ?, ImageURL = ? WHERE ClubID = ?";
+
+        try (Connection conn = getConnection(); PreparedStatement stm = conn.prepareStatement(sql)) {
+            stm.setString(1, name);
+            stm.setString(2, category);
+            stm.setString(3, description);
+            stm.setBoolean(4, isPublic);
+            stm.setString(5, image);
+            stm.setInt(6, clubID);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-}
 
     public Club getClubByID(int clubID) {
         Club club = null;
@@ -157,7 +156,7 @@ public class ClubDAO extends DBContext {
                 club.setClubName(rs.getString("ClubName"));
                 club.setCategory(rs.getString("Categories"));
                 club.setDescription(rs.getString("Description"));
-                club.setIsPublic(rs.getBoolean("IsPublic"));
+                club.setIsPublic(rs.getString("IsPublic"));
                 club.setImgURL(rs.getString("ImageURL"));
             }
         } catch (SQLException e) {
@@ -178,6 +177,28 @@ public class ClubDAO extends DBContext {
             System.out.println("Error when delete club: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public List<Club> getAllClubs() {
+
+        List<Club> list = new ArrayList<>();
+        String sql = "SELECT * FROM clubs ";
+        try (Connection conn = getConnection(); PreparedStatement stm = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new Club(rs.getInt("ClubID"), rs.getString("ClubName"),
+                        rs.getString("Categories"), rs.getString("Description"),
+                        rs.getString("Clubleader"),
+                        rs.getString("ImageURL"),
+                        rs.getString("ContactClub"),
+                        rs.getString("Schedule")
+                ));
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 
 }

@@ -132,7 +132,7 @@
 
         <div class="container">
             <!-- Biểu tượng "X" đóng trang -->
-            <a href="Public_ClubServlet" class="close-icon">
+            <a href="home1" class="close-icon">
                 <i class="fas fa-times"></i>
             </a>
 

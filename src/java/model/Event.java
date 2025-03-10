@@ -19,6 +19,8 @@ public class Event {
     private String eventImageURL;
     private Boolean Status;
     private Boolean Type;
+    private String NameCLub;
+    private String UserCreat;
     public Event() {
     }
 
@@ -34,6 +36,21 @@ public class Event {
         this.Status = Status;
         this.Type = Type;
     }
+
+    public Event(int id, int clubId, String eventName, String description, String eventDate, Integer createdBy, String createdDate, String eventImageURL, Boolean Status, Boolean Type, String NameCLub, String UserCreat) {
+        this.id = id;
+        this.clubId = clubId;
+        this.eventName = eventName;
+        this.description = description;
+        this.eventDate = eventDate;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.eventImageURL = eventImageURL;
+        this.Status = Status;
+        this.Type = Type;
+        this.NameCLub = NameCLub;
+        this.UserCreat = UserCreat;
+    }
     
 
     public Event(int id, int clubId, String eventName, String description, String eventDate, Integer createdBy, String createdDate, String eventImageURL) {
@@ -46,7 +63,22 @@ public class Event {
         this.createdDate = createdDate;
         this.eventImageURL = eventImageURL;
     }
-
+    public Event(int clubId, String eventName, String description, int createdBy,  String eventImageURL, String eventDate) {
+        this.clubId = clubId;   
+        this.eventName = eventName;
+        this.description = description;
+        this.createdBy = createdBy;
+        this.eventDate = eventDate;
+        this.eventImageURL = eventImageURL;
+    }
+      public Event(int id, int clubId, String eventName, String description, String eventDate, int createdBy) {
+        this.id = id;
+        this.clubId = clubId;
+        this.eventName = eventName;
+        this.description = description;
+        this.eventDate = eventDate;
+        this.createdBy = createdBy;
+    }
     public Event(int id, int clubId, String eventName, String description, String eventDate, String createdDate, String eventImageURL) {
         this.id = id;
         this.clubId = clubId;
@@ -58,6 +90,14 @@ public class Event {
         this.createdBy = null; // Không có người tạo
     }
 
+    public String getNameCLub() {
+        return NameCLub;
+    }
+
+    public String getUserCreat() {
+        return UserCreat;
+    }
+    
     public Boolean getStatus() {
         return Status;
     }
@@ -141,9 +181,10 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" + "id=" + id + ", clubId=" + clubId + ", eventName=" + eventName + ", description=" + description + ", eventDate=" + eventDate + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", eventImageURL=" + eventImageURL + ", Status=" + Status + ", Type=" + Type + '}';
+        return "Event{" + "id=" + id + ", clubId=" + clubId + ", eventName=" + eventName + ", description=" + description + ", eventDate=" + eventDate + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", eventImageURL=" + eventImageURL + ", Status=" + Status + ", Type=" + Type + ", NameCLub=" + NameCLub + ", UserCreat=" + UserCreat + '}';
     }
-
+  
+  
     
     
 }

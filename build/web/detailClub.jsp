@@ -86,10 +86,10 @@
             <button type="submit">Update</button>
         </form>
 
-        <form action="DeleteClubServlet" method="post">
+<!--        <form action="DeleteClubServlet" method="post">
             <input type="hidden" name="clubID" value="<%= club.getClubID() %>">
             <button type="submit" class="delete-btn" onclick="return confirm('Are you sure?')">Delete</button>
-        </form>
+        </form>-->
 
         <button class="back-btn" onclick="window.location.href='ClubServlet'">Back to List</button>
         <% } else { %>

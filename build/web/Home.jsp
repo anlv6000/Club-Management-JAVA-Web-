@@ -1,342 +1,411 @@
-<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<html lang="en">
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>FPT Club Manager</title>
-        <link href="css/Home.css" rel="stylesheet" type="text/css" />
-        <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Welcome to FPT Club!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+        <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+        <meta name="author" content="FreeHTML5.co" />
+
+        <!-- 
+              //////////////////////////////////////////////////////
+      
+              FREE HTML5 TEMPLATE 
+              DESIGNED & DEVELOPED by FreeHTML5.co
+                      
+              Website: 		http://freehtml5.co/
+              Email: 			info@freehtml5.co
+              Twitter: 		http://twitter.com/fh5co
+              Facebook: 		https://www.facebook.com/fh5co
+      
+              //////////////////////////////////////////////////////
+        -->
+
+        <!-- Facebook and Twitter integration -->
+        <meta property="og:title" content=""/>
+        <meta property="og:image" content=""/>
+        <meta property="og:url" content=""/>
+        <meta property="og:site_name" content=""/>
+        <meta property="og:description" content=""/>
+        <meta name="twitter:title" content="" />
+        <meta name="twitter:image" content="" />
+        <meta name="twitter:url" content="" />
+        <meta name="twitter:card" content="" />
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="shortcut icon" href="favicon.ico">
+        <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+        <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'> -->
+
+        <!-- Animate.css -->
+        <link rel="stylesheet" href="css/animate.css">
+        <!-- Icomoon Icon Fonts-->
+        <link rel="stylesheet" href="css/icomoon.css">
+        <!-- Bootstrap  -->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <!-- Flexslider  -->
+        <link rel="stylesheet" href="css/flexslider.css">
+        <!-- Theme style  -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- Modernizr JS -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+        <!-- FOR IE9 below -->
+        <!--[if lt IE 9]>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
         <style>
-            h2 {
-                text-align: center;
-                font-size: 2em;
-                color: #333;
-                margin-bottom: 20px;
-            }
-
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                background-color: #f4f4f9;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-
-                background-image: linear-gradient(45deg, #eee 50%, transparent 50%);
-                background-size: 20px 20px;
-                background-color: #fff;
-            }
-
-            header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
-                padding: 20px;
-                background-color: #333;
-                color: white;
-            }
-
-            header img {
+            #floatingButton {
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                z-index: 1000;
                 width: 50px;
                 height: 50px;
+                background-color: #f1eeee; /* Trắng trong suốt */
+                color: black; /* Màu chữ */
+                border: none;
                 border-radius: 50%;
                 cursor: pointer;
-            }
-
-            nav {
-                margin-top: 20px; /* Thêm khoảng cách trên thanh menu */
-                display: flex;
-                gap: 15px;
-                justify-content: center; /* Căn giữa thanh menu */
-            }
-
-            nav a {
-                color: white;
-                text-decoration: none;
-                padding: 10px 20px;
-                background-color: #444;
-                border-radius: 5px;
-                transition: background-color 0.3s;
-            }
-
-            nav a:hover {
-                background-color: #555;
-                text-decoration: underline;
-            }
-
-            .body-content {
-                padding: 20px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-                text-align: center;
-                flex-grow: 1;
-                margin: 0 auto; /* Cân giữa phần nội dung chính */
-                max-width: 1200px; /* Giới hạn độ rộng tối đa của phần nội dung chính */
-            }
-
-
-
-
-
-
-
-            .image-item {
-                width: calc(40% - 100px); /* Đảm bảo khoảng cách đều giữa hai cột */
-                margin: 20px;
-                background-color: white;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s, box-shadow 0.3s;
-            }
-
-            .image-item:hover {
-                transform: translateY(-10px);
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            }
-
-            .body-content img {
-                width: 100%;
-                max-width: 100%;
-                height: auto;
-                border-radius: 10px 10px 0 0;
-            }
-
-            .body-content .image-item div {
-                padding: 10px;
-                font-size: 18px;
-                font-weight: bold;
-                color: #333;
-            }
-
-            footer {
-                text-align: center;
-                padding: 20px;
-                background-color: #333;
-                color: white;
-                bottom: 0;
-                width: 100%;
-                font-size: 14px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            footer div {
-                margin: 5px 0;
-            }
-
-            footer a {
-                color: white;
-                margin: 0 10px;
-                text-decoration: none;
-            }
-
-            footer a:hover {
-                text-decoration: underline;
-            }
-
-            .header-logo {
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                justify-content: center;
+                font-size: 24px; /* Đảm bảo chữ vừa vặn trong nút */
             }
 
-            .header-logo img {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                cursor: pointer;
-                object-fit: cover;
-            }
-
-            .header-logo h1 {
-                margin: 0;
-                font-size: 20px;
-                color: #f4f4f9;
-            }
-
-            p {
-                text-align: center;
-                color: #666;
-                font-size: 1.2em;
-                margin-bottom: 20px;
+            #floatingButton:hover {
+                background-color: rgba(255, 255, 255, 0.7); /* Màu trắng trong suốt đậm hơn khi hover */
             }
 
 
 
         </style>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const items = document.querySelectorAll('.image-item');
+        <jsp:include page="header.jsp"></jsp:include>
+        </head>
+        <body>
 
-                items.forEach((item, index) => {
-                    item.style.float = (index % 2 === 0) ? 'left' : 'right';
-                    if (index % 2 === 0) {
-                        item.style.clear = 'left';
+
+            <div id="fh5co-page">
+
+                <aside id="fh5co-hero" clsas="js-fullheight">
+                    <div class="flexslider js-fullheight">
+                        <ul class="slides">
+                            <li style="background-image: url(images/FPT1.jpg);">
+                                <div class="container">
+                                    <div class="col-md-12 text-center js-fullheight fh5co-property-brief slider-text">
+                                        <div class="fh5co-property-brief-inner">
+                                            <div class="fh5co-box">
+                                                <h3><a href="#">FPT green space</a></h3>
+                                                <div class="price-status">
+
+                                                </div>
+                                                <p>A green, clean, beautiful university is an ideal learning environment, where students and lecturers can immerse themselves in a fresh, natural space.</p>
+                                                <div>${success}</div>
+                                            <c:if test="${kaka!=null}"><div>${kaka}</div></c:if>
+                                                <p class="fh5co-property-specification">
+                                                    <span><strong>VOV</strong></span>  <span><strong>Technology</strong></span>  <span><strong>Music</strong> </span>  <span><strong>traditional musical instruments</strong></span>
+                                                </p>
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="background-image: url(images/fpt2.jpg);">
+                                <div class="container">
+                                    <div class="col-md-12 text-center js-fullheight fh5co-property-brief slider-text">
+                                        <div class="fh5co-property-brief-inner">
+                                            <div class="fh5co-box">
+
+                                                <h3><a href="#">FPT green space</a></h3>
+                                                <div class="price-status">
+
+                                                </div>
+                                                <p>A green, clean, beautiful university is an ideal learning environment, where students and lecturers can immerse themselves in a fresh, natural space.</p>
+
+                                                <p class="fh5co-property-specification">
+                                                    <span><strong>VOV</strong></span>  <span><strong>Technology</strong></span>  <span><strong>Music</strong> </span>  <span><strong>traditional musical instruments</strong></span>
+                                                </p>
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li style="background-image: url(images/fpt3.jpg);">
+                                <div class="container">
+                                    <div class="col-md-12 text-center js-fullheight fh5co-property-brief slider-text">
+                                        <div class="fh5co-property-brief-inner">
+                                            <div class="fh5co-box">
+
+                                                <h3><a href="#">FPT green space</a></h3>
+                                                <div class="price-status">
+
+                                                </div>
+                                                <p>A green, clean, beautiful university is an ideal learning environment, where students and lecturers can immerse themselves in a fresh, natural space.</p>
+
+                                                <p class="fh5co-property-specification">
+                                                    <span><strong>VOV</strong></span>  <span><strong>Technology</strong></span>  <span><strong>Music</strong> </span>  <span><strong>traditional musical instruments</strong></span>
+                                                </p>
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </aside>
+                <div id="best-deal">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box" data-animate-effect="fadeIn">
+                                <h2>Lots of clubs for you to explore</h2>
+                                <p>Welcome to FPT Club!</p>
+                                <p>Explore our club activities and join us today!</p>
+                            </div>
+                            <form id="autoSubmitForm" action="home" method="post">
+                            <c:if test="${not empty listP}">
+                                <c:forEach var="o" items="${listP}" varStatus="status">
+                                    <%-- Mở hàng mới khi index % 3 == 0 --%>
+                                    <c:if test="${status.index % 3 == 0}">
+                                        <div class="row">
+                                        </c:if>
+
+                                        <div class="col-md-4 item-block animate-box" data-animate-effect="fadeIn">
+                                            <div class="fh5co-property">
+                                                <figure>
+                                                    <img src="${o.imgURL}" alt="img" class="img-responsive">
+                                                    <a href="${pageContext.request.contextPath}/home?clubName=${o.clubName}" class="tag">Detail</a>
+                                                </figure>
+                                                <div class="fh5co-property-innter">
+                                                    <h3><a>${o.clubName}</a></h3>
+                                                    <div class="price-status"></div>
+                                                   
+                                                </div>
+                                                <p class="fh5co-property-specification">
+                                                    <span><strong>${o.category}</strong> Category</span>
+                                                    <span><strong>${o.schedule}</strong> Schedule</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <%-- Đóng hàng khi index % 3 == 2 hoặc là phần tử cuối cùng --%>
+                                        <c:if test="${status.index % 3 == 2 or status.last}">
+                                        </div> <%-- Đóng div.row --%>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
+                        </form>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div id="fh5co-testimonial">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box" data-animate-effect="fadeIn">
+                            <h2>Happy Clients</h2>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        </div>
+                        <div class="col-md-4 text-center item-block animate-box" data-animate-effect="fadeIn">
+                            <blockquote>
+                                <p>&ldquo; She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of. &rdquo;</p>
+                                <p><span class="fh5co-author"><cite>Jason Davidson</cite></span><i class="icon twitter-color icon-twitter pull-right"></i></p>
+
+                            </blockquote>
+                        </div>
+                        <div class="col-md-4 text-center item-block animate-box" data-animate-effect="fadeIn">
+                            <blockquote>
+                                <p>&ldquo; Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way. She had a last view back on the skyline of her hometown Bookmarksgrove, the headline of. &rdquo;</p>
+                                <p><span class="fh5co-author"><cite>Kyle Smith</cite></span><i class="icon googleplus-color icon-google-plus pull-right"></i></p>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-4 text-center item-block animate-box" data-animate-effect="fadeIn">
+
+                            <blockquote>
+                                <p>&ldquo; The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. S	he had a last view back on the skyline of her hometown Bookmarksgrove. &rdquo;</p>
+                                <p><span class="fh5co-author"><cite>Rick Cook</cite></span><i class="icon facebook-color icon-facebook pull-right"></i></p>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="fh5co-agents">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center fh5co-heading white animate-box" data-animate-effect="fadeIn">
+                            <h2>Các bài post tiêu biểu</h2>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        </div>
+                        <form id="autoSubmitForm" action="home" method="post">
+                        <c:if test="${not empty postList}">
+                    <c:forEach var="o" items="${postList}">
+                        <div class="col-md-4 text-center item-block animate-box" data-animate-effect="fadeIn">
+
+                            <div class="fh5co-agent">
+                                <figure>
+                                    <img src="${o.image_url}" alt="Free Website Template by FreeHTML5.co">
+                                </figure>
+                                <h3>${o.title}</h3>
+                               
+                                <p><a href="#" class="btn btn-primary btn-outline">Detail Post</a></p>
+                            </div>
+
+                        </div>
+                        </c:forEach></c:if>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+      
+
+            <div id="fh5co-blog">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center fh5co-heading animate-box" data-animate-effect="fadeIn">
+                            <h2>Latest <em>from</em> Blog</h2>
+                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <form id="autoSubmitForm" action="home" method="post">
+                        <c:if test="${not empty postList}">
+                    <c:forEach var="o" items="${postList}">
+                        <div class="col-md-4 animate-box" data-animate-effect="fadeIn">
+                            <a class="fh5co-entry" href="#">
+                                <figure>
+                                    <img src="${o.image_url}" alt="Free Website Template, Free HTML5 Bootstrap Template" class="img-responsive">
+                                </figure>
+                                <div class="fh5co-copy">
+                                    <h3>${o.title}</h3>
+                                    <span class="fh5co-date">June 8, 2016</span>
+                                    
+                                </div>
+                            </a>
+                        </div>
+                                </c:forEach></c:if>
+                        </form>
+                        
+                        <div class="col-md-12 text-center animate-box" data-animate-effect="fadeIn">
+                            <p><a href="#" class="btn btn-primary btn-outline with-arrow">View More Posts <i class="icon-arrow-right"></i></a></p>
+                        </div>
+                    </div>
+                </div>	
+            </div>
+
+            <div class="fh5co-cta" style="background-image: url(images/slide_4.jpg);">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="col-md-12 text-center animate-box" data-animate-effect="fadeIn">
+                        <h3>We Try To Update The Site Everyday</h3>
+                        <p><a href="#" class="btn btn-primary btn-outline with-arrow">Get started now! <i class="icon-arrow-right"></i></a></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <jsp:include page="footer.jsp"></jsp:include>
+
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const logo = document.getElementById("logo");
+
+                    // Simulate logged-in state for demonstration
+                    let isLoggedIn = false;
+                    let userAvatar = "user-avatar.png"; // Change to actual uploaded avatar
+
+                    // Update logo based on login state
+                    if (isLoggedIn) {
+                        logo.src = userAvatar;
+                        logo.alt = "User Avatar";
                     } else {
-                        item.style.clear = 'right';
+                        logo.src = "default-user.png";
+                        logo.alt = "Default Logo";
+                    }
+
+                    // Add click event to the logo
+                    logo.addEventListener("click", function () {
+                        if (isLoggedIn) {
+                            alert("Welcome back, User!");
+                        } else {
+                            const option = confirm("You are not logged in. Would you like to login or register?");
+                            if (option) {
+                                window.location.href = "#"; // Link to login/register page
+                            }
+                        }
+                    });
+                });
+
+                document.addEventListener("DOMContentLoaded", function () {
+                    const form = document.getElementById("autoSubmitForm");
+                    if (!sessionStorage.getItem("formSubmitted")) {
+                        // Chỉ submit nếu chưa được gửi
+                        sessionStorage.setItem("formSubmitted", "true");
+                        form.submit();
                     }
                 });
-            });
-        </script>
-
-    </head>
-
-    <body>
-        <header>
-            <div class="header-logo">
-                <img src="https://th.bing.com/th/id/OIP.HEjDxqON9OjorjiDpDhDPQHaFj?rs=1&pid=ImgDetMain" alt="alt" />
-                <h1>FPT Club Manager</h1>
-            </div>
-
-            <c:if test="${sessionScope.acc != null}">
-
-
-
-
-                <div>Hello ${sessionScope.txtUsername}</div>
-
-            </c:if>
-
-            <c:if test="${sessionScope.googleAccount != null}">
-
-
-
-                <div>Hello ${sessionScope.name}</div>
-
-            </c:if>
-
-
-
-
-            <div id="logo-container">
-                <!-- Default logo -->
-                <img src="https://tse1.mm.bing.net/th?id=OIP.xyVi_Y3F3YwEIKzQm_j_jQHaHa&rs=1&pid=ImgDetMain" alt="Logo">
-            </div>
-        </header>
-
-        <nav>
-            <a href="#">Home</a>
-            <c:if test="${sessionScope.acc == null && sessionScope.accc == null}">
-                <a href="Login.jsp">Sign in</a>
-                <a href="Register.jsp">Sign up</a>
-            </c:if>
-            <c:if test="${sessionScope.acc != null}">
-
-<a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
-                <a href="Login.jsp">Log out</a>
-
-              <c:if test="${sessionScope.acc.role == 'Admin'|| sessionScope.accc.role == 'Admin'}">
-                    <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
-                    <a href="${pageContext.request.contextPath}/settings">Settings</a>
-                    <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
-                    <a href="${pageContext.request.contextPath}/listEvent">Event</a>
-
-                </c:if>
-
-
-
-
-            </c:if>
-            <c:if test="${ sessionScope.accc != null }">
-                <a href="Login.jsp">Log out</a>
-
-                <c:if test="${sessionScope.accc.role == 'Admin'}">
-                    <a href="${pageContext.request.contextPath}/ClubServlet">Club</a>
-                    <a href="${pageContext.request.contextPath}/settings">Settings</a>
-                    <a href="ManageAccount" class="btn btn-primary">Manage Account</a>
-                    <a href="${pageContext.request.contextPath}/listEvent">Event</a>
-
-                </c:if>
-            </c:if>
-
-        </nav>
-        <h2>Welcome to FPT Club!</h2>
-        <p>Explore our club activities and join us today!</p>
-        <div class="body-content">
-
-            <form id="autoSubmitForm" action="Public_ClubServlet" >
-
-                <form id="autoSubmitForm" action="Public_ClubServlet" method="POST">
-
-                    <!-- Display data -->
-                    <c:if test="${not empty listP}">
-                        <c:forEach var="o" items="${listP}">
-                            <div class="image-item">
-                                <img src="${o.imgURL}" alt="vov">
-                                <div>${o.clubName}
-                                    <a href="Public_ClubServlet?clubName=${o.clubName}">=></a>                                    
-                                </div>                              
-                            </div>
-                        </c:forEach>
-                    </c:if>
-                </form>
-
+            </script>          
         </div>
 
 
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script>
+        <!-- jQuery Easing -->
+        <script src="js/jquery.easing.1.3.js"></script>
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Waypoints -->
+        <script src="js/jquery.waypoints.min.js"></script>
+        <!-- Flexslider -->
+        <script src="js/jquery.flexslider-min.js"></script>
 
-
-        <footer>
-            <p>&copy; 2025 FPT Club Manager. All Rights Reserved.</p>
-            <div>
-                <a href="#">Privacy Policy</a> | 
-                <a href="#">Terms of Service</a> | 
-                <a href="#">Contact Us</a>
-            </div>
-            <div>
-                <p>Follow us on:</p>
-                <a href="#"><img src="" alt="Facebook"></a>
-                <a href="#"><img src="" alt="Twitter"></a>
-                <a href="#"><img src="" alt="Instagram"></a>
-            </div>
-        </footer>
-
+        <!-- MAIN JS -->
+        <script src="js/main.js"></script>
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const logo = document.getElementById("logo");
-
-                // Simulate logged-in state for demonstration
-                let isLoggedIn = false;
-                let userAvatar = "user-avatar.png"; // Change to actual uploaded avatar
-
-                // Update logo based on login state
-                if (isLoggedIn) {
-                    logo.src = userAvatar;
-                    logo.alt = "User Avatar";
-                } else {
-                    logo.src = "default-user.png";
-                    logo.alt = "Default Logo";
+                function scrollToTop() {
+                    window.scrollTo({top: 0, behavior: 'smooth'});
                 }
 
-                // Add click event to the logo
-                logo.addEventListener("click", function () {
-                    if (isLoggedIn) {
-                        alert("Welcome back, User!");
-                    } else {
-                        const option = confirm("You are not logged in. Would you like to login or register?");
-                        if (option) {
-                            window.location.href = "#"; // Link to login/register page
-                        }
-                    }
-                });
-            });
-
-            document.addEventListener("DOMContentLoaded", function () {
-                const form = document.getElementById("autoSubmitForm");
-                if (!sessionStorage.getItem("formSubmitted")) {
-                    // Chỉ submit nếu chưa được gửi
-                    sessionStorage.setItem("formSubmitted", "true");
-                    form.submit();
-                }
-            });
         </script>
-    </body>
 
+        <button id="floatingButton" onclick="scrollToTop()">>.<</button>
+
+
+    </body>
 </html>
+

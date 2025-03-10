@@ -1,1 +1,0 @@
-Controller.DeleteClubServlet

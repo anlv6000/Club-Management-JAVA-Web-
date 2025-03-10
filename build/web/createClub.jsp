@@ -66,8 +66,8 @@
 
             <label>Public:</label> 
             <select name="isPublic">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
             </select><br>
 
             <button type="submit">Create</button>
