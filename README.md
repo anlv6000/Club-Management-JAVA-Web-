@@ -35,8 +35,11 @@ Cập nhật file application.properties với thông tin kết nối:
 
 Hướng dẫn sử dụng:
 . Đăng nhập hoặc tạo tài khoản quản trị viên.
+
 . Thêm thông tin câu lạc bộ và các thành viên.
+
 . Sử dụng giao diện để lên lịch sự kiện, quản lý tài chính và tạo báo cáo.
+
 . Theo dõi thông báo và thống kê trong dashboard chính.
 
 Tác giả và ghi nhận
