@@ -4,6 +4,11 @@ Giới thiệu
 
 Hệ thống quản lý câu lạc bộ (Club Management System) là một nền tảng toàn diện được thiết kế để hỗ trợ việc quản lý hoạt động của các câu lạc bộ. Từ việc quản lý thành viên, sự kiện, tài chính đến tích hợp báo cáo chi tiết, giải pháp này giúp các nhà quản lý tiết kiệm thời gian và nâng cao hiệu quả.
 
+Tổng quan 
+
+![image](https://github.com/user-attachments/assets/1780eb48-fd71-433f-88d3-3f51ff973327)
+
+
 Các tính năng chính
 
 . Quản lý thành viên: Thêm, chỉnh sửa, và theo dõi thông tin cá nhân của từng thành viên.
@@ -22,13 +27,13 @@ Yêu cầu hệ thống:
 
 . Ngôn ngữ lập trình: Java
 
-. Framework: Spring Boot
+. Framework: Apache Tomcat 10.
 
 . Cơ sở dữ liệu: MySQL
 
-. IDE khuyến nghị: IntelliJ IDEA hoặc Eclipse
+. IDE khuyến nghị: Netbeans 17
 
-. Công cụ bổ sung: Git, Maven
+. Công cụ bổ sung: Git
 
 Hướng dẫn cài đặt:
 
@@ -52,9 +57,7 @@ Cập nhật file application.properties với thông tin kết nối:
   
 5. Build và chạy ứng dụng:
 
-  mvn clean install
-  
-  mvn spring-boot:run
+  Khởi động dự án trên Netbeans và run project. 
   
 6. Truy cập hệ thống:
    
