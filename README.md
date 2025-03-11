@@ -7,6 +7,7 @@ Hệ thống quản lý câu lạc bộ (Club Management System) là một nền
 Tổng quan 
 
 ![image](https://github.com/user-attachments/assets/1780eb48-fd71-433f-88d3-3f51ff973327)
+![image](https://github.com/user-attachments/assets/d7d56ff8-01f8-4a07-88b5-282867035299)
 
 
 Các tính năng chính
